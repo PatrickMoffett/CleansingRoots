@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Transform cameraTransform;
     public float speed = 10f;
+    public float rotationRate = 360f;
     private PlayerControls _playerControls;
     private CharacterController _characterController;
 
@@ -37,11 +38,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveInput.magnitude > 0f)
         {
-            float targetAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0f,targetAngle,0f);
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _characterController.Move(moveDir.normalized * speed*Time.deltaTime);
+            //get target forwards direction
+            Vector3 targetForwardDirection = new Vector3(moveInput.x, 0, moveInput.y);
+            //rotate the target forwards direction input by the camera yaw
+            targetForwardDirection = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0)*targetForwardDirection;
+            //rotate the current forwards direction towards the target clamped by rotationRate
+            transform.forward = Vector3.RotateTowards(transform.forward, targetForwardDirection, rotationRate*Mathf.Deg2Rad * Time.deltaTime, 0.0f);
+            //move the character in the forward direction
+            _characterController.Move(transform.forward * (speed * Time.deltaTime));
         }
     }
 }
