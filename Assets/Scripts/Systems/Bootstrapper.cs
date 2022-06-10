@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 
 public static class Bootstrapper
 {
@@ -24,6 +25,12 @@ public static class Bootstrapper
 
         //Start MainMenuState
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(MainMenuState));
+#if UNITY_EDITOR
+        if (ServiceLocator.Instance.Get<LevelSceneManager>().GetLevel() != "InitialScene")
+        {
+            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameState));
+        }
+#endif
     }
 }
 
