@@ -17,18 +17,9 @@ public class ApplicationStateManager : IService
     /// </summary>
     /// <param name="stateType">State to push</param>
     /// <param name="popPreviousState">Option to pop current state off the stack</param>
-    /// <param name="delayTime">Option to delay transition by float seconds</param>
     /// <param name="options">Optional data to be sent to the state</param>
-    public void NavigateToState(Type stateType, bool popCurrentState = false, float delayTime = 0f, Dictionary<string, object> options = null)
+    public void NavigateToState(Type stateType, bool popCurrentState = false, Dictionary<string, object> options = null)
     {
-        ServiceLocator.Instance.Get<MonoBehaviorService>().StartCoroutine(NavigateToState_Implementation(stateType, popCurrentState, delayTime, options));
-    }
-    private IEnumerator NavigateToState_Implementation(Type stateType, bool popCurrentState = false, float delayTime = 0f, Dictionary<string, object> options = null) { 
-        if (delayTime != 0f)
-        {
-            yield return new WaitForSeconds(delayTime);
-        }
-
         // If true, pop the current state
         if (popCurrentState)
         {
@@ -85,11 +76,11 @@ public class ApplicationStateManager : IService
         // Transition previous state to background if one exists
         if(prevState != null)
         {
-            prevState.Transition(State.Background);
+            prevState.Transition(State.BACKGROUND);
         }
 
         // Transition new state to active
-        state.Transition(State.Active, prevState, options);
+        state.Transition(State.ACTIVE, prevState, options);
     }
 
     /// <summary>
@@ -102,14 +93,14 @@ public class ApplicationStateManager : IService
         if (popState != null)
         {
             // Transition state to inactive for cleanup
-            popState.Transition(State.Inactive);
+            popState.Transition(State.INACTIVE);
 
             // Grab next state on the stack if one exists
             BaseApplicationState topState = _states.Count == 0 ? null : _states.Peek();
 
             if (topState != null)
             {
-                topState.Transition(State.Active, popState);
+                topState.Transition(State.ACTIVE, popState);
             }
         }
     }

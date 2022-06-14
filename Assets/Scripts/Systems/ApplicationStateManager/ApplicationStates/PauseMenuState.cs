@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Constants;
 using UnityEngine;
 
 public class PauseMenuState : BaseApplicationState
 {
-    public readonly string UI_PREFAB = "UIPauseMenu";
+    public readonly string UI_PREFAB = UIPrefabs.PauseMenuUI;
     private UIWidget _uiWidget;
 
     public PauseMenuState()
@@ -19,19 +20,19 @@ public class PauseMenuState : BaseApplicationState
             return;
         }
 
-        if(toState == State.Active && CurrentState == State.Inactive)
+        if(toState == State.ACTIVE && CurrentState == State.INACTIVE)
         {
             SetupState();
         }
-        else if(toState == State.Inactive && CurrentState == State.Active)
+        else if(toState == State.INACTIVE && CurrentState == State.ACTIVE)
         {
             TeardownState();
         }
-        else if(toState== State.Background && CurrentState == State.Active)
+        else if(toState== State.BACKGROUND && CurrentState == State.ACTIVE)
         {
             SetToBackgroundStateFromActive();
         }
-        else if(toState == State.Active && CurrentState == State.Background)
+        else if(toState == State.ACTIVE && CurrentState == State.BACKGROUND)
         {
             SetToActiveStateFromBackground();
         }

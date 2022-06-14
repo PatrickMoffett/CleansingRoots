@@ -7,8 +7,17 @@ public class LevelSceneManager : IService
         SceneManager.LoadScene(levelName);
     }
 
-    public string GetLevel()
+    public void LoadLevel(int levelIndex)
+    {
+        SceneManager.LoadScene(levelIndex);
+    }
+    public string GetLevelName()
     {
         return SceneManager.GetActiveScene().name;
+    }
+
+    public int GetLevelIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }

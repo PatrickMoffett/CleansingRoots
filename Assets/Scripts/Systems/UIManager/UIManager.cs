@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Constants;
 using UnityEngine;
 
 public class UIManager : IService
@@ -10,7 +11,7 @@ public class UIManager : IService
         ERROR,
     }
 
-    private static readonly string ROOT_PREFAB = "UIRoot";
+    private static readonly string ROOT_PREFAB = UIPrefabs.RootUI;
     private Transform[] _layerTransforms;
     private GameObject _rootObject;
     private Dictionary<string, UIWidget> _uiWidgets = new Dictionary<string, UIWidget>();

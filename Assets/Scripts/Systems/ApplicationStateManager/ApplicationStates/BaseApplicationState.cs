@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
 
+    /// <summary>
+    /// State Representing the current state of an Application State
+    /// @Inactive means the state is no longer in Application Manager State Stack and should teardown
+    /// @Background means the state is not the Active/Top State of the ApplicationStateManager
+    /// @Active means the state is the currently Active/Top State of the ApplicationStateManager
+    /// </summary>
     public enum State
     {
-        Inactive,
-        Active,
-        Background,
+        INACTIVE,
+        ACTIVE,
+        BACKGROUND,
     }
     public abstract class BaseApplicationState
     {
