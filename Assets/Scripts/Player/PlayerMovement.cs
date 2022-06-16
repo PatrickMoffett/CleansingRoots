@@ -45,12 +45,8 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            Vector2 input = _playerControls.Player.Move.ReadValue<Vector2>();
-            //get target forwards direction
-            Vector3 targetForwardDirection = new Vector3(input.x, 0, input.y);
-            //rotate the target forwards direction input by the camera yaw
-            targetForwardDirection = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0) * targetForwardDirection;
-
+            //TODO: Move most of this to a Character controller class
+            //change camera if input pressed
             if (_playerControls.Player.Fire.triggered)
             {
                 _targetingMovementMode = !_targetingMovementMode;
@@ -65,18 +61,26 @@ namespace Player
                     targetingCamera.SetActive(false);
                 }
             }
-            
+            //get inputDirection as Vector3
+            Vector2 input = _playerControls.Player.Move.ReadValue<Vector2>();
+            Vector3 inputDirection = new Vector3(input.x, 0, input.y);
             
             if (_targetingMovementMode)
-            { 
+            {
+                //rotate the character towards the target transform
                 SetTargetDirection(targetTransform.position-transform.position);
                 Rotate();
-                Move(targetForwardDirection,input.magnitude*speed);
+                //rotate the input by the characters current rotation and move in that direction
+                inputDirection = Quaternion.Euler(0, transform.eulerAngles.y, 0) * inputDirection;
+                Move(inputDirection,input.magnitude*speed);
             }
             else
             {
-                SetTargetDirection(targetForwardDirection);
+                //rotate the input direction input by the camera yaw and rotate character towards the input direction
+                inputDirection = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0) * inputDirection;
+                SetTargetDirection(inputDirection);
                 Rotate();
+                //move in the direction character is facing
                 Move(transform.forward, input.magnitude * speed);
             }
         }
