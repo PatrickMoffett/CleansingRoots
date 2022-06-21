@@ -47,7 +47,7 @@ namespace Player
         {
             //TODO: Move most of this to a Character controller class
             //change camera if input pressed
-            if (_playerControls.Player.Fire.triggered)
+            if (_playerControls.Player.LockOnTarget.triggered)
             {
                 _targetingMovementMode = !_targetingMovementMode;
                 if (_targetingMovementMode)
