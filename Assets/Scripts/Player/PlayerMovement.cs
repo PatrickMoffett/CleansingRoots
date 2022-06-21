@@ -5,22 +5,17 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        public Transform cameraTransform;
-        public float speed = 20f;
+        public float moveSpeed = 20f;
         public float rotationRate = 360f;
+        public float jumpForce = 2f;
         public float gravityScale = 1f;
         public float slopeForce = 1f;
-        public Transform targetTransform;
-        public GameObject mainCamera;
-        public GameObject targetingCamera;
+
     
         private bool _onWalkableSlope = false;
         private readonly float _gravity = -9.8f;
         private Vector3 _targetDirection = Vector3.forward;
         private Vector3 _velocity = Vector3.zero;
-
-        private bool _targetingMovementMode;
-        private PlayerControls _playerControls;
         private CharacterController _characterController;
 
 
@@ -28,68 +23,14 @@ namespace Player
 
         private void Awake()
         {
-            _playerControls = new PlayerControls();
             _characterController = GetComponent<CharacterController>();
-            targetingCamera.SetActive(false);
-        }
-        private void OnEnable()
-        {
-            _playerControls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _playerControls.Disable();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            //TODO: Move most of this to a Character controller class
-            //change camera if input pressed
-            if (_playerControls.Player.LockOnTarget.triggered)
-            {
-                _targetingMovementMode = !_targetingMovementMode;
-                if (_targetingMovementMode)
-                {
-                    targetingCamera.SetActive(true);
-                    mainCamera.SetActive(false);
-                }
-                else
-                {
-                    mainCamera.SetActive(true);
-                    targetingCamera.SetActive(false);
-                }
-            }
-            //get inputDirection as Vector3
-            Vector2 input = _playerControls.Player.Move.ReadValue<Vector2>();
-            Vector3 inputDirection = new Vector3(input.x, 0, input.y);
-            
-            if (_targetingMovementMode)
-            {
-                //rotate the character towards the target transform
-                SetTargetDirection(targetTransform.position-transform.position);
-                Rotate();
-                //rotate the input by the characters current rotation and move in that direction
-                inputDirection = Quaternion.Euler(0, transform.eulerAngles.y, 0) * inputDirection;
-                Move(inputDirection,input.magnitude*speed);
-            }
-            else
-            {
-                //rotate the input direction input by the camera yaw and rotate character towards the input direction
-                inputDirection = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0) * inputDirection;
-                SetTargetDirection(inputDirection);
-                Rotate();
-                //move in the direction character is facing
-                Move(transform.forward, input.magnitude * speed);
-            }
         }
 
         /// <summary>
         /// Rotates toward the current TargetDirection
         /// </summary>
         /// <param name="useRotationRate">use RotationRate to clamp max rotation this frame</param>
-        void Rotate(bool useRotationRate = true)
+        public void Rotate(bool useRotationRate = true)
         {
             if (useRotationRate)
             {
@@ -103,15 +44,25 @@ namespace Player
                 transform.forward = _targetDirection;
             }
         }
+
+        public void Jump()
+        {
+            if (_characterController.isGrounded)
+            {
+                _velocity.y = -_gravity * gravityScale * jumpForce;
+                _characterController.Move(_velocity * Time.deltaTime);
+            }
+        }
+
         /// <summary>
         /// Move the character
         /// </summary>
         /// <param name="moveDirection">direction to move the character</param>
-        /// <param name="moveSpeed">speed to move the character (Before Applying deltaTime)</param>
-        void Move(Vector3 moveDirection, float moveSpeed)
+        /// <param name="percentSpeed"> percent of moveSpeed to use this movement</param>
+        public void Move(Vector3 moveDirection,float percentSpeed)
         {
             //set velocity
-            _velocity = moveDirection * (moveSpeed) + new Vector3(0, _velocity.y, 0);
+            _velocity = moveDirection * (moveSpeed * percentSpeed) + new Vector3(0, _velocity.y, 0);
         
             //increment vertical velocity with gravity
             _velocity.y += _gravity*gravityScale*Time.deltaTime;

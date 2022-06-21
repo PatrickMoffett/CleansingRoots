@@ -322,7 +322,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776524, y: 1}
+    m_SensorSize: {x: 1.7787286, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -989,7 +989,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776524, y: 1}
+    m_SensorSize: {x: 1.7787286, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1067,7 +1067,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776524, y: 1}
+    m_SensorSize: {x: 1.7787286, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1110,6 +1110,7 @@ GameObject:
   - component: {fileID: 747888950}
   - component: {fileID: 747888955}
   - component: {fileID: 747888954}
+  - component: {fileID: 747888956}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -1162,14 +1163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c81cf747fedac4b80e7d30bffab258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 1838101181}
-  speed: 20
+  moveSpeed: 20
   rotationRate: 360
+  jumpForce: 2
   gravityScale: 2
   slopeForce: 0.1
-  targetTransform: {fileID: 197964293}
-  mainCamera: {fileID: 2051815740}
-  targetingCamera: {fileID: 352800783}
 --- !u!143 &747888955
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1188,6 +1186,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.74, z: 0}
+--- !u!114 &747888956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747888949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c12d2083ce14548ab8cde93d9f50705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 2051815740}
+  targetingCamera: {fileID: 352800783}
+  targetTransform: {fileID: 1891749175}
+  cameraTransform: {fileID: 1838101181}
 --- !u!1 &787929470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,7 +2721,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776524, y: 1}
+    m_SensorSize: {x: 1.7787286, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 1
