@@ -16,7 +16,7 @@ MonoBehaviour:
   - m_From: CM TargetingCamera
     m_To: CM ThirdPersonCamera
     m_Blend:
-      m_Style: 4
+      m_Style: 1
       m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2

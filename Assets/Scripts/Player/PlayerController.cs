@@ -66,10 +66,10 @@ public class PlayerController : MonoBehaviour
         {
             //rotate the character towards the target transform
             _playerMovement.SetTargetDirection(targetTransform.position-transform.position);
-            _playerMovement.Rotate();
             //rotate the input by the characters current rotation and move in that direction
             inputDirection = Quaternion.Euler(0, transform.eulerAngles.y, 0) * inputDirection;
             _playerMovement.Move(inputDirection,input.magnitude);
+            _playerMovement.Rotate();
         }
         else
         {
