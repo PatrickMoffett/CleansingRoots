@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
         if (_playerControls.Player.Jump.triggered)
         {
             _playerMovement.Jump();
+            return;
         }
         //change camera if input pressed
         if (_playerControls.Player.LockOnTarget.triggered)

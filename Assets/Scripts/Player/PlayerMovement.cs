@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -7,7 +9,7 @@ namespace Player
     {
         public float moveSpeed = 20f;
         public float rotationRate = 360f;
-        public float jumpForce = 2f;
+        [FormerlySerializedAs("jumpForce")] public float jumpHeight = 2f;
         public float gravityScale = 1f;
         public float slopeForce = 1f;
 
@@ -49,7 +51,7 @@ namespace Player
         {
             if (_characterController.isGrounded)
             {
-                _velocity.y = -_gravity * gravityScale * jumpForce;
+                _velocity.y = Mathf.Sqrt(-2 * _gravity * gravityScale * jumpHeight);
                 _characterController.Move(_velocity * Time.deltaTime);
             }
         }
@@ -66,14 +68,15 @@ namespace Player
         
             //increment vertical velocity with gravity
             _velocity.y += _gravity*gravityScale*Time.deltaTime;
-        
+
+            _onWalkableSlope = false;
             //determine if character is on a slope
             if (_characterController.isGrounded)
             {
                 Ray ray = new Ray(transform.position, Vector3.down);
                 if (Physics.Raycast(ray, out RaycastHit hit, _characterController.height*2))
                 {
-                    if (Mathf.Acos(Vector3.Dot(hit.normal, Vector3.up)) * Mathf.Rad2Deg <= _characterController.slopeLimit)
+                    if (Mathf.Acos(Vector3.Dot(hit.normal, Vector3.up)) * Mathf.Rad2Deg <= _characterController.slopeLimit && hit.normal != Vector3.up)
                     {
                         _onWalkableSlope = true;
                     }
