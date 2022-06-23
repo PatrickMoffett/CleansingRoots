@@ -12,6 +12,7 @@ namespace Player
         [FormerlySerializedAs("jumpForce")] public float jumpHeight = 2f;
         public float gravityScale = 1f;
         public float slopeForce = 1f;
+        public float groundDistance = 1f;
 
     
         private bool _onWalkableSlope = false;
@@ -49,11 +50,18 @@ namespace Player
 
         public void Jump()
         {
-            if (_characterController.isGrounded)
+            Ray ray = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, groundDistance ))
             {
                 _velocity.y = Mathf.Sqrt(-2 * _gravity * gravityScale * jumpHeight);
                 _characterController.Move(_velocity * Time.deltaTime);
             }
+            else
+            {
+                Debug.Log("Jump Failed");
+            }
+
+
         }
 
         /// <summary>
@@ -68,9 +76,11 @@ namespace Player
         
             //increment vertical velocity with gravity
             _velocity.y += _gravity*gravityScale*Time.deltaTime;
-
+            
+            
             _onWalkableSlope = false;
             //determine if character is on a slope
+            
             if (_characterController.isGrounded)
             {
                 Ray ray = new Ray(transform.position, Vector3.down);
@@ -82,7 +92,7 @@ namespace Player
                     }
                 }
             }
-
+            
             //move the character in the forward direction
             if (_onWalkableSlope)
             {
@@ -95,9 +105,9 @@ namespace Player
             }
 
             //if character is grounded reset vertical velocity
-            if (_characterController.isGrounded)
+            if (_characterController.isGrounded && _velocity.y < -2f)
             {
-                _velocity.y = 0f;
+               _velocity.y = 0f;
             }
         }
         
