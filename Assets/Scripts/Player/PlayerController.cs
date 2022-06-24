@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     public GameObject targetingCamera;
     public Transform targetTransform;
     public Transform cameraTransform;
+#if UNITY_EDITOR
+    public Transform debugTeleportTransform;
+#endif
     
     private PlayerControls _playerControls;
     private PlayerMovement _playerMovement;
@@ -39,6 +42,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
+        if (_playerControls.Player.DebugTeleport.triggered)
+        {
+            gameObject.transform.position = debugTeleportTransform.position;
+            return;
+        }
+#endif
         if (_playerControls.Player.Jump.triggered)
         {
             _playerMovement.Jump();
@@ -82,4 +92,5 @@ public class PlayerController : MonoBehaviour
             _playerMovement.Move(transform.forward, input.magnitude);
         }
     }
+
 }

@@ -71,6 +71,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugTeleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7f2de19-3bc6-405e-8b3a-e7128e262172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,6 +300,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""903eaa5e-89b9-4739-bd9b-af6075eb66fb"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugTeleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -883,6 +903,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
         m_Player_LockOnTarget = m_Player.FindAction("LockOnTarget", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_DebugTeleport = m_Player.FindAction("DebugTeleport", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -959,6 +980,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PauseMenu;
     private readonly InputAction m_Player_LockOnTarget;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_DebugTeleport;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -968,6 +990,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
         public InputAction @LockOnTarget => m_Wrapper.m_Player_LockOnTarget;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @DebugTeleport => m_Wrapper.m_Player_DebugTeleport;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -992,6 +1015,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @DebugTeleport.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
+                @DebugTeleport.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
+                @DebugTeleport.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1011,6 +1037,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @DebugTeleport.started += instance.OnDebugTeleport;
+                @DebugTeleport.performed += instance.OnDebugTeleport;
+                @DebugTeleport.canceled += instance.OnDebugTeleport;
             }
         }
     }
@@ -1172,6 +1201,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnLockOnTarget(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnDebugTeleport(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
