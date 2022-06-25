@@ -322,7 +322,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785388, y: 1}
+    m_SensorSize: {x: 1.7788944, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1232,7 +1232,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785388, y: 1}
+    m_SensorSize: {x: 1.7788944, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1310,7 +1310,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785388, y: 1}
+    m_SensorSize: {x: 1.7788944, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1510,6 +1510,7 @@ MonoBehaviour:
   gravityScale: 3
   slopeForce: 0.1
   groundDistance: 1
+  animator: {fileID: 805119308}
 --- !u!143 &747888955
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3743,7 +3744,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785388, y: 1}
+    m_SensorSize: {x: 1.7788944, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 1

@@ -13,6 +13,7 @@ namespace Player
         public float gravityScale = 1f;
         public float slopeForce = 1f;
         public float groundDistance = 1f;
+        public Animator animator;
 
     
         private bool _onWalkableSlope = false;
@@ -55,6 +56,8 @@ namespace Player
             {
                 _velocity.y = Mathf.Sqrt(-2 * _gravity * gravityScale * jumpHeight);
                 _characterController.Move(_velocity * Time.deltaTime);
+                animator.SetBool("HasJumped",true);
+                animator.SetBool("IsGrounded",false);
             }
             else
             {
@@ -71,6 +74,7 @@ namespace Player
         /// <param name="percentSpeed"> percent of moveSpeed to use this movement</param>
         public void Move(Vector3 moveDirection,float percentSpeed)
         {
+            animator.SetFloat("Speed",percentSpeed);
             //set velocity
             _velocity = moveDirection * (moveSpeed * percentSpeed) + new Vector3(0, _velocity.y, 0);
         
@@ -83,6 +87,8 @@ namespace Player
             
             if (_characterController.isGrounded)
             {
+                animator.SetBool("HasJumped",false);
+                animator.SetBool("IsGrounded",true);
                 Ray ray = new Ray(transform.position, Vector3.down);
                 if (Physics.Raycast(ray, out RaycastHit hit, _characterController.height*2))
                 {
