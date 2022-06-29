@@ -9,7 +9,7 @@ namespace Player
     {
         public float moveSpeed = 20f;
         public float rotationRate = 360f;
-        [FormerlySerializedAs("jumpForce")] public float jumpHeight = 2f;
+        public float jumpHeight = 2f;
         public float gravityScale = 1f;
         public float slopeForce = 1f;
         public float groundDistance = 1f;
