@@ -89,6 +89,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeLockOnTarget"",
+                    ""type"": ""Value"",
+                    ""id"": ""d9be82cb-f840-4526-a547-d9537c29da53"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -342,6 +351,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a1ad24c-5bea-417d-affa-d1a260a0ab0a"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLockOnTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c6c56e6-6030-4de3-97f0-2d2c7dae096f"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLockOnTarget"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -936,6 +967,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_DebugTeleport = m_Player.FindAction("DebugTeleport", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_ChangeLockOnTarget = m_Player.FindAction("ChangeLockOnTarget", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1014,6 +1046,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_DebugTeleport;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_ChangeLockOnTarget;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1025,6 +1058,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @DebugTeleport => m_Wrapper.m_Player_DebugTeleport;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @ChangeLockOnTarget => m_Wrapper.m_Player_ChangeLockOnTarget;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1055,6 +1089,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @ChangeLockOnTarget.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeLockOnTarget;
+                @ChangeLockOnTarget.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeLockOnTarget;
+                @ChangeLockOnTarget.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeLockOnTarget;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1080,6 +1117,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @ChangeLockOnTarget.started += instance.OnChangeLockOnTarget;
+                @ChangeLockOnTarget.performed += instance.OnChangeLockOnTarget;
+                @ChangeLockOnTarget.canceled += instance.OnChangeLockOnTarget;
             }
         }
     }
@@ -1243,6 +1283,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnDebugTeleport(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnChangeLockOnTarget(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
