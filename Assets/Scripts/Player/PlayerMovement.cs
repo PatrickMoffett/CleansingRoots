@@ -135,5 +135,11 @@ namespace Player
             _targetDirection = newTargetDirection;
             _targetDirection.y = 0;
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.down*groundDistance);
+        }
     }
 }
