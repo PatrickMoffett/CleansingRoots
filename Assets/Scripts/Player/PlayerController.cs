@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
     private void HandlePickup(GameObject pickup)
     {
         Pickup castPickup = pickup.GetComponent<Pickup>();
-
+        AudioSource pickupAudioSource = pickup.GetComponent<AudioSource>();
         if (castPickup != null)
         {
             switch (castPickup.category)
@@ -281,7 +281,12 @@ public class PlayerController : MonoBehaviour
                     break;
             }
 
-            Destroy(pickup);
+            if (pickupAudioSource && pickupAudioSource.clip != null)
+            {
+                pickupAudioSource.Play();
+            }
+
+            Destroy(pickup, pickupAudioSource.clip.length);
         }
     }
 }
