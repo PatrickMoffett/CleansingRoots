@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     //Player Variables
     private PlayerControls _playerControls;
     private PlayerMovement _playerMovement;
+    private int health = 100; //FM: Feel free to move final player attributes
     
     //Targeting Variables
     public LayerMask targetingLayers = -1;
@@ -196,7 +197,15 @@ public class PlayerController : MonoBehaviour
             _playerMovement.Move(transform.forward, input.magnitude);
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "pickup")
+        {
+            HandlePickup(other.gameObject);
+        }
+    }
+
     private bool FindTarget()
     {
         //find all possible targets
@@ -257,5 +266,22 @@ public class PlayerController : MonoBehaviour
         if (viewportPosition.z < 0) { return false; }
 
         return true;
+    }
+
+    private void HandlePickup(GameObject pickup)
+    {
+        Pickup castPickup = pickup.GetComponent<Pickup>();
+
+        if (castPickup != null)
+        {
+            switch (castPickup.category)
+            {
+                case Pickup.Category.Health:
+                    health += castPickup.modifier;
+                    break;
+            }
+
+            Destroy(pickup);
+        }
     }
 }
