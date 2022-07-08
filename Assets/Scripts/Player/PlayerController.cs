@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using Cinemachine;
 using Combat;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject mainCamera;
     public GameObject targetingCamera;
     public Transform cameraTransform;
+    public Animator animator;
     
     //Editor Variables
 #if UNITY_EDITOR
@@ -159,7 +161,15 @@ public class PlayerController : MonoBehaviour
 
     private void AttackPressed(InputAction.CallbackContext ctx)
     {
-        throw new NotImplementedException();
+        Debug.Log("Attack Pressed");
+        if (animator.GetBool("IsAttacking"))
+        {
+            animator.SetBool("IsAttacking",false);
+        }
+        else
+        {
+            animator.SetBool("IsAttacking",true);
+        }
     }
 
     private void OnEnable()
