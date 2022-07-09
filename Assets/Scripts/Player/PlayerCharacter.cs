@@ -1,21 +1,29 @@
 ﻿using System;
-using Cinemachine;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerCharacter : MonoBehaviour
     {
-        enum Weapon
+        public enum PlayerWeapon
         {
             None,
             Sword,
             SlingShot,
         };
 
-        public Animator animator;
+        [SerializeField]private Animator animator;
+        [SerializeField] private PlayerAnimationEventManager _animationEventManager;
+        
+        [SerializeField] private Vector3 swordAttackBoxSize = Vector3.one;
+        [SerializeField] private Vector3 swordAttackOffset = Vector3.forward;
+        [SerializeField] private int swordAttackDamage = 1;
 
-        private Weapon _currentWeapon = Weapon.Sword;
+
+        private bool _isAttacking = false;
+        private Coroutine _attackCoroutine = null;
+
+        private PlayerWeapon _currentPlayerWeapon = PlayerWeapon.Sword;
         
         //Component to move the player
         private PlayerMovement _movementComponent;
@@ -28,7 +36,18 @@ namespace Player
 
         private PlayerCameraComponent _cameraComponent;
 
-        
+        private void OnEnable()
+        {
+            _animationEventManager.swordAttackEndedAnimationEvent += SwordAttackEnded;
+            _animationEventManager.swordAttackDealDamageAnimationEvent += SwordAttackDealDamage;
+        }
+
+        private void OnDisable()
+        {
+            _animationEventManager.swordAttackEndedAnimationEvent -= SwordAttackEnded;
+            _animationEventManager.swordAttackDealDamageAnimationEvent -= SwordAttackDealDamage;
+        }
+
         private void Start()
         {
             _movementComponent = GetComponent<PlayerMovement>();
@@ -39,6 +58,8 @@ namespace Player
 
         public void Move(Vector3 direction)
         {
+            
+            
             //rotate the input direction input by the camera yaw
             direction = Quaternion.Euler(0, _cameraComponent.GetMainCamera().transform.eulerAngles.y, 0) * direction;
             
@@ -46,16 +67,26 @@ namespace Player
             {
                 case PlayerCameraMode.Aiming:
                     //Rotate Character To Face Direction of Camera
-                    
+                    _movementComponent.SetTargetDirection(_cameraComponent.GetMainCamera().transform.forward);
+                    _movementComponent.Rotate();
                     //Move Character Relative To Camera
-                    
+                    if (!_isAttacking)
+                    {
+                        _movementComponent.Move(transform.forward, direction.magnitude);
+                    }
+
                     break;
+                
                 case PlayerCameraMode.Orbit:
                     //Rotate Character To Input Direction
                     _movementComponent.SetTargetDirection(direction);
                     _movementComponent.Rotate();
                     //Move Character Relative To Camera
-                    _movementComponent.Move(transform.forward, direction.magnitude);
+                    if (!_isAttacking)
+                    {
+                        _movementComponent.Move(transform.forward, direction.magnitude);
+                    }
+
                     break;
                 
                 case PlayerCameraMode.TargetLocked:
@@ -63,7 +94,11 @@ namespace Player
                     _movementComponent.SetTargetDirection(_targetingComponent.GetCurrentTarget().TargetTransform.position - transform.position);
                     _movementComponent.Rotate();
                     //Move Character Relative To Target
-                    _movementComponent.Move(direction,direction.magnitude);
+                    if (!_isAttacking)
+                    {
+                        _movementComponent.Move(direction, direction.magnitude);
+                    }
+
                     break;
                 
                 default:
@@ -97,14 +132,13 @@ namespace Player
             
             //Try to find a new target in the direction hit
             _targetingComponent.ChangeLockOnTarget(changeTargetDirection);
-            
         }
         
         public void AimPressed()
         {
             //TODO: Also don't aim if in air
             //Don't aim if SlingShot isn't equipped
-            if (_currentWeapon != Weapon.SlingShot)
+            if (_currentPlayerWeapon != PlayerWeapon.SlingShot)
             {
                 return;
             }
@@ -125,18 +159,23 @@ namespace Player
 
         }
 
+        public void EquipWeapon(PlayerWeapon playerWeaponToEquip)
+        {
+            _currentPlayerWeapon = playerWeaponToEquip;
+            //TODO: swap weapon model/or animate switch weapons
+        }
         public void Attack()
         {
-            switch (_currentWeapon)
+            switch (_currentPlayerWeapon)
             {
-                case Weapon.None:
+                case PlayerWeapon.None:
                     //if no weapon is equipped, Equip the Sword, then attack
                     break;
-                case Weapon.Sword:
+                case PlayerWeapon.Sword:
                     //Attack with the Sword
-                    SwordAttack();
+                    StartSwordAttack();
                     break;
-                case Weapon.SlingShot:
+                case PlayerWeapon.SlingShot:
                     //Attack with the SlingShot
                     SlingShotAttack();
                     break;
@@ -146,22 +185,33 @@ namespace Player
             }
         }
 
-        private void SwordAttack()
+        private void StartSwordAttack()
         {
-            
-            if (animator.GetBool("IsAttacking"))
-            {
-                animator.SetBool("IsAttacking",false);
-            }
-            else
-            {
-                animator.SetBool("IsAttacking",true);
-            }
+            if (_isAttacking) { return; }
+
+            _isAttacking = true;
+            animator.SetBool("IsAttacking",true);
+        }
+
+        public void SwordAttackDealDamage()
+        {
+            Debug.Log("DealingDamage");
+        }
+        public void SwordAttackEnded()
+        {
+            _isAttacking = false;
+            animator.SetBool("IsAttacking", false);
         }
 
         private void SlingShotAttack()
         {
             
+        }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+            Gizmos.DrawCube(swordAttackOffset, swordAttackBoxSize);
         }
     }
 }

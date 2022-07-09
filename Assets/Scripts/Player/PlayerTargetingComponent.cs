@@ -63,6 +63,7 @@ namespace Player
             if (closestTargetable != null)
             {
                 _currentTarget = closestTargetable;
+                _isTargeting = true;
                 _playerCameraComponent.SetTargetCameraLookAt(_currentTarget.TargetTransform);
                 _playerCameraComponent.SetCurrentCameraMode(PlayerCameraMode.TargetLocked);
             }
@@ -70,6 +71,7 @@ namespace Player
 
         public void StopTargeting()
         {
+            _isTargeting = false;
             _playerCameraComponent.SetCurrentCameraMode(PlayerCameraMode.Orbit);
         }
         
