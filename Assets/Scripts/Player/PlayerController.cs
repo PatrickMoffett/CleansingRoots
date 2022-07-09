@@ -13,7 +13,7 @@ namespace Player
         //Player Variables
         private PlayerControls _playerControls;
         private PlayerCharacter _playerCharacter;
-        private PlayerMovement _playerMovement;
+
         private int health = 100; //FM: Feel free to move final player attributes
 
 
@@ -54,7 +54,7 @@ namespace Player
         }
         private void JumpPressed(InputAction.CallbackContext obj)
         {
-            _playerMovement.Jump();
+            _playerCharacter.Jump();
         }
 
         private void AttackPressed(InputAction.CallbackContext ctx)

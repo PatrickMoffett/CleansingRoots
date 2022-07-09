@@ -18,6 +18,7 @@ namespace Player
         [SerializeField] private Vector3 swordAttackBoxSize = Vector3.one;
         [SerializeField] private Vector3 swordAttackOffset = Vector3.forward;
         [SerializeField] private int swordAttackDamage = 1;
+        [SerializeField] private LayerMask attackLayerMask = -1;
 
 
         private bool _isAttacking = false;
@@ -58,8 +59,6 @@ namespace Player
 
         public void Move(Vector3 direction)
         {
-            
-            
             //rotate the input direction input by the camera yaw
             direction = Quaternion.Euler(0, _cameraComponent.GetMainCamera().transform.eulerAngles.y, 0) * direction;
             
@@ -109,7 +108,11 @@ namespace Player
         
         public void Jump()
         {
-            //if on ground, jump
+            //if not attacking, try to jump
+            if (!_isAttacking)
+            {
+                _movementComponent.Jump();
+            }
         }
         
         public void ToggleLockOnTarget()
@@ -195,7 +198,18 @@ namespace Player
 
         public void SwordAttackDealDamage()
         {
-            Debug.Log("DealingDamage");
+            Vector3 attackBoxPosition = transform.position + transform.rotation * swordAttackOffset;
+            Collider[] colliders = Physics.OverlapBox(attackBoxPosition, swordAttackBoxSize / 2, transform.rotation,attackLayerMask);
+            
+            foreach (var col in colliders)
+            {
+                Debug.Log(col.gameObject.name + " hit by attack");
+                IDamageable damageableComponent = col.gameObject.GetComponent<IDamageable>();
+                if (damageableComponent != null)
+                {
+                    damageableComponent.TakeDamage(swordAttackDamage);
+                }
+            }
         }
         public void SwordAttackEnded()
         {

@@ -24,6 +24,7 @@ public class Health : MonoBehaviour,IDamageable
         OnCurrentHealthChanged?.Invoke(_currentHealth);
         if (_currentHealth == 0f)
         {
+            Debug.Log("Health is Zero");
             OnHealthIsZero?.Invoke();
         }
     }
@@ -35,6 +36,7 @@ public class Health : MonoBehaviour,IDamageable
         OnCurrentHealthChanged?.Invoke(_currentHealth);
         if (_currentHealth == 0f)
         {
+            Debug.Log("Health is Zero");
             OnHealthIsZero?.Invoke();
         }
     }
