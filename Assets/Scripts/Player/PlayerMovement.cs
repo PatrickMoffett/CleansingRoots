@@ -15,21 +15,68 @@ namespace Player
         public float groundDistance = 1f;
         public Animator animator;
 
-    
+
+        private bool _isGrounded = false;
         private bool _onWalkableSlope = false;
+        private bool _jumpStarted = false;
         private readonly float _gravity = -9.8f;
         private Vector3 _targetDirection = Vector3.forward;
         private Vector3 _velocity = Vector3.zero;
         private CharacterController _characterController;
 
 
-        
-
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
         }
 
+        private void Update()
+        {
+            UpdateGroundParameters();
+            if (_jumpStarted && _velocity.y <= 0)
+            {
+                _jumpStarted = false;
+            }
+        }
+
+        public bool IsGrounded()
+        {
+            return _isGrounded;
+        }
+
+        public void UpdateGroundParameters()
+        {
+            Ray ray = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, groundDistance))
+            {
+                if (!_isGrounded)//if just became grounded
+                {
+                    _isGrounded = true;
+                    animator.SetBool("HasJumped", false);
+                    animator.SetBool("IsGrounded", true);
+                }
+                //update _onWalkable Slope
+                if (Mathf.Acos(Vector3.Dot(hit.normal, Vector3.up)) * Mathf.Rad2Deg <= _characterController.slopeLimit && hit.normal != Vector3.up)
+                {
+                    _onWalkableSlope = true;
+                }
+                else
+                {
+                    _onWalkableSlope = false;
+                }
+            }
+            else
+            {
+                if (_isGrounded)//if just left the ground
+                {
+                    _isGrounded = false;
+                    _onWalkableSlope = false;
+                    animator.SetBool("HasJumped", true);
+                    animator.SetBool("IsGrounded", false);
+                }
+            }
+        }
+        
         /// <summary>
         /// Rotates toward the current TargetDirection
         /// </summary>
@@ -48,23 +95,23 @@ namespace Player
                 transform.forward = _targetDirection;
             }
         }
-
+        
         public void Jump()
         {
-            Ray ray = new Ray(transform.position, Vector3.down);
-            if (Physics.Raycast(ray, out RaycastHit hit, groundDistance ))
+            if (_isGrounded)
             {
+                _jumpStarted = true;
                 _velocity.y = Mathf.Sqrt(-2 * _gravity * gravityScale * jumpHeight);
+                if (_onWalkableSlope)
+                {
+                    _velocity.y += slopeForce;
+                }
                 _characterController.Move(_velocity * Time.deltaTime);
-                animator.SetBool("HasJumped",true);
-                animator.SetBool("IsGrounded",false);
             }
             else
             {
                 Debug.Log("Jump Failed");
             }
-
-
         }
 
         /// <summary>
@@ -80,27 +127,9 @@ namespace Player
         
             //increment vertical velocity with gravity
             _velocity.y += _gravity*gravityScale*Time.deltaTime;
-            
-            
-            _onWalkableSlope = false;
-            //determine if character is on a slope
-            
-            if (_characterController.isGrounded)
-            {
-                animator.SetBool("HasJumped",false);
-                animator.SetBool("IsGrounded",true);
-                Ray ray = new Ray(transform.position, Vector3.down);
-                if (Physics.Raycast(ray, out RaycastHit hit, _characterController.height*2))
-                {
-                    if (Mathf.Acos(Vector3.Dot(hit.normal, Vector3.up)) * Mathf.Rad2Deg <= _characterController.slopeLimit && hit.normal != Vector3.up)
-                    {
-                        _onWalkableSlope = true;
-                    }
-                }
-            }
-            
+
             //move the character in the forward direction
-            if (_onWalkableSlope)
+            if (!_jumpStarted && _onWalkableSlope)
             {
                 //apply additional downward force if on slope to prevent jumping down the slope
                 _characterController.Move(_velocity * Time.deltaTime+ new Vector3(0,-slopeForce,0));

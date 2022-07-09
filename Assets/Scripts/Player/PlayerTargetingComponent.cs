@@ -24,10 +24,12 @@ namespace Player
         {
             return _currentTarget;
         }
-
         private void OnDisable()
         {
-            _currentTarget.TargetDestroyed -= CurrentTargetDestroyed;
+            if (_currentTarget != null)
+            {
+                _currentTarget.TargetDestroyed -= CurrentTargetDestroyed;
+            }
         }
 
         /// <summary>

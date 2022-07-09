@@ -190,7 +190,7 @@ namespace Player
 
         private void StartSwordAttack()
         {
-            if (_isAttacking) { return; }
+            if (_isAttacking || !_movementComponent.IsGrounded()) { return; }
 
             _isAttacking = true;
             animator.SetBool("IsAttacking",true);
