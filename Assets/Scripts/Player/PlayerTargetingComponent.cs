@@ -24,7 +24,12 @@ namespace Player
         {
             return _currentTarget;
         }
-        
+
+        private void OnDisable()
+        {
+            _currentTarget.TargetDestroyed -= CurrentTargetDestroyed;
+        }
+
         /// <summary>
         /// Attempts to find an initial target and stores the result as the CurrentTarget and switches player camera to Targeting mode
         /// </summary>
@@ -63,14 +68,24 @@ namespace Player
             if (closestTargetable != null)
             {
                 _currentTarget = closestTargetable;
+                _currentTarget.TargetDestroyed += CurrentTargetDestroyed;
                 _isTargeting = true;
                 _playerCameraComponent.SetTargetCameraLookAt(_currentTarget.TargetTransform);
                 _playerCameraComponent.SetCurrentCameraMode(PlayerCameraMode.TargetLocked);
             }
         }
 
+        private void CurrentTargetDestroyed()
+        {
+            if (!ChangeLockOnTarget(Vector2.left) && !ChangeLockOnTarget(Vector2.right))
+            {
+                StopTargeting();
+            }
+        }
+
         public void StopTargeting()
         {
+            _currentTarget.TargetDestroyed -= CurrentTargetDestroyed;
             _isTargeting = false;
             _playerCameraComponent.SetCurrentCameraMode(PlayerCameraMode.Orbit);
         }
@@ -79,10 +94,10 @@ namespace Player
         /// Attempts to find a new target in the direction of changeTargetDirection
         /// </summary>
         /// <param name="changeTargetDirection">direction to look for the new target relative to the currentTarget</param>
-        public void ChangeLockOnTarget(Vector2 changeTargetDirection)
+        public bool ChangeLockOnTarget(Vector2 changeTargetDirection)
         {
             //if not currently targeting or current target is null, we can't find a new target
-            if (!_isTargeting || _currentTarget == null) return;
+            if (!_isTargeting || _currentTarget == null) return false;
         
             //find all possible targets
             List<ITargetable> targetables = new List<ITargetable>();
@@ -147,8 +162,15 @@ namespace Player
             //if a target was found set the new target and update the camera's target
             if (nextTarget != null)
             {
+                _currentTarget.TargetDestroyed -= CurrentTargetDestroyed;
                 _currentTarget = nextTarget;
+                _currentTarget.TargetDestroyed += CurrentTargetDestroyed;
                 _playerCameraComponent.SetTargetCameraLookAt(_currentTarget.TargetTransform);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
