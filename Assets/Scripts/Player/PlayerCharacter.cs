@@ -197,7 +197,6 @@ namespace Player
             _currentAimBonePitch = Mathf.Clamp(_currentAimBonePitch, 45f, 135f);
             aimRotationBone.transform.localRotation = Quaternion.Euler(_currentAimBonePitch,0,0);
             
-            Debug.Log(direction.x*aimRotationSpeed);
             _movementComponent.SetTargetDirection(Quaternion.Euler(0,direction.x*aimRotationSpeed,0)*transform.forward);
             _movementComponent.Rotate();
         }
@@ -290,12 +289,15 @@ namespace Player
 
         private void SlingShotAttack()
         {
-            //don't attack without ammo unless debug is enabled in editor
 #if UNITY_EDITOR
-            if (currentAmmo <= 0 && !unlimitedAmmoDebug) { return;} 
-#else
-            if (currentAmmo <= 0) { return; }
+            if (unlimitedAmmoDebug)
+            {
+                currentAmmo = maxAmmo;
+            }            
 #endif
+            //don't attack without ammo or not aiming
+            if (currentAmmo <= 0 || _cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming) { return; }
+            
             GameObject projectile =  Instantiate(slingShotProjectilePrefab, projectileSpawnTransform.position,projectileSpawnTransform.rotation);
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
             currentAmmo--;
