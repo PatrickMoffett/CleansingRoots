@@ -32,14 +32,30 @@ namespace Player
             _playerControls.Player.ChangeLockOnTarget.performed += ChangeLockOnTarget;
             _playerControls.Player.PauseMenu.performed += PausePressed;
             _playerControls.Player.SwapWeapon.performed += SwapWeapon;
+            _playerControls.Player.AimDownSight.performed += Aim;
+            _playerControls.Player.AimDownSight.canceled += StopAiming;
+            _playerControls.Player.AimAxis.performed += AimAxis;
             
-            
-
 #if UNITY_EDITOR
             //Bind Debug Controls
             _playerControls.Player.DebugTeleport.performed += DebugTeleportPressed;
 #endif
             
+        }
+
+        private void AimAxis(InputAction.CallbackContext obj)
+        {
+           _playerCharacter.Aim(obj.ReadValue<Vector2>());
+        }
+
+        private void StopAiming(InputAction.CallbackContext obj)
+        {
+            _playerCharacter.StopAiming();
+        }
+
+        private void Aim(InputAction.CallbackContext obj)
+        {
+            _playerCharacter.StartAiming();
         }
 
         private void SwapWeapon(InputAction.CallbackContext obj)

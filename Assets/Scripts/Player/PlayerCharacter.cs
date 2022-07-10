@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -12,20 +13,29 @@ namespace Player
             SlingShot,
         };
 
+        [Header("Animation Properties")]
         [SerializeField]private Animator animator;
         [SerializeField] private PlayerAnimationEventManager _animationEventManager;
-
-        [SerializeField] private GameObject swordGO;
-        [SerializeField] private GameObject slingShotGO;
+        [SerializeField] private GameObject aimRotationBone;
+        private Quaternion originalAimBoneRotation;
+        private float _currentAimBonePitch;
         
+        [Header("Sling Shot Properties")]
+        [SerializeField] private GameObject slingShotGameObject;
+        [SerializeField] private GameObject slingShotProjectilePrefab;
+        [SerializeField] private float aimRotationSpeed = 1f;
+        [SerializeField] private int maxAmmo = 10;
+        [SerializeField] private int currentAmmo = 10;
+
+        [Header("Sword Properties")]
+        [SerializeField] private GameObject swordGameObject;
         [SerializeField] private Vector3 swordAttackBoxSize = Vector3.one;
         [SerializeField] private Vector3 swordAttackOffset = Vector3.forward;
         [SerializeField] private int swordAttackDamage = 1;
         [SerializeField] private LayerMask attackLayerMask = -1;
-    
+
 
         private bool _isAttacking = false;
-        private Coroutine _attackCoroutine = null;
 
         private PlayerWeapon _currentPlayerWeapon = PlayerWeapon.Sword;
         
@@ -58,6 +68,7 @@ namespace Player
             _targetingComponent = GetComponent<PlayerTargetingComponent>();
             _cameraComponent = GetComponent<PlayerCameraComponent>();
             _rigidbodyPush = GetComponent<RigidbodyPush>();
+            originalAimBoneRotation = aimRotationBone.transform.localRotation;
             EquipWeapon(PlayerWeapon.Sword);
         }
 
@@ -70,12 +81,13 @@ namespace Player
             {
                 case PlayerCameraMode.Aiming:
                     //Rotate Character To Face Direction of Camera
-                    _movementComponent.SetTargetDirection(_cameraComponent.GetMainCamera().transform.forward);
-                    _movementComponent.Rotate();
+                    //_movementComponent.SetTargetDirection(_cameraComponent.GetMainCamera().transform.forward);
+                    //_movementComponent.Rotate();
+                    
                     //Move Character Relative To Camera
                     if (!_isAttacking)
                     {
-                        _movementComponent.Move(transform.forward, direction.magnitude);
+                        _movementComponent.Move(direction, direction.magnitude);
                     }
 
                     break;
@@ -141,20 +153,24 @@ namespace Player
             _targetingComponent.ChangeLockOnTarget(changeTargetDirection);
         }
         
-        public void AimPressed()
+        public void StartAiming()
         {
-            //TODO: Also don't aim if in air
-            //Don't aim if SlingShot isn't equipped
-            if (_currentPlayerWeapon != PlayerWeapon.SlingShot)
+            //Don't aim if SlingShot isn't equipped or if character is not on ground
+            if (_currentPlayerWeapon != PlayerWeapon.SlingShot || !_movementComponent.IsGrounded())
             {
                 return;
             }
             
             //TODO: Set Animation to Aiming
+            if (_cameraComponent.GetCurrentCameraMode() == PlayerCameraMode.TargetLocked)
+            {
+                _targetingComponent.StopTargeting();
+            }
             _cameraComponent.SetCurrentCameraMode(PlayerCameraMode.Aiming);
+            _currentAimBonePitch = aimRotationBone.transform.localEulerAngles.x;
         }
 
-        public void AimReleased()
+        public void StopAiming()
         {
             if (_cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming)
             {
@@ -162,8 +178,21 @@ namespace Player
             }
             
             //TODO: turn off aiming Animation
-            _cameraComponent.SetCurrentCameraMode(PlayerCameraMode.Orbit);
+            _cameraComponent.SetCurrentCameraMode(PlayerCameraMode.Orbit); 
+            aimRotationBone.transform.localRotation = originalAimBoneRotation;
+        }
 
+        public void Aim(Vector2 direction)
+        {
+            if (_cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming) {return;}
+
+            _currentAimBonePitch -= direction.y * aimRotationSpeed;
+            _currentAimBonePitch = Mathf.Clamp(_currentAimBonePitch, 45f, 135f);
+            aimRotationBone.transform.localRotation = Quaternion.Euler(_currentAimBonePitch,0,0);
+            
+            Debug.Log(direction.x*aimRotationSpeed);
+            _movementComponent.SetTargetDirection(Quaternion.Euler(0,direction.x*aimRotationSpeed,0)*transform.forward);
+            _movementComponent.Rotate();
         }
 
         public void EquipWeapon(PlayerWeapon playerWeaponToEquip)
@@ -175,12 +204,12 @@ namespace Player
             switch (playerWeaponToEquip)
             {
                 case PlayerWeapon.Sword:
-                    swordGO.SetActive(true);
-                    slingShotGO.SetActive(false);
+                    swordGameObject.SetActive(true);
+                    slingShotGameObject.SetActive(false);
                     break;
                 case PlayerWeapon.SlingShot:
-                    swordGO.SetActive(false);
-                    slingShotGO.SetActive(true);
+                    swordGameObject.SetActive(false);
+                    slingShotGameObject.SetActive(true);
                     break;
                 default:
                     Debug.LogError("Unsupported Weapon");

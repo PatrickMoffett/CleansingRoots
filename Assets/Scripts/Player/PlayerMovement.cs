@@ -95,7 +95,6 @@ namespace Player
                 transform.forward = _targetDirection;
             }
         }
-        
         public void Jump()
         {
             if (_isGrounded)
