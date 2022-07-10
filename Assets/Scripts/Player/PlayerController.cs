@@ -31,12 +31,20 @@ namespace Player
             _playerControls.Player.LockOnTarget.performed += ToggleLockOnPressed;
             _playerControls.Player.ChangeLockOnTarget.performed += ChangeLockOnTarget;
             _playerControls.Player.PauseMenu.performed += PausePressed;
+            _playerControls.Player.SwapWeapon.performed += SwapWeapon;
             
+            
+
 #if UNITY_EDITOR
             //Bind Debug Controls
             _playerControls.Player.DebugTeleport.performed += DebugTeleportPressed;
 #endif
             
+        }
+
+        private void SwapWeapon(InputAction.CallbackContext obj)
+        {
+            _playerCharacter.SwapWeapon();
         }
 
         private void PausePressed(InputAction.CallbackContext obj)

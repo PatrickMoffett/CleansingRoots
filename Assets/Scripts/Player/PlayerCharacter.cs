@@ -14,12 +14,15 @@ namespace Player
 
         [SerializeField]private Animator animator;
         [SerializeField] private PlayerAnimationEventManager _animationEventManager;
+
+        [SerializeField] private GameObject swordGO;
+        [SerializeField] private GameObject slingShotGO;
         
         [SerializeField] private Vector3 swordAttackBoxSize = Vector3.one;
         [SerializeField] private Vector3 swordAttackOffset = Vector3.forward;
         [SerializeField] private int swordAttackDamage = 1;
         [SerializeField] private LayerMask attackLayerMask = -1;
-
+    
 
         private bool _isAttacking = false;
         private Coroutine _attackCoroutine = null;
@@ -55,6 +58,7 @@ namespace Player
             _targetingComponent = GetComponent<PlayerTargetingComponent>();
             _cameraComponent = GetComponent<PlayerCameraComponent>();
             _rigidbodyPush = GetComponent<RigidbodyPush>();
+            EquipWeapon(PlayerWeapon.Sword);
         }
 
         public void Move(Vector3 direction)
@@ -164,8 +168,39 @@ namespace Player
 
         public void EquipWeapon(PlayerWeapon playerWeaponToEquip)
         {
+            //cant change weapons while attacking
+            if (_isAttacking) { return;}
+
+            //TODO:animate switch weapons
+            switch (playerWeaponToEquip)
+            {
+                case PlayerWeapon.Sword:
+                    swordGO.SetActive(true);
+                    slingShotGO.SetActive(false);
+                    break;
+                case PlayerWeapon.SlingShot:
+                    swordGO.SetActive(false);
+                    slingShotGO.SetActive(true);
+                    break;
+                default:
+                    Debug.LogError("Unsupported Weapon");
+                    break;
+            }
             _currentPlayerWeapon = playerWeaponToEquip;
-            //TODO: swap weapon model/or animate switch weapons
+            
+            
+        }
+
+        public void SwapWeapon()
+        {
+            if (_currentPlayerWeapon == PlayerWeapon.Sword)
+            {
+                EquipWeapon(PlayerWeapon.SlingShot);
+            }
+            else
+            {
+                EquipWeapon(PlayerWeapon.Sword);
+            }
         }
         public void Attack()
         {

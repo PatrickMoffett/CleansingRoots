@@ -690,6 +690,12 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &246834379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8790477747730507886, guid: 7af724c534713d04db88205a1493ee5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124304785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &276793129
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +908,12 @@ Transform:
   m_Father: {fileID: 954057853}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &299375868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8208605359885359909, guid: 7af724c534713d04db88205a1493ee5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124304785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!850595691 &310503094
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1420,6 +1432,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 805119308}
   _animationEventManager: {fileID: 805119309}
+  swordGO: {fileID: 246834379}
+  slingShotGO: {fileID: 299375868}
   swordAttackBoxSize: {x: 3, y: 2, z: 2}
   swordAttackOffset: {x: 0, y: 1.5, z: 2}
   swordAttackDamage: 1
@@ -2639,7 +2653,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296390459}
-  m_LocalRotation: {x: -0.09197079, y: -0.009418678, z: 0.0005253921, w: 0.9957171}
+  m_LocalRotation: {x: -0.09197079, y: -0.009418712, z: 0.00052539405, w: 0.9957171}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3685,8 +3699,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838101178}
-  m_LocalRotation: {x: -0.018189492, y: 0.000000017711784, z: 3.118507e-10, w: 0.9998346}
-  m_LocalPosition: {x: 7.76, y: 2.3969998, z: -31.97}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.940001, y: 2.797, z: -22.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4556,7 +4570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2051815741
 MonoBehaviour:
   m_ObjectHideFlags: 0

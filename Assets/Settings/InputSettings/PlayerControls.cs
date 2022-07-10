@@ -98,6 +98,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwapWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7a638e6-b788-4277-82c9-d9ff4a07686c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -373,6 +382,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ChangeLockOnTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e29c53ae-d0cb-4318-af68-5d54687feeba"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""778da8ef-4d72-492d-8450-81563dca11bc"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -968,6 +999,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_DebugTeleport = m_Player.FindAction("DebugTeleport", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_ChangeLockOnTarget = m_Player.FindAction("ChangeLockOnTarget", throwIfNotFound: true);
+        m_Player_SwapWeapon = m_Player.FindAction("SwapWeapon", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1047,6 +1079,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DebugTeleport;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_ChangeLockOnTarget;
+    private readonly InputAction m_Player_SwapWeapon;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1059,6 +1092,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @DebugTeleport => m_Wrapper.m_Player_DebugTeleport;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @ChangeLockOnTarget => m_Wrapper.m_Player_ChangeLockOnTarget;
+        public InputAction @SwapWeapon => m_Wrapper.m_Player_SwapWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1092,6 +1126,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ChangeLockOnTarget.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeLockOnTarget;
                 @ChangeLockOnTarget.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeLockOnTarget;
                 @ChangeLockOnTarget.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeLockOnTarget;
+                @SwapWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
+                @SwapWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
+                @SwapWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1120,6 +1157,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ChangeLockOnTarget.started += instance.OnChangeLockOnTarget;
                 @ChangeLockOnTarget.performed += instance.OnChangeLockOnTarget;
                 @ChangeLockOnTarget.canceled += instance.OnChangeLockOnTarget;
+                @SwapWeapon.started += instance.OnSwapWeapon;
+                @SwapWeapon.performed += instance.OnSwapWeapon;
+                @SwapWeapon.canceled += instance.OnSwapWeapon;
             }
         }
     }
@@ -1284,6 +1324,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDebugTeleport(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnChangeLockOnTarget(InputAction.CallbackContext context);
+        void OnSwapWeapon(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
