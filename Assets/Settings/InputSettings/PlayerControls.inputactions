@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DebugTeleport",
-                    "type": "Button",
-                    "id": "a7f2de19-3bc6-405e-8b3a-e7128e262172",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "353d078b-b563-4041-9fe2-cf29f00ee404",
@@ -103,6 +94,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DebugTeleport",
+                    "type": "Button",
+                    "id": "a7f2de19-3bc6-405e-8b3a-e7128e262172",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugUnlimitedAmmo",
+                    "type": "Button",
+                    "id": "b96f8f78-905c-4d7c-bb09-2449bde87a83",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -328,17 +337,6 @@
                 },
                 {
                     "name": "",
-                    "id": "903eaa5e-89b9-4739-bd9b-af6075eb66fb",
-                    "path": "<Keyboard>/t",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DebugTeleport",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "96cbe19c-153c-4833-bec2-9d5995d71e23",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -444,6 +442,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "AimAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2180ba1d-c730-480b-8e4c-0c6f5a737d62",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DebugUnlimitedAmmo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "903eaa5e-89b9-4739-bd9b-af6075eb66fb",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugTeleport",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -22,10 +22,15 @@ namespace Player
         
         [Header("Sling Shot Properties")]
         [SerializeField] private GameObject slingShotGameObject;
+        [SerializeField] private Transform projectileSpawnTransform;
         [SerializeField] private GameObject slingShotProjectilePrefab;
         [SerializeField] private float aimRotationSpeed = 1f;
+        [SerializeField] private float projectileSpeed = 1f;
         [SerializeField] private int maxAmmo = 10;
         [SerializeField] private int currentAmmo = 10;
+#if UNITY_EDITOR
+        public bool unlimitedAmmoDebug; 
+#endif
 
         [Header("Sword Properties")]
         [SerializeField] private GameObject swordGameObject;
@@ -168,6 +173,7 @@ namespace Player
             }
             _cameraComponent.SetCurrentCameraMode(PlayerCameraMode.Aiming);
             _currentAimBonePitch = aimRotationBone.transform.localEulerAngles.x;
+            animator.SetBool("IsAiming",true);
         }
 
         public void StopAiming()
@@ -180,6 +186,7 @@ namespace Player
             //TODO: turn off aiming Animation
             _cameraComponent.SetCurrentCameraMode(PlayerCameraMode.Orbit); 
             aimRotationBone.transform.localRotation = originalAimBoneRotation;
+            animator.SetBool("IsAiming",false);
         }
 
         public void Aim(Vector2 direction)
@@ -283,7 +290,54 @@ namespace Player
 
         private void SlingShotAttack()
         {
-            
+            //don't attack without ammo unless debug is enabled in editor
+#if UNITY_EDITOR
+            if (currentAmmo <= 0 && !unlimitedAmmoDebug) { return;} 
+#else
+            if (currentAmmo <= 0) { return; }
+#endif
+            GameObject projectile =  Instantiate(slingShotProjectilePrefab, projectileSpawnTransform.position,projectileSpawnTransform.rotation);
+            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
+            currentAmmo--;
+            Debug.Log("Current Ammo: " + currentAmmo);
+        }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "pickup")
+            {
+                HandlePickup(other.gameObject);
+            }
+        }
+
+        private void HandlePickup(GameObject pickup)
+        {
+            Pickup castPickup = pickup.GetComponent<Pickup>();
+            AudioSource pickupAudioSource = pickup.GetComponent<AudioSource>();
+            if (castPickup != null)
+            {
+                switch (castPickup.category)
+                {
+                    case Pickup.Category.Health:
+                        //TODO: Add Health
+                        break;
+                    case Pickup.Category.Ammo:
+                        currentAmmo += castPickup.modifier;
+                        currentAmmo = currentAmmo > maxAmmo ? maxAmmo : currentAmmo;
+                        Debug.Log("Current Ammo: " + currentAmmo);
+                        break;
+                    default:
+                        Debug.LogError("Unsupported Pickup Type");
+                        break;
+                }
+
+                if (pickupAudioSource && pickupAudioSource.clip != null)
+                {
+                    pickupAudioSource.Play();
+                }
+
+                Destroy(pickup, pickupAudioSource.clip.length);
+            }
         }
         private void OnDrawGizmos()
         {

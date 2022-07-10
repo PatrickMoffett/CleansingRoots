@@ -39,8 +39,9 @@ namespace Player
 #if UNITY_EDITOR
             //Bind Debug Controls
             _playerControls.Player.DebugTeleport.performed += DebugTeleportPressed;
+            _playerControls.Player.DebugUnlimitedAmmo.performed += DebugUnlimitedAmmo;
 #endif
-            
+
         }
 
         private void AimAxis(InputAction.CallbackContext obj)
@@ -104,36 +105,6 @@ namespace Player
             
             _playerCharacter.Move(inputDirection);
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.tag == "pickup")
-            {
-                HandlePickup(other.gameObject);
-            }
-        }
-
-        private void HandlePickup(GameObject pickup)
-        {
-            Pickup castPickup = pickup.GetComponent<Pickup>();
-            AudioSource pickupAudioSource = pickup.GetComponent<AudioSource>();
-            if (castPickup != null)
-            {
-                switch (castPickup.category)
-                {
-                    case Pickup.Category.Health:
-                        health += castPickup.modifier;
-                        break;
-                }
-
-                if (pickupAudioSource && pickupAudioSource.clip != null)
-                {
-                    pickupAudioSource.Play();
-                }
-
-                Destroy(pickup, pickupAudioSource.clip.length);
-            }
-        }
 #if UNITY_EDITOR
         ///////////////////////////////////
         //Editor & Debug Variables
@@ -146,6 +117,11 @@ namespace Player
         private void DebugTeleportPressed(InputAction.CallbackContext obj)
         {
             gameObject.transform.position = debugTeleportTransform.position;
+        }
+
+        private void DebugUnlimitedAmmo(InputAction.CallbackContext obj)
+        {
+            _playerCharacter.unlimitedAmmoDebug = !_playerCharacter.unlimitedAmmoDebug;
         }
 #endif
         

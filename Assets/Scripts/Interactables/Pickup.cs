@@ -5,20 +5,8 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public enum Category {Health}
+    public enum Category {Health,Ammo}
 
     public Category category;
     public int modifier;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

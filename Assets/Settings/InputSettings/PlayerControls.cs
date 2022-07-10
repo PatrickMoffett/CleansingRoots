@@ -73,15 +73,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DebugTeleport"",
-                    ""type"": ""Button"",
-                    ""id"": ""a7f2de19-3bc6-405e-8b3a-e7128e262172"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""353d078b-b563-4041-9fe2-cf29f00ee404"",
@@ -125,6 +116,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DebugTeleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7f2de19-3bc6-405e-8b3a-e7128e262172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugUnlimitedAmmo"",
+                    ""type"": ""Button"",
+                    ""id"": ""b96f8f78-905c-4d7c-bb09-2449bde87a83"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -350,17 +359,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""903eaa5e-89b9-4739-bd9b-af6075eb66fb"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DebugTeleport"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""96cbe19c-153c-4833-bec2-9d5995d71e23"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -466,6 +464,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""AimAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2180ba1d-c730-480b-8e4c-0c6f5a737d62"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DebugUnlimitedAmmo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""903eaa5e-89b9-4739-bd9b-af6075eb66fb"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugTeleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1058,12 +1078,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
         m_Player_LockOnTarget = m_Player.FindAction("LockOnTarget", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_DebugTeleport = m_Player.FindAction("DebugTeleport", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_ChangeLockOnTarget = m_Player.FindAction("ChangeLockOnTarget", throwIfNotFound: true);
         m_Player_SwapWeapon = m_Player.FindAction("SwapWeapon", throwIfNotFound: true);
         m_Player_AimDownSight = m_Player.FindAction("AimDownSight", throwIfNotFound: true);
         m_Player_AimAxis = m_Player.FindAction("AimAxis", throwIfNotFound: true);
+        m_Player_DebugTeleport = m_Player.FindAction("DebugTeleport", throwIfNotFound: true);
+        m_Player_DebugUnlimitedAmmo = m_Player.FindAction("DebugUnlimitedAmmo", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1140,12 +1161,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PauseMenu;
     private readonly InputAction m_Player_LockOnTarget;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_DebugTeleport;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_ChangeLockOnTarget;
     private readonly InputAction m_Player_SwapWeapon;
     private readonly InputAction m_Player_AimDownSight;
     private readonly InputAction m_Player_AimAxis;
+    private readonly InputAction m_Player_DebugTeleport;
+    private readonly InputAction m_Player_DebugUnlimitedAmmo;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1155,12 +1177,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
         public InputAction @LockOnTarget => m_Wrapper.m_Player_LockOnTarget;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @DebugTeleport => m_Wrapper.m_Player_DebugTeleport;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @ChangeLockOnTarget => m_Wrapper.m_Player_ChangeLockOnTarget;
         public InputAction @SwapWeapon => m_Wrapper.m_Player_SwapWeapon;
         public InputAction @AimDownSight => m_Wrapper.m_Player_AimDownSight;
         public InputAction @AimAxis => m_Wrapper.m_Player_AimAxis;
+        public InputAction @DebugTeleport => m_Wrapper.m_Player_DebugTeleport;
+        public InputAction @DebugUnlimitedAmmo => m_Wrapper.m_Player_DebugUnlimitedAmmo;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1185,9 +1208,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @DebugTeleport.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
-                @DebugTeleport.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
-                @DebugTeleport.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -1203,6 +1223,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimAxis.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimAxis;
                 @AimAxis.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimAxis;
                 @AimAxis.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimAxis;
+                @DebugTeleport.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
+                @DebugTeleport.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
+                @DebugTeleport.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugTeleport;
+                @DebugUnlimitedAmmo.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugUnlimitedAmmo;
+                @DebugUnlimitedAmmo.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugUnlimitedAmmo;
+                @DebugUnlimitedAmmo.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugUnlimitedAmmo;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1222,9 +1248,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @DebugTeleport.started += instance.OnDebugTeleport;
-                @DebugTeleport.performed += instance.OnDebugTeleport;
-                @DebugTeleport.canceled += instance.OnDebugTeleport;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -1240,6 +1263,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimAxis.started += instance.OnAimAxis;
                 @AimAxis.performed += instance.OnAimAxis;
                 @AimAxis.canceled += instance.OnAimAxis;
+                @DebugTeleport.started += instance.OnDebugTeleport;
+                @DebugTeleport.performed += instance.OnDebugTeleport;
+                @DebugTeleport.canceled += instance.OnDebugTeleport;
+                @DebugUnlimitedAmmo.started += instance.OnDebugUnlimitedAmmo;
+                @DebugUnlimitedAmmo.performed += instance.OnDebugUnlimitedAmmo;
+                @DebugUnlimitedAmmo.canceled += instance.OnDebugUnlimitedAmmo;
             }
         }
     }
@@ -1401,12 +1430,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnLockOnTarget(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnDebugTeleport(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnChangeLockOnTarget(InputAction.CallbackContext context);
         void OnSwapWeapon(InputAction.CallbackContext context);
         void OnAimDownSight(InputAction.CallbackContext context);
         void OnAimAxis(InputAction.CallbackContext context);
+        void OnDebugTeleport(InputAction.CallbackContext context);
+        void OnDebugUnlimitedAmmo(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
