@@ -296,7 +296,7 @@ namespace Player
             }            
 #endif
             //don't attack without ammo or not aiming
-            if (currentAmmo <= 0 || _cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming) { return; }
+            if (currentAmmo <= 0 || (_cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming && _cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.TargetLocked)) { return; }
             
             GameObject projectile =  Instantiate(slingShotProjectilePrefab, projectileSpawnTransform.position,projectileSpawnTransform.rotation);
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
