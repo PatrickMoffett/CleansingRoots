@@ -25,11 +25,11 @@ public static class Bootstrapper
         Object.DontDestroyOnLoad(singletonObject);
 
         //Start MainMenuState
-        ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(MainMenuState));
+        //ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(MainMenuState));
 #if UNITY_EDITOR
         if (ServiceLocator.Instance.Get<LevelSceneManager>().GetLevelIndex() != (int)SceneIndexes.INITIAL_SCENE)
         {
-            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameState));
+            //ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameState));
         }
 #endif
     }

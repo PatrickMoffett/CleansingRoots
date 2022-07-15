@@ -16,6 +16,8 @@ namespace Enemies.FlyingRobot
             if (patrolWaypoints.Count == 0)
             {
                 Debug.LogError("No Waypoints Set For Behavior Tree on " + gameObject.name);
+                this.enabled = false;
+                return null;
             }
             else
             {
