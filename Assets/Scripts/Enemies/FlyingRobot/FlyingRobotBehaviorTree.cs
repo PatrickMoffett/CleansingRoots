@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AI.BehaviorTree;
 using AI.BehaviorTree.Control.Decorator;
 using AI.BehaviorTree.Task;
@@ -48,6 +49,22 @@ namespace Enemies.FlyingRobot
                     new IdleTask(2f)
                 })
             });
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            for (int i = 0; i < patrolWaypoints.Count; i++)
+            {
+                if (i == patrolWaypoints.Count - 1)
+                {
+                    Gizmos.DrawLine(patrolWaypoints[i].position, patrolWaypoints[0].position);
+                }
+                else
+                {
+                    Gizmos.DrawLine(patrolWaypoints[i].position, patrolWaypoints[i+1].position);
+                }
+            }
         }
     }
 }
