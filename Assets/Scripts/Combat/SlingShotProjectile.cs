@@ -7,6 +7,7 @@ public class SlingShotProjectile : MonoBehaviour
 {
     [SerializeField] private LayerMask collisionLayers = -1;
     [SerializeField] private int damage = 1;
+    [SerializeField] private GameObject trail;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -17,6 +18,7 @@ public class SlingShotProjectile : MonoBehaviour
             {
                 damageableComponent.TakeDamage(damage);
             }
+            trail.transform.SetParent(null);
             Destroy(gameObject);
         }
     }
