@@ -39,7 +39,7 @@ namespace Player
         [SerializeField] private int swordAttackDamage = 1;
         [SerializeField] private LayerMask attackLayerMask = -1;
 
-
+        private LayerMask shotLayers;
         private bool _isAttacking = false;
 
         private PlayerWeapon _currentPlayerWeapon = PlayerWeapon.Sword;
@@ -69,12 +69,14 @@ namespace Player
 
         private void Start()
         {
+            shotLayers = ~LayerMask.GetMask("Player");
             _movementComponent = GetComponent<PlayerMovement>();
             _targetingComponent = GetComponent<PlayerTargetingComponent>();
             _cameraComponent = GetComponent<PlayerCameraComponent>();
             _rigidbodyPush = GetComponent<RigidbodyPush>();
             originalAimBoneRotation = aimRotationBone.transform.localRotation;
             EquipWeapon(PlayerWeapon.Sword);
+
         }
 
         public void Move(Vector3 direction)
@@ -297,7 +299,15 @@ namespace Player
 #endif
             //don't attack without ammo or not aiming
             if (currentAmmo <= 0 || (_cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming && _cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.TargetLocked)) { return; }
-            
+            GameObject targetedObject;
+            Vector3 targetedPoint;
+            RaycastHit rhInfo;
+            // origin direction hitinfo distance
+            if (Physics.Raycast(projectileSpawnTransform.position, projectileSpawnTransform.rotation.eulerAngles, out rhInfo, 5000.0f, shotLayers)) {
+                targetedObject = rhInfo.collider.gameObject;
+                targetedPoint = rhInfo.point;
+                Debug.Log(targetedObject.name + " " + targetedPoint);
+            }
             GameObject projectile =  Instantiate(slingShotProjectilePrefab, projectileSpawnTransform.position,projectileSpawnTransform.rotation);
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
             currentAmmo--;
