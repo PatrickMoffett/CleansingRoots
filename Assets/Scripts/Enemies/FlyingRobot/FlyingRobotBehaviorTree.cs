@@ -29,9 +29,9 @@ namespace Enemies.FlyingRobot
             SetData("Player", playerGameObject);
             SetData("PlayerTransform", playerGameObject.transform);
             SetData("MoveSpeed", 5f);
-            SetData("AggroRange", 20f);
-            SetData("DeaggroRange", 40f);
-            SetData("AttackDistance", 10f);
+            SetData("AggroRange", 40f);
+            SetData("DeaggroRange", 50f);
+            SetData("AttackDistance", 30f);
             SetData("PatrolPointMinimumDistance",.2f);
             return new Selector(new List<BaseNode>
             {

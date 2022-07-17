@@ -39,6 +39,7 @@ namespace AI.BehaviorTree.Task
             else
             {
                 selfGameObject.transform.position += direction.normalized * (speed * Time.deltaTime);
+                selfGameObject.transform.rotation = Quaternion.LookRotation(direction);
                 return NodeState.RUNNING;
             }
         }
