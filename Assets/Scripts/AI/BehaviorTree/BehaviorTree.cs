@@ -13,7 +13,7 @@ namespace AI.BehaviorTree
         protected void Start()
         {
             _root = SetupTree();
-            _root.SetOwningTree(this);
+            _root?.SetOwningTree(this);
         }
 
         protected abstract BaseNode SetupTree();
