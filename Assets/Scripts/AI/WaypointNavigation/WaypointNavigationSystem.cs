@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,6 +50,30 @@ namespace AI.WaypointNavigation
                 }
                 yield return new WaitForSeconds(updateRate);
             }
+        }
+        public List<WaypointNode> GetPath(WaypointNode startNode)
+        {
+            if (startNode.score == Int32.MaxValue)
+            {
+                Debug.LogWarning("Start Node has no path connected to player");
+                return null;
+            }
+            
+            List<WaypointNode> path = new List<WaypointNode> { startNode };
+            WaypointNode currentNode = startNode;
+            while (currentNode.score != 1)
+            {
+                for (int i = 0; i < currentNode.connectedNodes.Count; i++)
+                {
+                    if (currentNode.connectedNodes[i].score < currentNode.score)
+                    {
+                        currentNode = currentNode.connectedNodes[i];
+                        path.Add(currentNode);
+                        break;
+                    }
+                }
+            }
+            return path;
         }
     }
 }

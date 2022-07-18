@@ -56,16 +56,10 @@ namespace Enemies.FlyingRobot
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            for (int i = 0; i < patrolWaypoints.Count; i++)
+            Gizmos.DrawLine(patrolWaypoints[0].position, patrolWaypoints[patrolWaypoints.Count-1].position);
+            for (int i = 1; i < patrolWaypoints.Count; i++)
             {
-                if (i == patrolWaypoints.Count - 1)
-                {
-                    Gizmos.DrawLine(patrolWaypoints[i].position, patrolWaypoints[0].position);
-                }
-                else
-                {
-                    Gizmos.DrawLine(patrolWaypoints[i].position, patrolWaypoints[i+1].position);
-                }
+                Gizmos.DrawLine(patrolWaypoints[i-1].position, patrolWaypoints[i].position);
             }
         }
     }
