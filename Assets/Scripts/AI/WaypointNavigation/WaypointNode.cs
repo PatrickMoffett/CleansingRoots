@@ -48,7 +48,20 @@ namespace AI.WaypointNavigation
         {
             ServiceLocator.Instance.Get<WaypointNavigationSystem>().RegisterWaypoint(this);
         }
-        
+
+        private void Update()
+        {
+            if (showDebug)
+            {
+                List<WaypointNode> path = ServiceLocator.Instance.Get<WaypointNavigationSystem>().GetPath(this);
+                string pathString = "";
+                for (int i = 1; i < path.Count; i++)
+                {
+                    Debug.DrawLine(path[i-1].transform.position,path[i].transform.position,Color.green);
+                }
+            }
+        }
+
         public void SetScore(int scoreToSet)
         {
             if (hasBeenScored) return;

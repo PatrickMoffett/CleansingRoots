@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace AI.WaypointNavigation
@@ -7,6 +8,7 @@ namespace AI.WaypointNavigation
     public class PlayerWaypointNode : MonoBehaviour
     {
         public float nodeConnectionRadius = 40.0f;
+        public Transform playerTargetTransform;
 
         private void Start()
         {
