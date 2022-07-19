@@ -78,7 +78,7 @@ namespace AI.WaypointNavigation
         }
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.gray;
             
             for (int i = 0; i < connectedNodes.Count; i++)
             {

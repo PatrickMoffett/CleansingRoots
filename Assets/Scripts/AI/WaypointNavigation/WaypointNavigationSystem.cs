@@ -16,11 +16,18 @@ namespace AI.WaypointNavigation
         {
             updateCoroutine = ServiceLocator.Instance.Get<MonoBehaviorService>().StartCoroutine(UpdateNav());
         }
+
+        ~WaypointNavigationSystem()
+        {
+            if (updateCoroutine != null)
+            {
+                ServiceLocator.Instance.Get<MonoBehaviorService>().StopCoroutine(updateCoroutine);
+            }
+        }
         public void RegisterWaypoint(WaypointNode nodeToRegister)
         {
             _nodes.Add(nodeToRegister);
         }
-
         public void UnregisterWaypoint(WaypointNode nodeToUnregister)
         {
             _nodes.Remove(nodeToUnregister);

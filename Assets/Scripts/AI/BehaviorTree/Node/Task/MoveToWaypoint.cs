@@ -1,37 +1,38 @@
-﻿using UnityEngine;
+﻿using AI.WaypointNavigation;
+using UnityEngine;
 
 namespace AI.BehaviorTree.Task
 {
-    public class MoveToTransform : BaseNode
+    public class MoveToWaypoint : BaseNode
     {
         private readonly string _selfGameObjectKey;
         private readonly string _moveSpeedKey;
         private readonly string _minimumDistanceKey;
-        private readonly string _transformKey;
+        private readonly string _waypointKey;
 
-        public MoveToTransform(string selfGameObjectKey, string moveSpeedKey, string minimumDistanceKey, string transformKey)
+        public MoveToWaypoint(string selfGameObjectKey, string moveSpeedKey, string minimumDistanceKey, string waypointKey)
         {
             _selfGameObjectKey = selfGameObjectKey;
             _moveSpeedKey = moveSpeedKey;
             _minimumDistanceKey = minimumDistanceKey;
-            _transformKey = transformKey;
+            _waypointKey = waypointKey;
         }
         
         public override NodeState Run()
         {
             if (!(owningTree.HasData(_moveSpeedKey) && owningTree.HasData(_minimumDistanceKey) &&
-                owningTree.HasData(_transformKey) && owningTree.HasData(_selfGameObjectKey)))
+                owningTree.HasData(_waypointKey) && owningTree.HasData(_selfGameObjectKey)))
             {
                 Debug.Log(this.owningTree.name+ ": Missing Data for node type: " + GetType() );
                 return NodeState.FAILURE;
             }
 
             GameObject selfGameObject = (GameObject)owningTree.GetData(_selfGameObjectKey);
-            Transform targetTransform = (Transform)owningTree.GetData(_transformKey);
+            WaypointNode targetTransform = (WaypointNode)owningTree.GetData(_waypointKey);
             float speed = (float)owningTree.GetData(_moveSpeedKey);
             float minimumDistance = (float)owningTree.GetData(_minimumDistanceKey);
             
-            Vector3 direction = targetTransform.position - selfGameObject.transform.position;
+            Vector3 direction = targetTransform.transform.position - selfGameObject.transform.position;
             if (direction.sqrMagnitude <= minimumDistance*minimumDistance)
             {
                 return NodeState.SUCCESS;

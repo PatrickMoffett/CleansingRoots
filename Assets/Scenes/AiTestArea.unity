@@ -743,6 +743,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701603291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8804656885014706969, guid: 3b732401988516243b9fdae22117a486,
+    type: 3}
+  m_PrefabInstance: {fileID: 1463678307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158409e2eba5c034fab9ff00ab0aa700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &831427992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1346,6 +1358,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b732401988516243b9fdae22117a486, type: 3}
+--- !u!114 &1360729539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8804656885014706969, guid: 3b732401988516243b9fdae22117a486,
+    type: 3}
+  m_PrefabInstance: {fileID: 1332882009}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158409e2eba5c034fab9ff00ab0aa700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1391610449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1593,6 +1617,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4291152293707694176}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1537343564 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8804656885014706969, guid: 3b732401988516243b9fdae22117a486,
+    type: 3}
+  m_PrefabInstance: {fileID: 4291152293707694176}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158409e2eba5c034fab9ff00ab0aa700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1538734809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2046,6 +2082,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2117820191}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1756332411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8804656885014706969, guid: 3b732401988516243b9fdae22117a486,
+    type: 3}
+  m_PrefabInstance: {fileID: 1216248083}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158409e2eba5c034fab9ff00ab0aa700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1785387171
 GameObject:
   m_ObjectHideFlags: 0
@@ -2912,6 +2960,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
+      propertyPath: aggroRange
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
+        type: 3}
       propertyPath: playerGameObject
       value: 
       objectReference: {fileID: 146553986}
@@ -2919,21 +2972,21 @@ PrefabInstance:
         type: 3}
       propertyPath: patrolWaypoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1537343563}
+      objectReference: {fileID: 1537343564}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
       propertyPath: patrolWaypoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1013836955}
+      objectReference: {fileID: 1360729539}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
       propertyPath: patrolWaypoints.Array.data[2]
       value: 
-      objectReference: {fileID: 497489808}
+      objectReference: {fileID: 701603291}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
       propertyPath: patrolWaypoints.Array.data[3]
       value: 
-      objectReference: {fileID: 1732290761}
+      objectReference: {fileID: 1756332411}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd5f7a1aada85744b4e002fb9ce0d5d, type: 3}
