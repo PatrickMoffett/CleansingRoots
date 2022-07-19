@@ -112,6 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeConnectionRadius: 50
+  nodeConnectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 513
   showDebug: 0
   displayNumberText: {fileID: 4291152294871294720}
 --- !u!1 &4291152294871294782

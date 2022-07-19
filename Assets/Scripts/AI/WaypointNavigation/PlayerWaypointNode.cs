@@ -8,6 +8,7 @@ namespace AI.WaypointNavigation
     public class PlayerWaypointNode : MonoBehaviour
     {
         public float nodeConnectionRadius = 40.0f;
+        public LayerMask nodeConnectionLayerMask = -1;
         public Transform playerTargetTransform;
 
         private void Start()
@@ -24,7 +25,7 @@ namespace AI.WaypointNavigation
             
             for (int i = 0; i < colliders.Length; i++)
             {
-                if(Physics.Raycast(transform.position,colliders[i].transform.position -transform.position,out rhInfo,nodeConnectionRadius))
+                if(Physics.Raycast(transform.position,colliders[i].transform.position -transform.position,out rhInfo,nodeConnectionRadius,nodeConnectionLayerMask))
                 {
                     if (rhInfo.collider.gameObject.CompareTag("WaypointNode"))
                     {

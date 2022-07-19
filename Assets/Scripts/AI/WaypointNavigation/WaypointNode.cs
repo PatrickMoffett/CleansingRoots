@@ -10,13 +10,14 @@ namespace AI.WaypointNavigation
         private static int wpCount = 0;
 
         public float nodeConnectionRadius = 40.0f;
+        public LayerMask nodeConnectionLayerMask = -1;
         public bool showDebug = false;
         public TMP_Text displayNumberText;
-
+        
         [NonSerialized]public List<WaypointNode> connectedNodes = new List<WaypointNode>();
         [NonSerialized]public bool hasBeenScored = false;
         [NonSerialized]public int score = Int32.MaxValue;
-
+        
         private void Awake()
         {
             gameObject.name = "wp" + wpCount;
@@ -30,7 +31,8 @@ namespace AI.WaypointNavigation
             RaycastHit rhInfo;
             for (int i = 0; i < colliders.Length; i++)
             {
-                if(Physics.Raycast(transform.position,colliders[i].transform.position -transform.position,out rhInfo,nodeConnectionRadius))
+                
+                if(Physics.Raycast(transform.position,colliders[i].transform.position -transform.position,out rhInfo,nodeConnectionRadius,nodeConnectionLayerMask))
                 {
                     if (showDebug)
                     {
