@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace AI.BehaviorTree.Node.Task
 {
-    public class SetNextWaypointFromList : BaseNode
+    public class SetWaypointToStartFromList : BaseNode
     {
         private readonly string _waypointListKey;
         private readonly string _waypointIndexKey;
         private readonly string _currentWaypointKey;
-        public SetNextWaypointFromList(string waypointListKey, string waypointIndexKey, string currentWaypointKey)
+        
+        public SetWaypointToStartFromList(string waypointListKey, string waypointIndexKey, string currentWaypointKey)
         {
             _waypointListKey = waypointListKey;
             _waypointIndexKey = waypointIndexKey;
@@ -18,21 +19,19 @@ namespace AI.BehaviorTree.Node.Task
 
         public override NodeState Run()
         {
-            if (!(owningTree.HasData(_waypointListKey) && owningTree.HasData(_waypointIndexKey)&&owningTree.HasData(_currentWaypointKey)))
+            if (!(owningTree.HasData(_waypointListKey) && owningTree.HasData(_waypointIndexKey) && owningTree.HasData(_currentWaypointKey)))
             {
                 Debug.Log(this.owningTree.name+ ": Missing Data for node type: " + GetType());
                 return NodeState.FAILURE;
             }
 
             List<WaypointNode> waypoints = (List<WaypointNode>)owningTree.GetData(_waypointListKey);
-            int currentWaypointIndex = (int)owningTree.GetData(_waypointIndexKey);
-            currentWaypointIndex++;
-            if (currentWaypointIndex >= waypoints.Count)
+            if (waypoints.Count == 0)
             {
                 return NodeState.FAILURE;
             }
-            owningTree.SetData(_waypointIndexKey,currentWaypointIndex);
-            owningTree.SetData(_currentWaypointKey,waypoints[currentWaypointIndex]);
+            owningTree.SetData(_waypointIndexKey,0);
+            owningTree.SetData(_currentWaypointKey,waypoints[0]);
             return NodeState.SUCCESS;
         }
 

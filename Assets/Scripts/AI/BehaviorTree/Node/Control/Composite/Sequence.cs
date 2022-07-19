@@ -2,7 +2,7 @@
 using AI.BehaviorTree.Control.Decorator;
 using UnityEngine;
 
-namespace AI.BehaviorTree
+namespace AI.BehaviorTree.Node.Control.Composite
 {
     public class Sequence : BaseComposite
     {

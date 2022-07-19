@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.WaypointNavigation

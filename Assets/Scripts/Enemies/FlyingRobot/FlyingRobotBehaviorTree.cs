@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using AI.BehaviorTree;
 using AI.BehaviorTree.Control.Decorator;
+using AI.BehaviorTree.Node.Control.Composite;
+using AI.BehaviorTree.Node.Task;
 using AI.BehaviorTree.Task;
 using AI.WaypointNavigation;
 using UnityEngine;
@@ -19,11 +21,11 @@ namespace Enemies.FlyingRobot
 
         private readonly string _selfKey = "Self";
         private readonly string _playerKey = "Player";
-        private readonly string _playerTransformKey = "PlayerTransform";
         private readonly string _moveSpeedKey = "MoveSpeed";
         private readonly string _aggroRangeKey = "AggroRange";
         private readonly string _attackDistanceKey = "AttackDistance";
         private readonly string _patrolMinimumDistanceKey = "PatrolMinimumDistance";
+        private readonly string _waypointIndexKey = "WaypointIndexKey";
         private readonly string _patrolWaypointsKey = "PatrolWaypoints";
         private readonly string _targetWaypointKey = "TargetWaypoint";
         private readonly string _navPathKey = "NavPathList";
@@ -41,10 +43,9 @@ namespace Enemies.FlyingRobot
                 SetData(_patrolWaypointsKey,patrolWaypoints);
                 SetData(_targetWaypointKey,patrolWaypoints[0]);
             }
-            
+            SetData(_waypointIndexKey,0);
             SetData(_selfKey,gameObject);
             SetData(_playerKey, playerGameObject);
-            SetData(_playerTransformKey, playerGameObject.transform);
             SetData(_moveSpeedKey, moveSpeed);
             SetData(_aggroRangeKey, aggroRange);
             SetData(_attackDistanceKey, attackDistance);
@@ -54,16 +55,28 @@ namespace Enemies.FlyingRobot
                 new GameObjectWithinDistance(_aggroRangeKey,_selfKey,_playerKey,AbortType.LOWER_PRIORITY,
                 new Sequence(new List<BaseNode>
                             {
-                                new SetWaypointPathToPlayer(_navPathKey,_targetWaypointKey),
-                                new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
-                                new SetNextWaypointFromList(_navPathKey,_targetWaypointKey)
+                                new SetWaypointPathToPlayer(_navPathKey,_waypointIndexKey,_targetWaypointKey),
+                                new RepeatUntilFail(
+                                    new Sequence(new List<BaseNode>{
+                                                new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
+                                                new SetNextWaypointFromList(_navPathKey,_waypointIndexKey,_targetWaypointKey)
+                                            })
+                                    )
+                                //Move into range
+                                //Face Player
                                 //Perform Range Attack
-                            })),
-                new Sequence(new List<BaseNode>
-                {
-                    new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
-                    new SetNextWaypointFromList(_patrolWaypointsKey,_targetWaypointKey),
-                    new IdleTask(2f)
+                            })
+                ),
+                new Sequence(new List<BaseNode>{
+                    new SetWaypointToStartFromList(_patrolWaypointsKey,_waypointIndexKey,_targetWaypointKey),
+                    new RepeatUntilFail(
+                        new Sequence(new List<BaseNode>
+                        {
+                                    new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
+                                    new IdleTask(2f),
+                                    new SetNextWaypointFromList(_patrolWaypointsKey,_waypointIndexKey,_targetWaypointKey),
+                        })
+                    )
                 })
             });
         }
