@@ -24,13 +24,13 @@ namespace AI.BehaviorTree.Node.Task
                 return NodeState.FAILURE;
             }
 
-            List<WaypointNode> waypoints = (List<WaypointNode>)owningTree.GetData(_waypointListKey);
+            List<BaseNavigationNode> waypoints = (List<BaseNavigationNode>)owningTree.GetData(_waypointListKey);
             int currentWaypointIndex = (int)owningTree.GetData(_waypointIndexKey);
-            currentWaypointIndex++;
-            if (currentWaypointIndex >= waypoints.Count)
+            if (currentWaypointIndex+1 >= waypoints.Count)
             {
                 return NodeState.FAILURE;
             }
+            currentWaypointIndex++;
             owningTree.SetData(_waypointIndexKey,currentWaypointIndex);
             owningTree.SetData(_currentWaypointKey,waypoints[currentWaypointIndex]);
             return NodeState.SUCCESS;

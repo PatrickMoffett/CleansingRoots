@@ -4,6 +4,7 @@ using AI.BehaviorTree;
 using AI.BehaviorTree.Control.Decorator;
 using AI.BehaviorTree.Node.Control.Composite;
 using AI.BehaviorTree.Node.Task;
+using AI.BehaviorTree.Service;
 using AI.BehaviorTree.Task;
 using AI.WaypointNavigation;
 using UnityEngine;
@@ -16,8 +17,9 @@ namespace Enemies.FlyingRobot
         public float aggroRange = 40f;
         public float attackDistance = 30f;
         public float patrolDistanceTolerance = .2f;
+        public float navigationUpdateRate = 1f;
         public GameObject playerGameObject;
-        public List<WaypointNode> patrolWaypoints;
+        public List<BaseNavigationNode> patrolWaypoints;
 
         private readonly string _selfKey = "Self";
         private readonly string _playerKey = "Player";
@@ -53,19 +55,12 @@ namespace Enemies.FlyingRobot
             return new Selector(new List<BaseNode>
             {
                 new GameObjectWithinDistance(_aggroRangeKey,_selfKey,_playerKey,AbortType.LOWER_PRIORITY,
-                new Sequence(new List<BaseNode>
-                            {
-                                new SetWaypointPathToPlayer(_navPathKey,_waypointIndexKey,_targetWaypointKey),
-                                new RepeatUntilFail(
-                                    new Sequence(new List<BaseNode>{
-                                                new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
-                                                new SetNextWaypointFromList(_navPathKey,_waypointIndexKey,_targetWaypointKey)
-                                            })
-                                    )
-                                //Move into range
-                                //Face Player
-                                //Perform Range Attack
-                            })
+                new SetPathToPlayerService(_selfKey,_targetWaypointKey,_waypointIndexKey,_navPathKey,navigationUpdateRate,
+                        new Sequence(new List<BaseNode>{
+                                    new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
+                                    new SetNextWaypointFromList(_navPathKey,_waypointIndexKey,_targetWaypointKey)
+                                })
+                        )
                 ),
                 new Sequence(new List<BaseNode>{
                     new SetWaypointToStartFromList(_patrolWaypointsKey,_waypointIndexKey,_targetWaypointKey),
@@ -92,7 +87,7 @@ namespace Enemies.FlyingRobot
             }
             
             Gizmos.color = Color.green;
-            List<WaypointNode> path = (List<WaypointNode>)GetData(_navPathKey);
+            List<BaseNavigationNode> path = (List<BaseNavigationNode>)GetData(_navPathKey);
             if (path != null)
             {
                 for (int i = 1; i < path.Count; i++)
@@ -103,7 +98,7 @@ namespace Enemies.FlyingRobot
             
             //draw current Target Node path
             Gizmos.color = Color.magenta;
-            WaypointNode targetNode = (WaypointNode)GetData(_targetWaypointKey);
+            BaseNavigationNode targetNode = (BaseNavigationNode)GetData(_targetWaypointKey);
             if (targetNode != null)
             {
                 Gizmos.DrawLine(transform.position,targetNode.transform.position);

@@ -397,29 +397,23 @@ PrefabInstance:
     - target: {fileID: 2958128879054579319, guid: cb2a1426558b97b418a94ebf3e5df10c,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.77875
+      value: 1.7788944
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb2a1426558b97b418a94ebf3e5df10c, type: 3}
---- !u!4 &2674798720927000765 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2958128877679098987, guid: cb2a1426558b97b418a94ebf3e5df10c,
-    type: 3}
-  m_PrefabInstance: {fileID: 870225835098297558}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2674798721527388452 stripped
+--- !u!1 &2674798720927000762 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2958128878136708594, guid: cb2a1426558b97b418a94ebf3e5df10c,
+  m_CorrespondingSourceObject: {fileID: 2958128877679098988, guid: cb2a1426558b97b418a94ebf3e5df10c,
     type: 3}
   m_PrefabInstance: {fileID: 870225835098297558}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6423733765046708310
+--- !u!114 &146553988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2674798721527388452}
+  m_GameObject: {fileID: 2674798720927000762}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35a1375a4eac4626be8e7b98eb2354a7, type: 3}
@@ -429,24 +423,6 @@ MonoBehaviour:
   nodeConnectionLayerMask:
     serializedVersion: 2
     m_Bits: 513
-  playerTargetTransform: {fileID: 2674798720927000765}
---- !u!114 &494599830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2674798721527388452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35a1375a4eac4626be8e7b98eb2354a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeConnectionRadius: 40
-  nodeConnectionLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  playerTargetTransform: {fileID: 0}
 --- !u!4 &2674798721527388456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958128878136708606, guid: cb2a1426558b97b418a94ebf3e5df10c,

@@ -25,7 +25,7 @@ namespace AI.BehaviorTree.Node.Task
                 return NodeState.FAILURE;
             }
 
-            List<WaypointNode> waypoints = (List<WaypointNode>)owningTree.GetData(_waypointListKey);
+            List<BaseNavigationNode> waypoints = (List<BaseNavigationNode>)owningTree.GetData(_waypointListKey);
             if (waypoints.Count == 0)
             {
                 return NodeState.FAILURE;

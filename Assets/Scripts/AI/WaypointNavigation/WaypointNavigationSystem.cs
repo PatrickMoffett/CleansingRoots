@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AI.BehaviorTree;
 using UnityEngine;
 
 namespace AI.WaypointNavigation
@@ -8,6 +9,7 @@ namespace AI.WaypointNavigation
     public class WaypointNavigationSystem : IService
     {
         private List<WaypointNode> _nodes = new List<WaypointNode>();
+        private LayerMask nodeConnectionLayerMask = 513;
         private PlayerWaypointNode _playerNode;
         private float updateRate = .2f;
         private Coroutine updateCoroutine;
@@ -58,21 +60,58 @@ namespace AI.WaypointNavigation
                 yield return new WaitForSeconds(updateRate);
             }
         }
-        public List<WaypointNode> GetPath(WaypointNode startNode)
+
+        public List<BaseNavigationNode> GetPath(Vector3 startPosition)
         {
-            if (startNode.score == Int32.MaxValue)
+            Collider[] colliders = Physics.OverlapSphere(startPosition, 40f, LayerMask.GetMask("Waypoint"));
+            RaycastHit rhInfo;
+            BaseNavigationNode closestNode = null;
+            int closestNodeDistance = Int32.MaxValue;
+
+            for (int i = 0; i < colliders.Length; i++)
             {
-                Debug.LogWarning("Start Node has no path connected to player");
+                if (Physics.Raycast(startPosition, colliders[i].transform.position - startPosition, out rhInfo, 40f,
+                        nodeConnectionLayerMask))
+                {
+                    if (rhInfo.collider.gameObject.CompareTag("WaypointNode") || rhInfo.collider.gameObject.CompareTag("Player"))
+                    {
+                        var currentNode = rhInfo.collider.gameObject.GetComponent<BaseNavigationNode>();
+                        if (currentNode.nodesToPlayer < closestNodeDistance)
+                        {
+                            closestNodeDistance = currentNode.nodesToPlayer;
+                            closestNode = currentNode;
+                        }
+                    }
+                }
+            }
+
+            return closestNode == null ? null : GetPath(closestNode);
+        }
+        public List<BaseNavigationNode> GetPath(BaseNavigationNode startNode)
+        {
+            if (startNode.nodesToPlayer == 0)
+            {
+                return new List<BaseNavigationNode> { startNode };
+            }
+
+            if (startNode.nodesToPlayer == 1)
+            {
+                return new List<BaseNavigationNode> { startNode, _playerNode };
+            }
+            
+            if (startNode.nodesToPlayer == Int32.MaxValue)
+            {
+                Debug.LogWarning(startNode.name + " Node has no path connected to player");
                 return null;
             }
             
-            List<WaypointNode> path = new List<WaypointNode> { startNode };
-            WaypointNode currentNode = startNode;
-            while (currentNode.score != 1)
+            List<BaseNavigationNode> path = new List<BaseNavigationNode> { startNode };
+            WaypointNode currentNode = (WaypointNode)startNode;
+            while (currentNode.nodesToPlayer != 1)
             {
                 for (int i = 0; i < currentNode.connectedNodes.Count; i++)
                 {
-                    if (currentNode.connectedNodes[i].score < currentNode.score)
+                    if (currentNode.connectedNodes[i].nodesToPlayer < currentNode.nodesToPlayer)
                     {
                         currentNode = currentNode.connectedNodes[i];
                         path.Add(currentNode);
@@ -80,6 +119,7 @@ namespace AI.WaypointNavigation
                     }
                 }
             }
+            path.Add(_playerNode);
             return path;
         }
     }

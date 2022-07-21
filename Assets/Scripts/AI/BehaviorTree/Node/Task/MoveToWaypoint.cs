@@ -49,7 +49,7 @@ namespace AI.BehaviorTree.Node.Task
             }
 
             GameObject selfGameObject = (GameObject)owningTree.GetData(_selfGameObjectKey);
-            WaypointNode targetTransform = (WaypointNode)owningTree.GetData(_waypointKey);
+            BaseNavigationNode targetTransform = (BaseNavigationNode)owningTree.GetData(_waypointKey);
             float speed = (float)owningTree.GetData(_moveSpeedKey);
             float minimumDistance = (float)owningTree.GetData(_minimumDistanceKey);
             

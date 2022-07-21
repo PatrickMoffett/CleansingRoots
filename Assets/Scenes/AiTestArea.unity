@@ -2900,7 +2900,7 @@ PrefabInstance:
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
       propertyPath: aggroRange
-      value: 50
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}

@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.WaypointNavigation
 {
-    public class PlayerWaypointNode : MonoBehaviour
+    public class PlayerWaypointNode : BaseNavigationNode
     {
         public float nodeConnectionRadius = 40.0f;
         public LayerMask nodeConnectionLayerMask = -1;
-        public Transform playerTargetTransform;
+
+        private void Awake()
+        {
+            nodesToPlayer = 0;
+        }
 
         private void Start()
         {
@@ -45,8 +50,8 @@ namespace AI.WaypointNavigation
                 WaypointNode currentNode = nodes.Dequeue();
                 foreach (var childNode in currentNode.connectedNodes)
                 {
-                    if (childNode.hasBeenScored) continue;
-                    childNode.SetScore(currentNode.score+1);
+                    if (childNode.nodesToPlayerSet) continue;
+                    childNode.SetScore(currentNode.nodesToPlayer+1);
                     nodes.Enqueue(childNode);
                 }
             }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AI.WaypointNavigation
 {
-    public class WaypointNode : MonoBehaviour
+    public class WaypointNode : BaseNavigationNode
     {
         private static int wpCount = 0;
 
@@ -15,9 +15,8 @@ namespace AI.WaypointNavigation
         public TMP_Text displayNumberText;
         
         [NonSerialized]public List<WaypointNode> connectedNodes = new List<WaypointNode>();
-        [NonSerialized]public bool hasBeenScored = false;
-        [NonSerialized]public int score = Int32.MaxValue;
-        
+        [NonSerialized]public bool nodesToPlayerSet = false;
+
         private void Awake()
         {
             gameObject.name = "wp" + wpCount;
@@ -55,7 +54,7 @@ namespace AI.WaypointNavigation
         {
             if (showDebug)
             {
-                List<WaypointNode> path = ServiceLocator.Instance.Get<WaypointNavigationSystem>().GetPath(this);
+                List<BaseNavigationNode> path = ServiceLocator.Instance.Get<WaypointNavigationSystem>().GetPath(this);
                 string pathString = "";
                 for (int i = 1; i < path.Count; i++)
                 {
@@ -66,16 +65,16 @@ namespace AI.WaypointNavigation
 
         public void SetScore(int scoreToSet)
         {
-            if (hasBeenScored) return;
-            score = scoreToSet;
-            hasBeenScored = true;
-            displayNumberText.text = "" + score;
+            if (nodesToPlayerSet) return;
+            nodesToPlayer = scoreToSet;
+            nodesToPlayerSet = true;
+            displayNumberText.text = "" + nodesToPlayer;
         }
 
         public void Reset()
         {
-            hasBeenScored = false;
-            score = Int32.MaxValue;
+            nodesToPlayerSet = false;
+            nodesToPlayer = Int32.MaxValue;
             displayNumberText.text = "?";
         }
         private void OnDrawGizmos()
