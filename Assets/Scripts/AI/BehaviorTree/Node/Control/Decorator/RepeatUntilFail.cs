@@ -2,9 +2,8 @@
 {
     public class RepeatUntilFail : BaseDecorator
     {
-        public RepeatUntilFail(BaseNode childNode)
+        public RepeatUntilFail(BaseNode childNode) : base(AbortType.NONE,childNode)
         {
-            base.childNode = childNode;
         }
         public override NodeState Run()
         {
@@ -19,12 +18,7 @@
             }
         }
 
-        public override void Reset()
-        {
-            childNode.Reset();
-        }
-
-        public override bool ShouldAbort()
+        protected override bool EvaluateCondition()
         {
             return false;
         }

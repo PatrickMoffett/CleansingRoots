@@ -18,7 +18,7 @@ namespace AI.BehaviorTree
                 
                 BaseDecorator decorator = (BaseDecorator)childNodes[i];
                 if (decorator.abortType is AbortType.LOWER_PRIORITY or AbortType.BOTH 
-                    && decorator.ShouldAbort())
+                    && decorator.ShouldAbortLowerPriority())
                 {
                     Reset();
                     currentChildIndex = i;

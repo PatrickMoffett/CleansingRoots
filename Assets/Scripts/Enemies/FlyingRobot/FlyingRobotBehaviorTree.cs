@@ -56,9 +56,19 @@ namespace Enemies.FlyingRobot
             {
                 new GameObjectWithinDistance(_aggroRangeKey,_selfKey,_playerKey,AbortType.LOWER_PRIORITY,
                 new SetPathToPlayerService(_selfKey,_targetWaypointKey,_waypointIndexKey,_navPathKey,navigationUpdateRate,
-                        new Sequence(new List<BaseNode>{
-                                    new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
-                                    new SetNextWaypointFromList(_navPathKey,_waypointIndexKey,_targetWaypointKey)
+                        new Selector(new List<BaseNode>{
+                                    new CurrentWaypointIsPlayer(_targetWaypointKey,AbortType.BOTH,
+                                        new Sequence(new List<BaseNode> {
+                                                    new GameObjectWithinDistance(_attackDistanceKey,_selfKey,_playerKey,AbortType.BOTH,
+                                                        new RepeatUntilFail(
+                                                            new IdleTask(.1f))),
+                                                    new MoveToWaypoint(_selfKey,_moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
+                                            })
+                                        ),
+                                    new Sequence(new List<BaseNode> {
+                                        new MoveToWaypoint(_selfKey, _moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
+                                        new SetNextWaypointFromList(_navPathKey,_waypointIndexKey,_targetWaypointKey)
+                                    })
                                 })
                         )
                 ),
@@ -86,6 +96,7 @@ namespace Enemies.FlyingRobot
                 Gizmos.DrawLine(patrolWaypoints[i-1].transform.position, patrolWaypoints[i].transform.position);
             }
             
+            //draw nav to player path
             Gizmos.color = Color.green;
             List<BaseNavigationNode> path = (List<BaseNavigationNode>)GetData(_navPathKey);
             if (path != null)

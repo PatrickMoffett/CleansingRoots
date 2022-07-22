@@ -9,7 +9,7 @@ namespace AI.BehaviorTree.Control.Decorator
         private readonly string _selfGameObjectKey;
         private readonly string _targetGameObjectKey;
         
-        public GameObjectWithinDistance(string distanceKey, string selfGameObjectKey, string targetGameObjectKey,AbortType abortType, BaseNode childNode)
+        public GameObjectWithinDistance(string distanceKey, string selfGameObjectKey, string targetGameObjectKey,AbortType abortType, BaseNode childNode) : base(abortType,childNode)
         {
             _distanceKey = distanceKey;
             _selfGameObjectKey = selfGameObjectKey;
@@ -17,20 +17,8 @@ namespace AI.BehaviorTree.Control.Decorator
             this.abortType = abortType;
             this.childNode = childNode;
         }
-        public override NodeState Run()
-        {
-            if ((state == NodeState.RUNNING && abortType != AbortType.SELF && abortType != AbortType.BOTH) || WithinRange())
-            {
-                state = childNode.Run();
-                return state;
-            }else
-            {
-                state = NodeState.FAILURE;
-                return state;
-            }
-        }
 
-        public bool WithinRange()
+        protected override bool EvaluateCondition()
         {
             //make sure data is exists
             if(!(owningTree.HasData(_selfGameObjectKey) && owningTree.HasData(_targetGameObjectKey) && owningTree.HasData(_distanceKey)))
@@ -43,19 +31,8 @@ namespace AI.BehaviorTree.Control.Decorator
             GameObject targetGameObject = (GameObject)owningTree.GetData(_targetGameObjectKey);
             float maxDistance = (float)owningTree.GetData(_distanceKey);
             
-
-
             float sqrDistanceToGameObject = (targetGameObject.transform.position - selfGameObject.transform.position).sqrMagnitude;
             return sqrDistanceToGameObject <= maxDistance *maxDistance;
-        }
-        public override void Reset()
-        {
-            childNode.Reset();
-        }
-
-        public override bool ShouldAbort()
-        {
-            return WithinRange();
         }
     }
 }
