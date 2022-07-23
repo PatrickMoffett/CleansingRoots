@@ -16,7 +16,10 @@ namespace Enemies.AttackComponents
         private Coroutine _attackCoroutine;
         private void OnDisable()
         {
-            StopCoroutine(_attackCoroutine);
+            if (_attackCoroutine != null)
+            {
+                StopCoroutine(_attackCoroutine);
+            }
         }
 
         public override bool CanAttack()
