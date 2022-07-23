@@ -24,8 +24,8 @@ namespace Player
         [SerializeField] private GameObject slingShotGameObject;
         [SerializeField] private Transform projectileSpawnTransform;
         [SerializeField] private GameObject slingShotProjectilePrefab;
-        [SerializeField] private float aimRotationSpeed = 1f;
-        [SerializeField] private float projectileSpeed = 1f;
+        [SerializeField] private float aimRotationSpeed = .5f;
+        [SerializeField] private float projectileSpeed = 60f;
         [SerializeField] private int maxAmmo = 10;
         [SerializeField] private int currentAmmo = 10;
 #if UNITY_EDITOR
@@ -220,7 +220,7 @@ namespace Player
                     slingShotGameObject.SetActive(true);
                     break;
                 default:
-                    Debug.LogError("Unsupported Weapon");
+                    Debug.LogError("Unsupported Weapon Equipped");
                     break;
             }
             _currentPlayerWeapon = playerWeaponToEquip;
@@ -244,7 +244,7 @@ namespace Player
             switch (_currentPlayerWeapon)
             {
                 case PlayerWeapon.None:
-                    //if no weapon is equipped, Equip the Sword, then attack
+                    //TODO: if no weapon is equipped, Equip the Sword, then attack
                     break;
                 case PlayerWeapon.Sword:
                     //Attack with the Sword

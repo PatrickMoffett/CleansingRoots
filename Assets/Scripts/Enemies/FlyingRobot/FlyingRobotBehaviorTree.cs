@@ -7,6 +7,7 @@ using AI.BehaviorTree.Node.Task;
 using AI.BehaviorTree.Service;
 using AI.BehaviorTree.Task;
 using AI.WaypointNavigation;
+using Enemies.AttackComponents;
 using UnityEngine;
 
 namespace Enemies.FlyingRobot
@@ -31,6 +32,7 @@ namespace Enemies.FlyingRobot
         private readonly string _patrolWaypointsKey = "PatrolWaypoints";
         private readonly string _targetWaypointKey = "TargetWaypoint";
         private readonly string _navPathKey = "NavPathList";
+        private readonly string _attackComponentKey = "AttackComponent";
 
         protected override BaseNode SetupTree()
         {
@@ -45,6 +47,9 @@ namespace Enemies.FlyingRobot
                 SetData(_patrolWaypointsKey,patrolWaypoints);
                 SetData(_targetWaypointKey,patrolWaypoints[0]);
             }
+
+            BaseAttackComponent attackComponent = GetComponent<BaseAttackComponent>();
+            SetData(_attackComponentKey,attackComponent);
             SetData(_waypointIndexKey,0);
             SetData(_selfKey,gameObject);
             SetData(_playerKey, playerGameObject);
@@ -61,7 +66,13 @@ namespace Enemies.FlyingRobot
                                         new Sequence(new List<BaseNode> {
                                                     new GameObjectWithinDistance(_attackDistanceKey,_selfKey,_playerKey,AbortType.BOTH,
                                                         new RepeatUntilFail(
-                                                            new IdleTask(.1f))),
+                                                            new Sequence(new List<BaseNode> {
+                                                                        new FaceTargetWaypoint(_selfKey,_targetWaypointKey),
+                                                                        new PerformAttack(_attackComponentKey),
+                                                                        new IdleTask(1f)
+                                                                })
+                                                            )
+                                                        ),
                                                     new MoveToWaypoint(_selfKey,_moveSpeedKey,_patrolMinimumDistanceKey,_targetWaypointKey),
                                             })
                                         ),
