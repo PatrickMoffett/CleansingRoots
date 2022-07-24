@@ -113,7 +113,9 @@ namespace Player
         //////////////////////////////////
         private void DebugTeleportPressed(InputAction.CallbackContext obj)
         {
+            GetComponent<CharacterController>().enabled = false;
             gameObject.transform.position = debugTeleportTransform.position;
+            GetComponent<CharacterController>().enabled = true;
         }
 
         private void DebugUnlimitedAmmo(InputAction.CallbackContext obj)
