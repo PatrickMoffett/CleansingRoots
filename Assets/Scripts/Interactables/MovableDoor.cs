@@ -12,6 +12,7 @@ public class MovableDoor : RespondsToSwitch
         [SerializeField] private float closeTime = 1f;
         private float _currentPercentOpen = 0f;
         private Coroutine _coroutine;
+        private bool _switchOn = false;
 
         private void Start()
         {
@@ -34,6 +35,7 @@ public class MovableDoor : RespondsToSwitch
                         StopCoroutine(_coroutine);
                 }
                 _coroutine = StartCoroutine(OpenDoor());
+                _switchOn = true;
         }
 
         public override void SwitchOff()
@@ -43,6 +45,19 @@ public class MovableDoor : RespondsToSwitch
                         StopCoroutine(_coroutine);
                 }
                 _coroutine = StartCoroutine(CloseDoor());
+                _switchOn = false;
+        }
+
+        public override void ToggleSwitch()
+        {
+                if (_switchOn)
+                {
+                        SwitchOff();
+                }
+                else
+                {
+                        SwitchOn();
+                }
         }
 
         private void SetCurrentPercentOpen(float percentOpen)
@@ -57,7 +72,7 @@ public class MovableDoor : RespondsToSwitch
                 {
                         SetCurrentPercentOpen(_currentPercentOpen);
                         yield return null;
-                        _currentPercentOpen += Time.deltaTime * openTime;
+                        _currentPercentOpen += Time.deltaTime * 1/openTime;
                 }
                 SetCurrentPercentOpen(1f);
         }
@@ -67,7 +82,7 @@ public class MovableDoor : RespondsToSwitch
                 {
                         SetCurrentPercentOpen(_currentPercentOpen);
                         yield return null;
-                        _currentPercentOpen -= Time.deltaTime * openTime;
+                        _currentPercentOpen -= Time.deltaTime * 1/openTime;
                 }
                 SetCurrentPercentOpen(0f);
         }
