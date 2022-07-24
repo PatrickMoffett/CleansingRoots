@@ -1330,7 +1330,7 @@ GameObject:
   - component: {fileID: 155541607}
   - component: {fileID: 155541606}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: SmokeStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1973,13 +1973,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155541605}
-  m_LocalRotation: {x: 1.110223e-17, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.38341, y: 128.54364, z: 518.61206}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -32.31659, y: 76.729706, z: -80.103516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 581745547}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &164694343
 PrefabInstance:
@@ -3565,7 +3565,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-242830
+  m_Name: pb_Mesh117194
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21448,6 +21448,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1366250247}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &329651714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 405787255353911228, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2048350334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &346352203
 GameObject:
   m_ObjectHideFlags: 0
@@ -22775,7 +22781,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-241046
+  m_Name: pb_Mesh117592
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23581,7 +23587,7 @@ GameObject:
   - component: {fileID: 581745543}
   - component: {fileID: 581745542}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: RobotFactoryPlaceHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23902,13 +23908,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581745541}
-  m_LocalRotation: {x: 1.110223e-17, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100.7, y: 51.81394, z: 598.7156}
+  m_LocalRotation: {x: 1.110223e-17, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 51.681664, y: 29.780235, z: 512.0634}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Children:
+  - {fileID: 155541611}
+  - {fileID: 1779710250}
+  - {fileID: 808759759}
+  m_Father: {fileID: 1321906411}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &592664051 stripped
 Transform:
@@ -25893,7 +25902,7 @@ GameObject:
   - component: {fileID: 808759755}
   - component: {fileID: 808759754}
   m_Layer: 0
-  m_Name: Cylinder (2)
+  m_Name: SmokeStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26536,13 +26545,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808759753}
-  m_LocalRotation: {x: 1.110223e-17, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109.72, y: 128.54364, z: 518.61206}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.020004, y: 76.729706, z: -80.103516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 581745547}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &844851733 stripped
 Transform:
@@ -31370,6 +31379,7 @@ Transform:
   - {fileID: 416399499}
   - {fileID: 1457959629}
   - {fileID: 295952362}
+  - {fileID: 581745547}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34719,7 +34729,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1505715016
 MonoBehaviour:
@@ -34812,7 +34822,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerGameObject
       value: 
-      objectReference: {fileID: 2048350335}
+      objectReference: {fileID: 329651714}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
       propertyPath: patrolWaypoints.Array.data[0]
@@ -38402,7 +38412,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-240068
+  m_Name: pb_Mesh116986
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -38575,7 +38585,7 @@ GameObject:
   - component: {fileID: 1779710246}
   - component: {fileID: 1779710245}
   m_Layer: 0
-  m_Name: Cylinder (1)
+  m_Name: SmokeStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39218,13 +39228,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779710244}
-  m_LocalRotation: {x: 1.110223e-17, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89.14415, y: 130.88431, z: 519.9171}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.555847, y: 79.07037, z: -78.79846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 581745547}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1785552716 stripped
 MonoBehaviour:
@@ -39256,7 +39266,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-238912
+  m_Name: pb_Mesh117124
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -44806,7 +44816,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerGameObject
       value: 
-      objectReference: {fileID: 2048350335}
+      objectReference: {fileID: 329651714}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
       propertyPath: patrolWaypoints.Array.data[0]
@@ -45102,6 +45112,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 405787254037136500, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 405787254037136500, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20.113567
+      objectReference: {fileID: 0}
+    - target: {fileID: 405787254788464168, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 405787254788464168, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.8535671
+      objectReference: {fileID: 0}
+    - target: {fileID: 405787255353911221, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 405787255353911221, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.26
+      objectReference: {fileID: 0}
     - target: {fileID: 2674798720091534014, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -45209,12 +45249,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c741ca041ff8414bb6b7570fa3d33e8, type: 3}
---- !u!1 &2048350335 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2674798720927000762, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2048350334}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068790415
 GameObject:
   m_ObjectHideFlags: 0
@@ -45630,7 +45664,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerGameObject
       value: 
-      objectReference: {fileID: 2048350335}
+      objectReference: {fileID: 329651714}
     - target: {fileID: 8315687198863322156, guid: cdd5f7a1aada85744b4e002fb9ce0d5d,
         type: 3}
       propertyPath: patrolWaypoints.Array.data[0]
