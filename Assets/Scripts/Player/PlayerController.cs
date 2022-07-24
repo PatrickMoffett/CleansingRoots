@@ -14,9 +14,6 @@ namespace Player
         private PlayerControls _playerControls;
         private PlayerCharacter _playerCharacter;
 
-        private int health = 100; //FM: Feel free to move final player attributes
-
-
         private void Awake()
         {
             //create controls
