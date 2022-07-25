@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class UIHealthbar : MonoBehaviour
 {
     
-    [Header("Healthbar Properties")]
     [SerializeField] private GameObject _gameObject;
     [SerializeField] private Image _image;
 

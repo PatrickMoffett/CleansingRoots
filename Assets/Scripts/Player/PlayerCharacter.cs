@@ -357,5 +357,15 @@ namespace Player
             Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
             Gizmos.DrawCube(swordAttackOffset, swordAttackBoxSize);
         }
+
+        public int GetMaxAmmo() 
+        {
+            return maxAmmo;
+        }
+
+        public int GetCurrentAmmo() 
+        {
+            return currentAmmo;
+        }
     }
 }
