@@ -89,16 +89,6 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision col)
-    {
-        
-    }
-
-    private void OnCollisionExit(Collision col)
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider col)
     {
         connectedObject = col.gameObject;

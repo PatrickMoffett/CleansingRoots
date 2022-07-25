@@ -8,6 +8,7 @@ public class ConveyorBelt : MonoBehaviour
     public GameObject conveyorBeltSegmentPrefab;
     public int numberOfSegments = 5;
     public float speed = 10f;
+    public bool drawPreview = true;
 
     private Queue<GameObject> conveyorBeltSegments = new Queue<GameObject>();
     private Vector3 _meshSize;
@@ -39,48 +40,44 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void FixedUpdate()
     {
-        foreach (var segment in conveyorBeltSegments)
-        {
-            segment.transform.position += Vector3.forward * (speed * Time.deltaTime);
-        }
-
-        if (conveyorBeltSegments.Peek().transform.localPosition.z > _meshSize.z * numberOfSegments)
+        if (conveyorBeltSegments.Peek().transform.localPosition.z + (speed * Time.deltaTime) > _meshSize.z * numberOfSegments)
         {
             GameObject segment = conveyorBeltSegments.Dequeue();
             segment.transform.position = transform.position;
             conveyorBeltSegments.Enqueue(segment);
         }
+        foreach (var segment in conveyorBeltSegments)
+        {
+            segment.transform.position += Vector3.forward * (speed * Time.deltaTime);
+        }
     }
 
     private void OnDrawGizmos()
     {
-        //Draw ConveyorBelt Spawn Location
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(transform.position,_meshSize);
-        
-        //Draw ConveyorBelt Move Locations
-        Gizmos.color = Color.blue;
-        for (int i = 1; i < numberOfSegments; i++)
+        if (drawPreview)
         {
-            Gizmos.DrawCube(transform.position+Vector3.forward*_meshSize.z*i,_meshSize);
+            //Draw ConveyorBelt Spawn Location
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(transform.position, _meshSize);
+
+            //Draw ConveyorBelt Move Locations
+            Gizmos.color = Color.blue;
+            for (int i = 1; i < numberOfSegments; i++)
+            {
+                Gizmos.DrawCube(transform.position + Vector3.forward * _meshSize.z * i, _meshSize);
+            }
+
+            //Draw Last Location Before back to start
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(transform.position + Vector3.forward * _meshSize.z * numberOfSegments, _meshSize);
         }
-        
-        //Draw Last Location Before back to start
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position+Vector3.forward*_meshSize.z*numberOfSegments,_meshSize);
     }
 
     private void OnValidate()
     {
-        Mesh segmentMesh = conveyorBeltSegmentPrefab.GetComponent<MeshFilter>().mesh;
+        Mesh segmentMesh = conveyorBeltSegmentPrefab.GetComponent<MeshFilter>().sharedMesh;
         if (segmentMesh != null)
         {
             _meshSize = segmentMesh.bounds.size;
