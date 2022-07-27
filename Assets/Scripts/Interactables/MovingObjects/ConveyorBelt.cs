@@ -40,17 +40,17 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (conveyorBeltSegments.Peek().transform.localPosition.z + (speed * Time.deltaTime) > _meshSize.z * numberOfSegments)
         {
             GameObject segment = conveyorBeltSegments.Dequeue();
-            segment.transform.position = transform.position;
+            segment.transform.localPosition -= new Vector3(0,0,_meshSize.z * numberOfSegments);
             conveyorBeltSegments.Enqueue(segment);
         }
         foreach (var segment in conveyorBeltSegments)
         {
-            segment.transform.position += Vector3.forward * (speed * Time.deltaTime);
+            segment.transform.localPosition += Vector3.forward * (speed * Time.deltaTime);
         }
     }
 
@@ -58,20 +58,22 @@ public class ConveyorBelt : MonoBehaviour
     {
         if (drawPreview)
         {
+            Gizmos.matrix = transform.localToWorldMatrix;
+            
             //Draw ConveyorBelt Spawn Location
             Gizmos.color = Color.green;
-            Gizmos.DrawCube(transform.position, _meshSize);
-
+            Gizmos.DrawCube(Vector3.zero, _meshSize);
+            
             //Draw ConveyorBelt Move Locations
             Gizmos.color = Color.blue;
             for (int i = 1; i < numberOfSegments; i++)
             {
-                Gizmos.DrawCube(transform.position + Vector3.forward * _meshSize.z * i, _meshSize);
+                Gizmos.DrawCube(Vector3.forward * _meshSize.z * i, _meshSize);
             }
 
             //Draw Last Location Before back to start
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(transform.position + Vector3.forward * _meshSize.z * numberOfSegments, _meshSize);
+            Gizmos.DrawCube(Vector3.forward * _meshSize.z * numberOfSegments, _meshSize);
         }
     }
 
