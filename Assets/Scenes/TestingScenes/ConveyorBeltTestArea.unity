@@ -625,12 +625,12 @@ PrefabInstance:
     - target: {fileID: 405787254037136500, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.028204521
+      value: 0.028204486
       objectReference: {fileID: 0}
     - target: {fileID: 405787254037136500, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00051311095
+      value: -0.0005131103
       objectReference: {fileID: 0}
     - target: {fileID: 405787254037136500, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
@@ -680,12 +680,12 @@ PrefabInstance:
     - target: {fileID: 405787254545699547, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.009418712
+      value: -0.009418677
       objectReference: {fileID: 0}
     - target: {fileID: 405787254545699547, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0005253939
+      value: 0.00052539184
       objectReference: {fileID: 0}
     - target: {fileID: 405787254788464168, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
@@ -1039,6 +1039,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ConveyorBelt
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862497145780418443, guid: ebd232d576f5b3f479347cbe0491e952,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862497146074990680, guid: ebd232d576f5b3f479347cbe0491e952,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 50.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862497146074990683, guid: ebd232d576f5b3f479347cbe0491e952,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebd232d576f5b3f479347cbe0491e952, type: 3}
