@@ -1,0 +1,5 @@
+newmtl LevelEditorMaterial
+map_Kd GridBox_Default.png
+Kd 0.4716981 0.4716981 0.4716981
+d 1
+
