@@ -3,7 +3,12 @@ guid: ce6016553d056744c92b114345c53c57
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StreetSignPole
+    second: {fileID: 2100000, guid: 21094349254dc604e9f81f7029d0cae0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
