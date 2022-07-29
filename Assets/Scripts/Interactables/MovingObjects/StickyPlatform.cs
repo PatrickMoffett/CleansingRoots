@@ -5,29 +5,33 @@ namespace Interactables.MovingObjects
 {
     public class StickyPlatform : MonoBehaviour
     {
-        private GameObject _connectedObject;
+        private GameObject _connectedPlayer;
 
-        private Vector3 prevPosition;
+        private Vector3 _prevPosition;
 
         private void Start()
         {
-            prevPosition = transform.position;
+            _prevPosition = transform.position;
         }
 
         private void Update()
         {
-            if (_connectedObject != null)
+            if (_connectedPlayer != null)
             {
-                _connectedObject.transform.position += transform.position-prevPosition;
+                _connectedPlayer.transform.position += transform.position-_prevPosition;
             }
-            prevPosition = transform.position;
+            _prevPosition = transform.position;
         }
 
         private void OnTriggerEnter(Collider col)
         {
             if (col.CompareTag("Player"))
             {
-                _connectedObject = col.gameObject;
+                _connectedPlayer = col.gameObject;
+            }
+            else
+            {
+                col.transform.parent = transform;
             }
         }
 
@@ -35,7 +39,11 @@ namespace Interactables.MovingObjects
         {
             if (col.CompareTag("Player"))
             {
-                _connectedObject = null;
+                _connectedPlayer = null;
+            }
+            else
+            {
+                col.transform.parent = null;
             }
         }
     }

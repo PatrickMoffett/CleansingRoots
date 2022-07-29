@@ -18,8 +18,8 @@ TagManager:
   - PlayerProjectile
   - Waypoint
   - DebugOnly
-  - 
-  - 
+  - StickyPlatform
+  - Default_SticksToPlatform
   - 
   - 
   - 
