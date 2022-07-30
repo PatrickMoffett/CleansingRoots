@@ -977,6 +977,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2862497144770318316, guid: ebd232d576f5b3f479347cbe0491e952,
         type: 3}
+      propertyPath: state
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862497144770318316, guid: ebd232d576f5b3f479347cbe0491e952,
+        type: 3}
       propertyPath: conveyorBeltSegmentPrefab
       value: 
       objectReference: {fileID: 421620017}
