@@ -34,7 +34,7 @@ namespace Interactables.MovingObjects
         private void Awake()
         {
             
-            Mesh segmentMesh = conveyorBeltSegmentPrefab.GetComponent<MeshFilter>().mesh;
+            Mesh segmentMesh = conveyorBeltSegmentPrefab.GetComponent<MeshFilter>().sharedMesh;
             if (segmentMesh != null)
             {
                 _meshSize = segmentMesh.bounds.size;
@@ -55,7 +55,7 @@ namespace Interactables.MovingObjects
             for (int i = numberOfSegments-1; i >= 0; i--)
             {
                 GameObject segment = Instantiate(conveyorBeltSegmentPrefab, transform);
-                segment.transform.position += Vector3.forward*_meshSize.z*i;
+                segment.transform.localPosition += Vector3.forward*_meshSize.z * i;
                 _conveyorBeltSegments.Add(segment);
             }
         }
@@ -63,12 +63,12 @@ namespace Interactables.MovingObjects
         private void Update()
         {
             //increment speed based on state
-            if (switchResponse == SwitchResponse.TurnOff && !switchState)
+            if (switchResponse == SwitchResponse.TurnOff && !switchState) //if switch is off and conveyorbelt should turn off
             {
-                if (Mathf.Abs(_currentSpeed) < zeroSpeedTolerance)
+                if (Mathf.Abs(_currentSpeed) < zeroSpeedTolerance) // if speed is almost zero, set to zero
                 {
                     _currentSpeed = 0;
-                }else if (_currentSpeed > 0)
+                }else if (_currentSpeed > 0) //else apply acceleration in opposite direction of motion
                 {
                     _currentSpeed -= acceleration * Time.deltaTime;
                 }
@@ -79,48 +79,23 @@ namespace Interactables.MovingObjects
             }else if (defaultDirection == ConveyorDirection.Forwards && !switchState
                       || defaultDirection == ConveyorDirection.Reverse && switchState)
             {
-                _currentSpeed += acceleration * Time.deltaTime;
+                _currentSpeed += acceleration * Time.deltaTime; // apply forward speed
             }
             else
             {
-                _currentSpeed -= acceleration * Time.deltaTime;
-            }
+                _currentSpeed -= acceleration * Time.deltaTime; // apply reverse speed
+            }        
             
-            /*
-            switch (runningState)
-            {
-                case ConveyorRunningState.Forwards:
-                    _currentSpeed += acceleration * Time.deltaTime;
-                    break;
-                case ConveyorRunningState.Reverse:
-                    _currentSpeed -= acceleration * Time.deltaTime;
-                    break;
-                case ConveyorRunningState.Off:
-                    if (_currentSpeed < zeroSpeedTolerance)
-                    {
-                        _currentSpeed = 0;
-                    }else if (_currentSpeed > 0)
-                    {
-                        _currentSpeed -= acceleration * Time.deltaTime;
-                    }
-                    else
-                    {
-                        _currentSpeed += acceleration * Time.deltaTime;
-                    }
-                    break;
-                default:
-                    Debug.LogError("Unsupported ConveyorState Hit");
-                    break;
-            }
-            */
-            
-            //clamp speed
+            //clamp speed to max or negative max
             _currentSpeed = Mathf.Clamp(_currentSpeed, -maxSpeed, maxSpeed);
             
-            //move each segment and wrap to other side if too far
+            //for each segment of conveyor belt
             foreach (var segment in _conveyorBeltSegments)
             {
-                segment.transform.localPosition += Vector3.forward * (_currentSpeed * Time.deltaTime);
+                //apply speed, taking into account local scale
+                segment.transform.localPosition += Vector3.forward * (_currentSpeed/transform.localScale.z * Time.deltaTime);
+                
+                //wrap segment if it has gone too far either direction
                 if (segment.transform.localPosition.z < 0)
                 {
                     segment.transform.localPosition += new Vector3(0,0,_meshSize.z * numberOfSegments);
