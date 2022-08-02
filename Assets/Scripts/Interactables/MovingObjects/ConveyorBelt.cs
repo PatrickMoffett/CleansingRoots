@@ -38,9 +38,10 @@ namespace Interactables.MovingObjects
             if (segmentMesh != null)
             {
                 _meshSize = segmentMesh.bounds.size;
-                _meshSize.x *= conveyorBeltSegmentPrefab.transform.localScale.x;
-                _meshSize.y *= conveyorBeltSegmentPrefab.transform.localScale.y;
-                _meshSize.z *= conveyorBeltSegmentPrefab.transform.localScale.z;
+                var localScale = conveyorBeltSegmentPrefab.transform.localScale;
+                _meshSize.x *= localScale.x;
+                _meshSize.y *= localScale.y;
+                _meshSize.z *= localScale.z;
             }
             else
             {
@@ -135,9 +136,10 @@ namespace Interactables.MovingObjects
             if (segmentMesh != null)
             {
                 _meshSize = segmentMesh.bounds.size;
-                _meshSize.x *= conveyorBeltSegmentPrefab.transform.localScale.x;
-                _meshSize.y *= conveyorBeltSegmentPrefab.transform.localScale.y;
-                _meshSize.z *= conveyorBeltSegmentPrefab.transform.localScale.z;
+                var localScale = conveyorBeltSegmentPrefab.transform.localScale;
+                _meshSize.x *= localScale.x;
+                _meshSize.y *= localScale.y;
+                _meshSize.z *= localScale.z;
             }
             else
             {
