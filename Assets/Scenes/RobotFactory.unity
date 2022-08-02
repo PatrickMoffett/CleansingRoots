@@ -88372,6 +88372,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5207261438660721459, guid: 866210ca67dbbb94180b10e72e629666,
+        type: 3}
+      propertyPath: particleSystem
+      value: 
+      objectReference: {fileID: 1776180620}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 866210ca67dbbb94180b10e72e629666, type: 3}
 --- !u!114 &1760175494 stripped
@@ -89164,6 +89169,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4291152294859161643, guid: 3b732401988516243b9fdae22117a486,
     type: 3}
   m_PrefabInstance: {fileID: 1516533819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1776180620 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3218153979403890407, guid: 866210ca67dbbb94180b10e72e629666,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751035212}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1782680684
 PrefabInstance:
