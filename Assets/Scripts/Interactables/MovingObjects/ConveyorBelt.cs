@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
 
@@ -109,7 +110,7 @@ namespace Interactables.MovingObjects
 
         private void OnDrawGizmos()
         {
-            if (drawPreview)
+            if (drawPreview && !EditorApplication.isPlaying)
             {
                 Gizmos.matrix = transform.localToWorldMatrix;
             
