@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipTitle: Movement
   tipText: Use WASD or Left Stick to move.
-  tipImage: {fileID: 0}
+  tipImage: {fileID: 21300000, guid: 03db191901b4d684ab11fcb4fa614449, type: 3}

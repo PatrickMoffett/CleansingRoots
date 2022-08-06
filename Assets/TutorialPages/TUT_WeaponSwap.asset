@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipTitle: Swap Weapons
   tipText: Hit Q to swap between your sword and slingshot
-  tipImage: {fileID: 0}
+  tipImage: {fileID: 21300000, guid: 05168f17fc56e3c46aeb8efc4599e06e, type: 3}

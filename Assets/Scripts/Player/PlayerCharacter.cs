@@ -29,7 +29,8 @@ namespace Player
         [SerializeField] private int maxAmmo = 10;
         [SerializeField] private int currentAmmo = 10;
 #if UNITY_EDITOR
-        public bool unlimitedAmmoDebug; 
+        public bool unlimitedAmmoDebug;
+        public bool drawDebug = false;
 #endif
 
         [Header("Sword Properties")]
@@ -353,9 +354,12 @@ namespace Player
         }
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
-            Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-            Gizmos.DrawCube(swordAttackOffset, swordAttackBoxSize);
+            if (drawDebug)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+                Gizmos.DrawCube(swordAttackOffset, swordAttackBoxSize);
+            }
         }
 
         public int GetMaxAmmo() 

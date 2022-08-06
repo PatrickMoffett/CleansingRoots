@@ -55639,7 +55639,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27244
+  m_Name: pb_Mesh27332
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -102987,6 +102987,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 16, z: 17}
   m_Center: {x: 0, y: 8, z: -8}
+--- !u!198 &1944552683 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3872155825106552811, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2048350334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1947508109
 Mesh:
   m_ObjectHideFlags: 0
@@ -104641,6 +104647,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 17.26
       objectReference: {fileID: 0}
+    - target: {fileID: 405787255369470437, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: SwordTrail
+      value: 
+      objectReference: {fileID: 1944552683}
     - target: {fileID: 405787255794867199, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -104750,6 +104761,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872155825106552811, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872155825106552811, guid: 7c741ca041ff8414bb6b7570fa3d33e8,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c741ca041ff8414bb6b7570fa3d33e8, type: 3}
