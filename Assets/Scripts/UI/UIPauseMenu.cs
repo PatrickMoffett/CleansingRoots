@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Systems.ApplicationStateManager.ApplicationStates;
+using UnityEngine;
 
 public class UIPauseMenu : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class UIPauseMenu : MonoBehaviour
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
     }
 
+    public void TutorialClicked()
+    {
+        ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(TutorialState));
+    }
     public void SettingsClicked()
     {
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(SettingsState));

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Systems.ApplicationStateManager.ApplicationStates;
 using UnityEngine;
 
 public class ApplicationStateManager : IService
@@ -53,6 +54,9 @@ public class ApplicationStateManager : IService
         else if (stateType.Equals(typeof(GameOverState)))
         {
             PushState(new GameOverState(),options);
+        }else if (stateType.Equals(typeof(TutorialState)))
+        {
+            PushState(new TutorialState(),options);
         }
         else
         {

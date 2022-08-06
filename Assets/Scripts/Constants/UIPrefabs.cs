@@ -14,5 +14,6 @@
         public const string CreditsUI = "UICredits";
         public const string GameOverUI = "UIGameOver";
         public const string LoadingScreenUI = "UILoadingScreen";
+        public const string TutorialUI = "UITutorial";
     }
 }
