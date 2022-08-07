@@ -45,6 +45,9 @@ Assets/ProBuilder*Data/ProBuilderPreferences.asset.meta
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 
+#Blend History
+*.blend1
+
 # FMOD
 /Assets/FMODStudioCache.asset
 /Assets/FMODStudioCache.asset.meta
