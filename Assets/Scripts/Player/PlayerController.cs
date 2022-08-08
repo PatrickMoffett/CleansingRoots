@@ -63,6 +63,7 @@ namespace Player
 
         private void PausePressed(InputAction.CallbackContext obj)
         {
+            Time.timeScale = 0f;
             ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(PauseMenuState));
         }
 
