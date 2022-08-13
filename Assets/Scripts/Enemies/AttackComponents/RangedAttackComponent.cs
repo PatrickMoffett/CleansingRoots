@@ -10,7 +10,8 @@ namespace Enemies.AttackComponents
         public float projectileSpeed = 30f;
         public GameObject attackProjectilePrefab;
         public Transform projectileSpawnTransform;
-        
+        static private Transform trailBucket;
+
 
         private bool _attackOnCooldown = false;
         private Coroutine _attackCoroutine;
@@ -19,6 +20,12 @@ namespace Enemies.AttackComponents
             if (_attackCoroutine != null)
             {
                 StopCoroutine(_attackCoroutine);
+            }
+        }
+
+        private void Start() {
+            if (trailBucket == null) {
+                trailBucket = GameObject.Find("TemporaryBucket").transform;
             }
         }
 
@@ -32,6 +39,7 @@ namespace Enemies.AttackComponents
             if (!CanAttack()) {return false;}
 
             GameObject projectile = Instantiate(attackProjectilePrefab, projectileSpawnTransform.position, projectileSpawnTransform.rotation);
+            projectile.transform.SetParent(trailBucket);
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
             _attackCoroutine = StartCoroutine(AttackCooldown());
             return true;
