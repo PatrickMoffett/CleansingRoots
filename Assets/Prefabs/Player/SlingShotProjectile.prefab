@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2804244261731816559}
   - component: {fileID: 8061363774384239783}
   - component: {fileID: 1971303401778958569}
+  - component: {fileID: 6538243938052924550}
   m_Layer: 8
   m_Name: RandHitSound
   m_TagString: Untagged
@@ -143,6 +144,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyActorSec: 3
+--- !u!114 &6538243938052924550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196085586949063631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce243f92d59c473d83af577c09b60f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randOptions:
+  - {fileID: 8300000, guid: 9c5e94127932940e09556e652b16771b, type: 3}
+  - {fileID: 8300000, guid: 483b24cf0b4a2462189578837d4bafb2, type: 3}
+  - {fileID: 8300000, guid: c09737d1d9f2d4caaaf986db762b8d9b, type: 3}
+  - {fileID: 8300000, guid: 32d477267d8a741ed90cc8bafea12611, type: 3}
 --- !u!1 &3211707212544362433
 GameObject:
   m_ObjectHideFlags: 0
