@@ -2568,7 +2568,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6, y: 1}
+    m_SensorSize: {x: 1.5997459, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3576,6 +3576,7 @@ MonoBehaviour:
   projectileSpawnTransform: {fileID: 4590697344802798805}
   slingShotProjectilePrefab: {fileID: 3211707212544362433, guid: edfe2a9a9161ee14991fdf171ca3d7f3,
     type: 3}
+  slingShotFiredSFX: {fileID: 8300000, guid: b7299fd26b8f9a7468cb76f77062f1f0, type: 3}
   aimRotationSpeed: 0.5
   projectileSpeed: 60
   maxAmmo: 10
@@ -3583,6 +3584,7 @@ MonoBehaviour:
   unlimitedAmmoDebug: 0
   drawDebug: 0
   swordGameObject: {fileID: 405787255734177070}
+  swordSwingSFX: {fileID: 8300000, guid: 9828ef6e6e4ef924f9dca1a30ad848a8, type: 3}
   swordAttackBoxSize: {x: 3, y: 2, z: 2}
   swordAttackOffset: {x: 0, y: 1.5, z: 2}
   swordAttackDamage: 1

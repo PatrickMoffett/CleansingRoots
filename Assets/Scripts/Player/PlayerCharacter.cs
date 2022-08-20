@@ -1,8 +1,5 @@
-﻿using System;
-using Systems.AudioManager;
+﻿using Systems.AudioManager;
 using UnityEngine;
-using UnityEngine.Serialization;
-
 namespace Player
 {
     public class PlayerCharacter : MonoBehaviour
@@ -25,6 +22,7 @@ namespace Player
         [SerializeField] private GameObject slingShotGameObject;
         [SerializeField] private Transform projectileSpawnTransform;
         [SerializeField] private GameObject slingShotProjectilePrefab;
+        [SerializeField] private AudioClip slingShotFiredSFX;
         [SerializeField] private float aimRotationSpeed = .5f;
         [SerializeField] private float projectileSpeed = 60f;
         [SerializeField] private int maxAmmo = 10;
@@ -36,6 +34,7 @@ namespace Player
 
         [Header("Sword Properties")]
         [SerializeField] private GameObject swordGameObject;
+        [SerializeField] private AudioClip swordSwingSFX;
         [SerializeField] private Vector3 swordAttackBoxSize = Vector3.one;
         [SerializeField] private Vector3 swordAttackOffset = Vector3.forward;
         [SerializeField] private int swordAttackDamage = 1;
@@ -268,6 +267,7 @@ namespace Player
 
             _isAttacking = true;
             animator.SetBool("IsAttacking",true);
+            ServiceLocator.Instance.Get<AudioManager>().PlaySFX(swordSwingSFX);
         }
 
         public void SwordAttackDealDamage()
@@ -301,18 +301,22 @@ namespace Player
 #endif
             //don't attack without ammo or not aiming
             if (currentAmmo <= 0 || (_cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming && _cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.TargetLocked)) { return; }
-            GameObject targetedObject;
-            Vector3 targetedPoint;
-            RaycastHit rhInfo;
+
             // origin direction hitinfo distance
-            if (Physics.Raycast(projectileSpawnTransform.position, projectileSpawnTransform.rotation.eulerAngles, out rhInfo, 5000.0f, shotLayers)) {
-                targetedObject = rhInfo.collider.gameObject;
-                targetedPoint = rhInfo.point;
+            if (Physics.Raycast(projectileSpawnTransform.position, projectileSpawnTransform.rotation.eulerAngles, out var rhInfo, 5000.0f, shotLayers)) {
+                var targetedObject = rhInfo.collider.gameObject;
+                var targetedPoint = rhInfo.point;
                 Debug.Log(targetedObject.name + " " + targetedPoint);
             }
+            //Spawn projectile
             GameObject projectile =  Instantiate(slingShotProjectilePrefab, projectileSpawnTransform.position,projectileSpawnTransform.rotation);
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
+            
+            //reduce ammo
             currentAmmo--;
+            
+            //Play SFX
+            ServiceLocator.Instance.Get<AudioManager>().PlaySFX(slingShotFiredSFX);
             Debug.Log("Current Ammo: " + currentAmmo);
         }
         
