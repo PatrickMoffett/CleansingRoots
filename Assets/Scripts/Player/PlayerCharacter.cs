@@ -1,4 +1,5 @@
 ﻿using System;
+using Systems.AudioManager;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -326,7 +327,9 @@ namespace Player
         private void HandlePickup(GameObject pickup)
         {
             Pickup castPickup = pickup.GetComponent<Pickup>();
-            AudioSource pickupAudioSource = pickup.GetComponent<AudioSource>();
+            ServiceLocator.Instance.Get<AudioManager>().PlaySFX(castPickup.clipToPlayOnPickup);
+            
+            //handle pickup type
             if (castPickup != null)
             {
                 switch (castPickup.category)
@@ -343,14 +346,8 @@ namespace Player
                         Debug.LogError("Unsupported Pickup Type");
                         break;
                 }
-
-                if (pickupAudioSource && pickupAudioSource.clip != null)
-                {
-                    pickupAudioSource.Play();
-                }
-
-                Destroy(pickup, pickupAudioSource.clip.length);
             }
+            Destroy(pickup);
         }
         private void OnDrawGizmos()
         {

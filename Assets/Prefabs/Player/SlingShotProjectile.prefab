@@ -245,7 +245,11 @@ MonoBehaviour:
     m_Bits: 4294967295
   damage: 1
   trail: {fileID: 4484560907936770868}
-  hitSound: {fileID: 196085586949063631}
+  hitSounds:
+  - {fileID: 8300000, guid: 9c5e94127932940e09556e652b16771b, type: 3}
+  - {fileID: 8300000, guid: 483b24cf0b4a2462189578837d4bafb2, type: 3}
+  - {fileID: 8300000, guid: c09737d1d9f2d4caaaf986db762b8d9b, type: 3}
+  - {fileID: 8300000, guid: 32d477267d8a741ed90cc8bafea12611, type: 3}
 --- !u!114 &4293685053311945723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +427,8 @@ AudioSource:
   m_GameObject: {fileID: 4484560907936770868}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7605665614825699764, guid: 06dd4124a39f71e4da918663fb6ad823,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: b7299fd26b8f9a7468cb76f77062f1f0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

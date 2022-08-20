@@ -9,4 +9,5 @@ public class Pickup : MonoBehaviour
 
     public Category category;
     public int modifier;
+    public AudioClip clipToPlayOnPickup;
 }

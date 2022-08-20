@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Systems.AudioManager;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SlingShotProjectile : MonoBehaviour
 {
     [SerializeField] private LayerMask collisionLayers = -1;
     [SerializeField] private int damage = 1;
     [SerializeField] private GameObject trail;
-    [SerializeField] private GameObject hitSound;
+    [SerializeField] private List<AudioClip> hitSounds;
     static private Transform trailBucket;
 
     void Start() {
@@ -27,9 +29,16 @@ public class SlingShotProjectile : MonoBehaviour
                 damageableComponent.TakeDamage(damage);
             }
             trail.transform.SetParent(trailBucket);
-            hitSound.transform.SetParent(trailBucket);
-            hitSound.SetActive(true);
+            PlayHitSound();
             Destroy(gameObject);
         }
+    }
+
+    private void PlayHitSound()
+    {
+        //TODO:Switch to play hit at position
+        //ServiceLocator.Instance.Get<AudioManager>().PlaySFXAtLocation(hitSounds[Random.Range(0,hitSounds.Count)],transform.position);
+        
+        ServiceLocator.Instance.Get<AudioManager>().PlaySFX(hitSounds[Random.Range(0,hitSounds.Count)]);
     }
 }
