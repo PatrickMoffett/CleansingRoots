@@ -24,6 +24,7 @@ public static class Bootstrapper
         //Setup Services
         ServiceLocator.Instance.Register(new ApplicationStateManager());
         ServiceLocator.Instance.Register(new AudioManager());
+        ServiceLocator.Instance.Register(new MusicManager());
         ServiceLocator.Instance.Register(new LevelSceneManager());
         ServiceLocator.Instance.Register(new UIManager());
         ServiceLocator.Instance.Register(new WaypointNavigationSystem());

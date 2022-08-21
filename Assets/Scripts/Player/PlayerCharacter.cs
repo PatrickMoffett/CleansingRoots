@@ -82,22 +82,16 @@ namespace Player
 
         public void Move(Vector3 direction)
         {
+            //don't move while attacking
+            if (_isAttacking) return;
             //rotate the input direction input by the camera yaw
             direction = Quaternion.Euler(0, _cameraComponent.GetMainCamera().transform.eulerAngles.y, 0) * direction;
-            
+
             switch (_cameraComponent.GetCurrentCameraMode())
             {
                 case PlayerCameraMode.Aiming:
-                    //Rotate Character To Face Direction of Camera
-                    //_movementComponent.SetTargetDirection(_cameraComponent.GetMainCamera().transform.forward);
-                    //_movementComponent.Rotate();
-                    
                     //Move Character Relative To Camera
-                    if (!_isAttacking)
-                    {
-                        _movementComponent.Move(direction, direction.magnitude);
-                    }
-
+                    _movementComponent.Move(direction, direction.magnitude);
                     break;
                 
                 case PlayerCameraMode.Orbit:
@@ -105,11 +99,7 @@ namespace Player
                     _movementComponent.SetTargetDirection(direction);
                     _movementComponent.Rotate();
                     //Move Character Relative To Camera
-                    if (!_isAttacking)
-                    {
-                        _movementComponent.Move(transform.forward, direction.magnitude);
-                    }
-
+                    _movementComponent.Move(transform.forward, direction.magnitude);
                     break;
                 
                 case PlayerCameraMode.TargetLocked:
@@ -117,11 +107,7 @@ namespace Player
                     _movementComponent.SetTargetDirection(_targetingComponent.GetCurrentTarget().TargetTransform.position - transform.position);
                     _movementComponent.Rotate();
                     //Move Character Relative To Target
-                    if (!_isAttacking)
-                    {
-                        _movementComponent.Move(direction, direction.magnitude);
-                    }
-
+                    _movementComponent.Move(direction, direction.magnitude);
                     break;
                 
                 default:

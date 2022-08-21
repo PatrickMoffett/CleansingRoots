@@ -28,7 +28,7 @@ public class SlingShotProjectile : MonoBehaviour
             {
                 damageableComponent.TakeDamage(damage);
             }
-            trail.transform.SetParent(trailBucket);
+
             PlayHitSound();
             Destroy(gameObject);
         }

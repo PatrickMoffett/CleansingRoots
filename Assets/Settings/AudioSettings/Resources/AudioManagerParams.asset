@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: AudioManagerParams
   m_EditorClassIdentifier: Assembly-CSharp:Systems.AudioManager:AudioManagerParams
-  mixer: {fileID: 24100000, guid: 06dd4124a39f71e4da918663fb6ad823, type: 2}
-  masterGroup: {fileID: 24300002, guid: 06dd4124a39f71e4da918663fb6ad823, type: 2}
-  sfxGroup: {fileID: -7605665614825699764, guid: 06dd4124a39f71e4da918663fb6ad823,
-    type: 2}
-  musicGroup: {fileID: 1342616378773424251, guid: 06dd4124a39f71e4da918663fb6ad823,
-    type: 2}
+  mixer: {fileID: 0}
+  masterGroup: {fileID: 0}
+  sfxGroup: {fileID: 0}
+  musicGroup: {fileID: 0}

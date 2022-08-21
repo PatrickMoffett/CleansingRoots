@@ -104,5 +104,12 @@ namespace Systems.AudioManager
         {
             _sfxAudioSource.PlayOneShot(clipToPlay);
         }
+
+        public AudioSource GetMusicAudioSource()
+        {
+            AudioSource newSource = _bucket.AddComponent<AudioSource>();
+            newSource.outputAudioMixerGroup = _params.musicGroup;
+            return newSource;
+        }
     }
 }

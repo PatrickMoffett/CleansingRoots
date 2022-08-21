@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using Constants;
+using Systems.AudioManager;
+using UnityEngine;
 
 public class MainMenuState : BaseApplicationState
 {
     public readonly string UI_PREFAB = UIPrefabs.MainMenuUI;
+    private AudioClip _mainMenuMusic = Resources.Load<AudioClip>("MainMenuMusic");
     private UIWidget _uiWidget;
 
     public MainMenuState()
@@ -59,6 +62,7 @@ public class MainMenuState : BaseApplicationState
     {
         _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
         _uiWidget.UIObject.GetComponent<UIMainMenu>()?.Setup();
+        ServiceLocator.Instance.Get<MusicManager>().StartSong(_mainMenuMusic);
     }
 
     public void TeardownState()
