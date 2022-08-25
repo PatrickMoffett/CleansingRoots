@@ -14,7 +14,7 @@ public class Health : MonoBehaviour,IDamageable
 
     private void Start()
     {
-        _currentHealth = maxHealth;
+        _currentHealth = maxHealth;            
     }
 
     public void TakeDamage(int damage)

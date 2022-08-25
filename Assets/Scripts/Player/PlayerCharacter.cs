@@ -56,6 +56,8 @@ namespace Player
 
         private PlayerCameraComponent _cameraComponent;
 
+        private Health health;
+
         private void OnEnable()
         {
             _animationEventManager.swordAttackEndedAnimationEvent += SwordAttackEnded;
@@ -70,6 +72,7 @@ namespace Player
 
         private void Start()
         {
+            health = GetComponent<Health>();
             shotLayers = ~LayerMask.GetMask("Player");
             _movementComponent = GetComponent<PlayerMovement>();
             _targetingComponent = GetComponent<PlayerTargetingComponent>();
@@ -325,6 +328,8 @@ namespace Player
                 switch (castPickup.category)
                 {
                     case Pickup.Category.Health:
+                        health.AddHealth(castPickup.modifier);
+                        Debug.Log("Added health");
                         //TODO: Add Health
                         break;
                     case Pickup.Category.Ammo:
