@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: fcd4d1846c1b4464be1b914ecf3a125f, type: 3}
   m_Name: AudioManagerParams
   m_EditorClassIdentifier: Assembly-CSharp:Systems.AudioManager:AudioManagerParams
-  mixer: {fileID: 0}
-  masterGroup: {fileID: 0}
-  sfxGroup: {fileID: 0}
-  musicGroup: {fileID: 0}
+  mixer: {fileID: 24100000, guid: 06dd4124a39f71e4da918663fb6ad823, type: 2}
+  masterGroup: {fileID: 24300002, guid: 06dd4124a39f71e4da918663fb6ad823, type: 2}
+  sfxGroup: {fileID: -7605665614825699764, guid: 06dd4124a39f71e4da918663fb6ad823,
+    type: 2}
+  musicGroup: {fileID: 1342616378773424251, guid: 06dd4124a39f71e4da918663fb6ad823,
+    type: 2}
