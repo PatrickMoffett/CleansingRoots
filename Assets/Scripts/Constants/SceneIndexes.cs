@@ -6,6 +6,6 @@
     public enum SceneIndexes
     {
         INITIAL_SCENE = 0,
-        GAME_SCENE = 1,
+        ROBOT_FACTORY_SCENE = 1,
     }
 }

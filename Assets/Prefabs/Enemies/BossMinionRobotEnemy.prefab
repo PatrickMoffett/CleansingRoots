@@ -151,12 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3355a32c7f04c4ab0dec3c881fa92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  aggroRange: 40
-  attackDistance: 30
+  moveSpeed: 10
+  aggroRange: 30
+  attackDistance: 20
   patrolDistanceTolerance: 0.2
-  navigationUpdateRate: 1
-  playerGameObject: {fileID: 0}
+  navigationUpdateRate: 0.2
 --- !u!1001 &8315687198829219900
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ namespace Player
 
         private PlayerCameraComponent _cameraComponent;
 
-        private Health health;
+        private Health _health;
 
         private void OnEnable()
         {
@@ -72,7 +72,8 @@ namespace Player
 
         private void Start()
         {
-            health = GetComponent<Health>();
+            _health = GetComponent<Health>();
+            _health.OnHealthIsZero += PlayerDied;
             shotLayers = ~LayerMask.GetMask("Player");
             _movementComponent = GetComponent<PlayerMovement>();
             _targetingComponent = GetComponent<PlayerTargetingComponent>();
@@ -81,6 +82,11 @@ namespace Player
             originalAimBoneRotation = aimRotationBone.transform.localRotation;
             EquipWeapon(PlayerWeapon.Sword);
 
+        }
+
+        private void PlayerDied()
+        {
+            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameOverState));
         }
 
         public void Move(Vector3 direction)
@@ -328,7 +334,7 @@ namespace Player
                 switch (castPickup.category)
                 {
                     case Pickup.Category.Health:
-                        health.AddHealth(castPickup.modifier);
+                        _health.AddHealth(castPickup.modifier);
                         Debug.Log("Added health");
                         //TODO: Add Health
                         break;

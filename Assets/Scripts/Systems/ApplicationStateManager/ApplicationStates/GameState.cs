@@ -4,7 +4,7 @@ using Constants;
 public class GameState : BaseApplicationState
 {
     public readonly string UI_PREFAB = UIPrefabs.GameUI;
-    public readonly int SCENE_NAME = (int)SceneIndexes.GAME_SCENE;
+    public readonly int SCENE_NAME = (int)SceneIndexes.ROBOT_FACTORY_SCENE;
     private UIWidget _uiWidget;
 
     public GameState()

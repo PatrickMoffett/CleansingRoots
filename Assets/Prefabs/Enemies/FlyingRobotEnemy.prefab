@@ -224,10 +224,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -242165637326713887, guid: 65491ecafc5829343b45ede22686f87a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 65491ecafc5829343b45ede22686f87a,
         type: 3}
       propertyPath: m_Name
       value: RangedRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 65491ecafc5829343b45ede22686f87a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 929813603578649138, guid: 65491ecafc5829343b45ede22686f87a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65491ecafc5829343b45ede22686f87a, type: 3}
