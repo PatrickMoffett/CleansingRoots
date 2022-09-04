@@ -21,6 +21,8 @@ namespace Player
         [SerializeField] private GameObject orbitCamera;
         [SerializeField] private GameObject targetingCamera;
         [SerializeField] private GameObject aimingCamera;
+        
+        public Action<bool> aimingCameraActive;
 
         private void Start()
         {
@@ -41,16 +43,19 @@ namespace Player
                     orbitCamera.SetActive(false);
                     aimingCamera.SetActive(true);
                     targetingCamera.SetActive(false);
+                    aimingCameraActive?.Invoke(true);
                     break;
                 case PlayerCameraMode.Orbit:
                     orbitCamera.SetActive(true);
                     aimingCamera.SetActive(false);
                     targetingCamera.SetActive(false);
+                    aimingCameraActive?.Invoke(false);
                     break;
                 case PlayerCameraMode.TargetLocked:
                     orbitCamera.SetActive(false);
                     aimingCamera.SetActive(false);
                     targetingCamera.SetActive(true);
+                    aimingCameraActive?.Invoke(false);
                     break;
                 default:
                     Debug.LogError("Unsupported CameraMode");

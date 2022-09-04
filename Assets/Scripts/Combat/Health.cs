@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour,IDamageable
 {
-    public event Action<float> OnCurrentHealthChanged;
-    public event Action<float> OnMaxHealthChanged;
+    public event Action<int> OnCurrentHealthChanged;
+    public event Action<int> OnMaxHealthChanged;
     public event Action OnHealthIsZero;
     
     [SerializeField]
@@ -53,12 +53,12 @@ public class Health : MonoBehaviour,IDamageable
         }
     }
 
-    public float GetCurrentHealth()
+    public int GetCurrentHealth()
     {
         return _currentHealth;
     }
 
-    public float GetMaxHealth()
+    public int GetMaxHealth()
     {
         return maxHealth;
     }
@@ -72,6 +72,6 @@ public class Health : MonoBehaviour,IDamageable
 
     public float GetHealthPercentage()
     {
-        return _currentHealth / maxHealth;
+        return (float)_currentHealth / maxHealth;
     }
 }

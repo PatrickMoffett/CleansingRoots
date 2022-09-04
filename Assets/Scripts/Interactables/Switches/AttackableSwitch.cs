@@ -1,24 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackableSwitch : MonoBehaviour, IDamageable
+namespace Interactables.Switches
 {
-    public RespondsToSwitch ObjectToSwitch;
-    // Start is called before the first frame update
-    void Start()
+    public class AttackableSwitch : MonoBehaviour, IDamageable
     {
-        
-    }
+        public RespondsToSwitch objectToSwitch;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void TakeDamage(int damage)
-    {
-        ObjectToSwitch.ToggleSwitch();
+        public void TakeDamage(int damage)
+        {
+            objectToSwitch.ToggleSwitch();
+        }
     }
 }

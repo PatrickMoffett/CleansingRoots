@@ -31,7 +31,7 @@ public class UIHealthbar : MonoBehaviour
         UpdateHealth(_health.GetCurrentHealth());
     }
 
-    void UpdateHealth(float newHealth)
+    void UpdateHealth(int newHealth)
     {
         _image.fillAmount = _health.GetHealthPercentage();
     }
