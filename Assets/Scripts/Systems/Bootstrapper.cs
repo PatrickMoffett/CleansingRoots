@@ -1,6 +1,7 @@
 ﻿using AI.WaypointNavigation;
 using Constants;
 using Systems.AudioManager;
+using Systems.PlayerManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
@@ -28,6 +29,7 @@ public static class Bootstrapper
         ServiceLocator.Instance.Register(new LevelSceneManager());
         ServiceLocator.Instance.Register(new UIManager());
         ServiceLocator.Instance.Register(new WaypointNavigationSystem());
+        ServiceLocator.Instance.Register(new PlayerManager());
         
         //Start MainMenuState
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(MainMenuState));

@@ -7,13 +7,16 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: 
-    guid: 99c9720ab356a0642a771bea13969a05
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_Scenes/InitialScene.unity
     guid: d0edcdacea48c414bb7700bf2ad378c6
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/GameScene.unity
     guid: 4700ac5a8db9a7f4b95310ded9eb3506
+  - enabled: 1
+    path: Assets/_Scenes/RobotFactory.unity
+    guid: 680bf268c6e2cef49a86673a1576c39f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1c5eefd3a96a0ff478506042ca4d8687,
       type: 2}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Systems.PlayerManager;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -17,8 +18,22 @@ public class UIHealthbar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _health = _gameObject.GetComponent<Health>();
+        ServiceLocator.Instance.Get<PlayerManager>().playerRegistered += Setup;
+    }
+
+    void Setup()
+    {
+        //setup health
+        GameObject player = ServiceLocator.Instance.Get<PlayerManager>().GetPlayer();
+        _health = player.GetComponent<Health>();
         Assert.IsNotNull(_health);
+        _health.OnCurrentHealthChanged += UpdateHealth;
+        UpdateHealth(_health.GetCurrentHealth());
+    }
+
+    void UpdateHealth(float newHealth)
+    {
+        _image.fillAmount = _health.GetHealthPercentage();
     }
 
     // Update is called once per frame

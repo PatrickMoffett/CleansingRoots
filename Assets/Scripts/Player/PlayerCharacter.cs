@@ -1,4 +1,6 @@
-﻿using Systems.AudioManager;
+﻿using System;
+using Systems.AudioManager;
+using Systems.PlayerManager;
 using UnityEngine;
 namespace Player
 {
@@ -10,6 +12,8 @@ namespace Player
             Sword,
             SlingShot,
         };
+
+        public Action<int> playerAmmoChanged;
 
         [Header("Animation Properties")]
         [SerializeField]private Animator animator;
@@ -72,14 +76,28 @@ namespace Player
 
         private void Start()
         {
+            // register this game object as the player
+            ServiceLocator.Instance.Get<PlayerManager>().RegisterPlayer(gameObject);
+            
+            //get health component
             _health = GetComponent<Health>();
+            
+            //bind event to health reaching zero
             _health.OnHealthIsZero += PlayerDied;
+            
+            //initialize layermake
             shotLayers = ~LayerMask.GetMask("Player");
+            
+            //get other components
             _movementComponent = GetComponent<PlayerMovement>();
             _targetingComponent = GetComponent<PlayerTargetingComponent>();
             _cameraComponent = GetComponent<PlayerCameraComponent>();
             _rigidbodyPush = GetComponent<RigidbodyPush>();
+            
+            //initialize aim rotation
             originalAimBoneRotation = aimRotationBone.transform.localRotation;
+            
+            //start with sword equipped
             EquipWeapon(PlayerWeapon.Sword);
 
         }
@@ -292,6 +310,7 @@ namespace Player
             if (unlimitedAmmoDebug)
             {
                 currentAmmo = maxAmmo;
+                playerAmmoChanged?.Invoke(currentAmmo);
             }            
 #endif
             //don't attack without ammo or not aiming
@@ -309,6 +328,7 @@ namespace Player
             
             //reduce ammo
             currentAmmo--;
+            playerAmmoChanged?.Invoke(currentAmmo);
             
             //Play SFX
             ServiceLocator.Instance.Get<AudioManager>().PlaySFX(slingShotFiredSFX);
@@ -341,6 +361,7 @@ namespace Player
                     case Pickup.Category.Ammo:
                         currentAmmo += castPickup.modifier;
                         currentAmmo = currentAmmo > maxAmmo ? maxAmmo : currentAmmo;
+                        playerAmmoChanged?.Invoke(currentAmmo);
                         Debug.Log("Current Ammo: " + currentAmmo);
                         break;
                     default:

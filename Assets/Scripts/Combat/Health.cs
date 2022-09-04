@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour,IDamageable
 {
-    public event Action<int> OnCurrentHealthChanged;
-    public event Action<int> OnMaxHealthChanged;
+    public event Action<float> OnCurrentHealthChanged;
+    public event Action<float> OnMaxHealthChanged;
     public event Action OnHealthIsZero;
     
     [SerializeField]

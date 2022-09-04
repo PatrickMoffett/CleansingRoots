@@ -1,28 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Player;
+using Systems.PlayerManager;
+using TMPro;
+using UnityEngine;
 
-public class UIAmmoCount : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private GameObject _gameObject;
-    [SerializeField] private TextMeshProUGUI ammoText;
-    
-    private PlayerCharacter _playerCharacter;
-    private int _currentAmmo;
-    private int _maxAmmo;
-
-    void Start() 
-    { 
-        _playerCharacter = _gameObject.GetComponent<PlayerCharacter>();
-        _currentAmmo = _playerCharacter.GetCurrentAmmo();
-        _maxAmmo = _playerCharacter.GetMaxAmmo();
-    }
-
-    void Update() 
+    public class UIAmmoCount : MonoBehaviour
     {
-        ammoText.text = _currentAmmo.ToString() + "/" + _maxAmmo.ToString();
+        [SerializeField] private TextMeshProUGUI ammoText;
+    
+        private PlayerCharacter _playerCharacter;
+
+        void Start() 
+        { 
+            ServiceLocator.Instance.Get<PlayerManager>().playerRegistered += Setup;
+        }
+
+        void Setup()
+        {
+            //setup ammo
+            GameObject player = ServiceLocator.Instance.Get<PlayerManager>().GetPlayer();
+            _playerCharacter = player.GetComponent<PlayerCharacter>();
+            _playerCharacter.playerAmmoChanged += UpdateAmmo;
+            UpdateAmmo(_playerCharacter.GetCurrentAmmo());
+        }
+
+        private void UpdateAmmo(int ammo)
+        {
+            ammoText.text = _playerCharacter.GetCurrentAmmo().ToString() + "/" + _playerCharacter.GetMaxAmmo().ToString();
+        }
     }
 }
