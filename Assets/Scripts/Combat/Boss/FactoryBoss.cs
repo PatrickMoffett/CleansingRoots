@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Interactables.Misc;
 using Interactables.Switches;
 using UnityEngine;
 
@@ -9,11 +10,14 @@ namespace Combat.Boss
     {
         [SerializeField] private BossSpawner bossSpawner;
         [SerializeField] private int health = 3;
+        [SerializeField] private MovableDoor entranceDoor;
         [SerializeField] private MovableDoor batteryDoor;
+        [SerializeField] private PlayerDetector playerDetector;
         [SerializeField] private List<SwitchEventForwarder> doorSwitches;
 
         private void Start()
         {
+            playerDetector.OnPlayerDetected += StartFight;
             foreach (var doorSwitch in doorSwitches)
             {
                 doorSwitch.SwitchOff();
@@ -44,13 +48,17 @@ namespace Combat.Boss
             }
         }
 
-        public void StartFight()
+        private void StartFight()
         {
-            bossSpawner.SpawnEnemies();    
+            bossSpawner.SpawnEnemies();
+            entranceDoor.SwitchOff();
         }
 
         public void TakeDamage(int damage)
         {
+            //cant take damage if door isn't open
+            if (!batteryDoor.IsOpen()) return;
+            
             health--;
             if (health == 0)
             {

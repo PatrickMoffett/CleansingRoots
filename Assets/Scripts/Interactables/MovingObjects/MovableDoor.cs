@@ -28,6 +28,10 @@ public class MovableDoor : RespondsToSwitch
                 }
         }
 
+        public bool IsOpen()
+        { 
+                return _switchOn;
+        }
         public override void SwitchOn ()
         {
                 if (_coroutine != null)

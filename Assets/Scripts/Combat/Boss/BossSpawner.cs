@@ -45,14 +45,7 @@ public class BossSpawner : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
-        {
-            Vector3 spawnPosition = Random.insideUnitSphere * rangeToSpawn;
-            spawnPosition.y = 0;
-            spawnPosition += transform.position;
-            GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
-            _managedEnemies.Add(newEnemy);
-        }
+        StartCoroutine(SpawnDelayedEnemies());
     }
     private IEnumerator SpawnDelayedEnemies()
     {
