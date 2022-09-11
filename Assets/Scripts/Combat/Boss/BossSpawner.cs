@@ -12,6 +12,7 @@ public class BossSpawner : MonoBehaviour
     [SerializeField]private int numberOfEnemiesToSpawn = 3;
     [SerializeField] private float spawnDelay = 5f;
     [SerializeField] private float rangeToSpawn = 10f;
+    [SerializeField] private bool autoSpawnEnemies = false;
 
     private List<GameObject> _managedEnemies = new List<GameObject>();
 
@@ -25,6 +26,9 @@ public class BossSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //only do this if we should auto spawn enemies when they are dead.
+        if (!autoSpawnEnemies) return;
+        
         for (int i = 0; i < _managedEnemies.Count; i++)
         {
             if (_managedEnemies[i] == null)
@@ -35,11 +39,22 @@ public class BossSpawner : MonoBehaviour
 
         if (_managedEnemies.Count == 0 && !waitingToSpawn)
         {
-            StartCoroutine(SpawnEnemies());
+            StartCoroutine(SpawnDelayedEnemies());
         }
     }
 
-    private IEnumerator SpawnEnemies()
+    public void SpawnEnemies()
+    {
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        {
+            Vector3 spawnPosition = Random.insideUnitSphere * rangeToSpawn;
+            spawnPosition.y = 0;
+            spawnPosition += transform.position;
+            GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+            _managedEnemies.Add(newEnemy);
+        }
+    }
+    private IEnumerator SpawnDelayedEnemies()
     {
         waitingToSpawn = true;
         yield return new WaitForSeconds(spawnDelay);
