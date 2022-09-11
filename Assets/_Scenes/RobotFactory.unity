@@ -79885,7 +79885,6 @@ GameObject:
   - component: {fileID: 1896792355}
   - component: {fileID: 1896792354}
   - component: {fileID: 1896792353}
-  - component: {fileID: 1896792352}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -79893,20 +79892,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1896792352
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896792351}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1758931711}
 --- !u!33 &1896792353
 MeshFilter:
   m_ObjectHideFlags: 10

@@ -5,7 +5,7 @@ namespace Interactables.MovingObjects
 {
     public class StickyPlatform : MonoBehaviour
     {
-        private GameObject _connectedPlayer;
+        private CharacterController _connectedPlayer;
 
         private Vector3 _prevPosition;
 
@@ -18,7 +18,7 @@ namespace Interactables.MovingObjects
         {
             if (_connectedPlayer != null)
             {
-                _connectedPlayer.transform.position += transform.position-_prevPosition;
+                _connectedPlayer.Move(transform.position - _prevPosition);
             }
             _prevPosition = transform.position;
         }
@@ -27,7 +27,7 @@ namespace Interactables.MovingObjects
         {
             if (col.CompareTag("Player"))
             {
-                _connectedPlayer = col.gameObject;
+                _connectedPlayer = col.gameObject.GetComponent<CharacterController>();
             }
             else
             {
