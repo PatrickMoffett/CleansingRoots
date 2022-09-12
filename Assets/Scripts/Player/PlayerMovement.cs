@@ -24,6 +24,10 @@ namespace Player
         private Vector3 _velocity = Vector3.zero;
         private CharacterController _characterController;
 
+        // idea is to use this as an accumulator while we're falling 
+        // and take damage if it's over a certain value
+        private float _terminalVelocity = -30.0f;
+
 
         private void Awake()
         {
@@ -36,7 +40,7 @@ namespace Player
             if (_jumpStarted && _velocity.y <= 0)
             {
                 _jumpStarted = false;
-            }
+            }            
         }
 
         public bool IsGrounded()
@@ -51,6 +55,12 @@ namespace Player
             {
                 if (!_isGrounded)//if just became grounded
                 {
+                    // check our landing velocity
+                    if (_velocity.y < _terminalVelocity) {
+                        // we should maybe set a flag or
+                        // reduce health here?
+                        Debug.Log("Ouch!");
+                    }
                     _isGrounded = true;
                     animator.SetBool("HasJumped", false);
                     animator.SetBool("IsGrounded", true);
@@ -142,7 +152,8 @@ namespace Player
             if (_characterController.isGrounded && _velocity.y < -2f)
             {
                _velocity.y = 0f;
-            }
+               
+            }            
         }
         
         /// <summary>
