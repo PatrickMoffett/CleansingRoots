@@ -26,9 +26,9 @@ namespace Player
 
         private float _lastStandingHeight;
 
-        private float maxFallDamageHeight = 30;
+        private float maxFallDamageHeight = 40;
 
-        private float minFallDamageHeight = 10;
+        private float minFallDamageHeight = 20;
 
         private float maxFallDamage = .5f;
 
@@ -74,19 +74,18 @@ namespace Player
                 if (!_isGrounded)//if just became grounded
                 {
                     float fallDistance = _lastStandingHeight - newGroundHeight;
-                    // check our landing velocity
-                    //if (_velocity.y < _terminalVelocity) {
-                        // we should maybe set a flag or
-                        // reduce health here?
-                    //Debug.Log("Fell " + Mathf.Round(fallDistance));
+                    Debug.Log("Fall distance was " + fallDistance);
                     if (minFallDamageHeight < fallDistance && fallDistance < maxFallDamageHeight) {
                         float damageScale = (fallDistance - minFallDamageHeight) / (maxFallDamageHeight - minFallDamageHeight);
                         float damageAmtPct = minFallDamage + damageScale * (maxFallDamage - minFallDamage);
                         //Debug.Log("Damage scale " + damageScale);
                         Debug.Log("Damage Amount% " + damageAmtPct + " Damage scale " + damageScale + " Fall dist " + fallDistance);
                         _health.TakeDamage((int)(damageAmtPct * _health.GetMaxHealth()));
-                    }    
-                    //}
+                    }  else if (fallDistance > maxFallDamageHeight) {
+                        // fatal height
+                        _health.TakeDamage((int)(_health.GetMaxHealth()));
+                    }  
+                    
                     _isGrounded = true;
                     animator.SetBool("HasJumped", false);
                     animator.SetBool("IsGrounded", true);
