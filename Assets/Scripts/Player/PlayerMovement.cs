@@ -24,11 +24,16 @@ namespace Player
         private Vector3 _velocity = Vector3.zero;
         private CharacterController _characterController;
 
-        public float _lastStandingHeight;
+        private float _lastStandingHeight;
 
-        // idea is to use this as an accumulator while we're falling 
-        // and take damage if it's over a certain value
-        private float _terminalVelocity = -30.0f;
+        private float maxFallDamageHeight = 30;
+
+        private float minFallDamageHeight = 10;
+
+        private float maxFallDamage = .5f;
+
+        private float minFallDamage = .2f;
+        
         
         private Health _health;
 
@@ -73,8 +78,14 @@ namespace Player
                     //if (_velocity.y < _terminalVelocity) {
                         // we should maybe set a flag or
                         // reduce health here?
-                        Debug.Log("Fell " + Mathf.Round(fallDistance));
-                        
+                    //Debug.Log("Fell " + Mathf.Round(fallDistance));
+                    if (minFallDamageHeight < fallDistance && fallDistance < maxFallDamageHeight) {
+                        float damageScale = (fallDistance - minFallDamageHeight) / (maxFallDamageHeight - minFallDamageHeight);
+                        float damageAmtPct = minFallDamage + damageScale * (maxFallDamage - minFallDamage);
+                        //Debug.Log("Damage scale " + damageScale);
+                        Debug.Log("Damage Amount% " + damageAmtPct + " Damage scale " + damageScale + " Fall dist " + fallDistance);
+                        _health.TakeDamage((int)(damageAmtPct * _health.GetMaxHealth()));
+                    }    
                     //}
                     _isGrounded = true;
                     animator.SetBool("HasJumped", false);
