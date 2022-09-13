@@ -24,14 +24,23 @@ namespace Player
         private Vector3 _velocity = Vector3.zero;
         private CharacterController _characterController;
 
+        public float _lastStandingHeight;
+
         // idea is to use this as an accumulator while we're falling 
         // and take damage if it's over a certain value
         private float _terminalVelocity = -30.0f;
-
+        
+        private Health _health;
 
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
+        }
+
+        private void Start()
+        {
+            _health = GetComponent<Health>();
+            _lastStandingHeight = transform.position.y;
         }
 
         private void Update()
@@ -48,23 +57,30 @@ namespace Player
             return _isGrounded;
         }
 
+
         public void UpdateGroundParameters()
         {
-            Ray ray = new Ray(transform.position, Vector3.down);
+            // detecting ground from .1 higher so that raycast isn't below the ground
+            Ray ray = new Ray(transform.position + Vector3.up*.1f, Vector3.down);
             if (Physics.Raycast(ray, out RaycastHit hit, groundDistance))
             {
+                
+                float newGroundHeight = transform.position.y;
                 if (!_isGrounded)//if just became grounded
                 {
+                    float fallDistance = _lastStandingHeight - newGroundHeight;
                     // check our landing velocity
-                    if (_velocity.y < _terminalVelocity) {
+                    //if (_velocity.y < _terminalVelocity) {
                         // we should maybe set a flag or
                         // reduce health here?
-                        Debug.Log("Ouch!");
-                    }
+                        Debug.Log("Fell " + Mathf.Round(fallDistance));
+                        
+                    //}
                     _isGrounded = true;
                     animator.SetBool("HasJumped", false);
                     animator.SetBool("IsGrounded", true);
                 }
+                _lastStandingHeight = transform.position.y;
                 //update _onWalkable Slope
                 if (Mathf.Acos(Vector3.Dot(hit.normal, Vector3.up)) * Mathf.Rad2Deg <= _characterController.slopeLimit && hit.normal != Vector3.up)
                 {
