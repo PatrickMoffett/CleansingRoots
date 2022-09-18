@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 65491ecafc5829343b45ede22686f87a
+guid: d627c35af1b2c69408431462ac0e4def
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: AntennaMaterial
-    second: {fileID: 2100000, guid: 681a4a7fab3d7674f88c5a2f4ea7c3ff, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BodyMaterial
-    second: {fileID: 2100000, guid: b5756ba9d84960444b41e66a0f37420a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FaceMaterial
-    second: {fileID: 2100000, guid: 61bd4c6b3d06153408dda923c2384ba3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalMaterial
-    second: {fileID: 2100000, guid: 21094349254dc604e9f81f7029d0cae0, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
