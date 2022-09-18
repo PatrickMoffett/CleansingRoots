@@ -15,6 +15,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Blade.001
+    second: {fileID: 2100000, guid: 21094349254dc604e9f81f7029d0cae0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: BodyMaterial
     second: {fileID: 2100000, guid: 0d246c766e20325459038ad134993712, type: 2}
   - first:
@@ -26,6 +31,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Hilt
+    second: {fileID: 2100000, guid: a46c804cc096f7f45a4ee3e06c6160a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hilt.001
     second: {fileID: 2100000, guid: a46c804cc096f7f45a4ee3e06c6160a1, type: 2}
   - first:
       type: UnityEngine:Material
@@ -46,6 +56,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Vine
+    second: {fileID: 2100000, guid: 04ebbc083cb981146bc2aa9940b53db2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vine.001
     second: {fileID: 2100000, guid: 04ebbc083cb981146bc2aa9940b53db2, type: 2}
   materials:
     materialImportMode: 2

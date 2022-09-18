@@ -46,7 +46,7 @@ public class Health : MonoBehaviour,IDamageable
         _currentHealth += amountToAdd;
         Mathf.Clamp(_currentHealth, 0, maxHealth);
         OnCurrentHealthChanged?.Invoke(_currentHealth);
-        if (_currentHealth == 0f)
+        if (_currentHealth <= 0f)
         {
             OnHealthIsZero?.Invoke();
             Debug.LogWarning(gameObject.name + " Health Component reached zero health after adding health.");
