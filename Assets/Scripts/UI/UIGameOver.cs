@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-public class UIGameOver : MonoBehaviour
+namespace UI
 {
-    public void ExitToMenuClicked()
+    public class UIGameOver : MonoBehaviour
     {
-        ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
-    }
+        public void ExitToMenuClicked()
+        {
+            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
+        }
 
-    public void RestartClicked()
-    {
-        ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameState),true);
+        public void RestartClicked()
+        {
+            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameState),true);
+        }
     }
 }

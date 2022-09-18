@@ -15,5 +15,6 @@
         public const string GameOverUI = "UIGameOver";
         public const string LoadingScreenUI = "UILoadingScreen";
         public const string TutorialUI = "UITutorial";
+        public const string GameWonUI = "UIGameWon";
     }
 }
