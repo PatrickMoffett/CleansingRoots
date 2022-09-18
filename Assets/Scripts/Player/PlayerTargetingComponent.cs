@@ -71,6 +71,7 @@ namespace Player
             {
                 _currentTarget = closestTargetable;
                 _currentTarget.TargetDestroyed += CurrentTargetDestroyed;
+                _currentTarget.ShowTargetedImage(true);
                 _isTargeting = true;
                 _playerCameraComponent.SetTargetCameraLookAt(_currentTarget.TargetTransform);
                 _playerCameraComponent.SetCurrentCameraMode(PlayerCameraMode.TargetLocked);
@@ -88,6 +89,7 @@ namespace Player
         public void StopTargeting()
         {
             _currentTarget.TargetDestroyed -= CurrentTargetDestroyed;
+            _currentTarget.ShowTargetedImage(false);
             _isTargeting = false;
             _playerCameraComponent.SetCurrentCameraMode(PlayerCameraMode.Orbit);
         }
@@ -165,7 +167,9 @@ namespace Player
             if (nextTarget != null)
             {
                 _currentTarget.TargetDestroyed -= CurrentTargetDestroyed;
+                _currentTarget.ShowTargetedImage(false);
                 _currentTarget = nextTarget;
+                _currentTarget.ShowTargetedImage(true);
                 _currentTarget.TargetDestroyed += CurrentTargetDestroyed;
                 _playerCameraComponent.SetTargetCameraLookAt(_currentTarget.TargetTransform);
                 return true;

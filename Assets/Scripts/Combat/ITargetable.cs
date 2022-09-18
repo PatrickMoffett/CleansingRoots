@@ -7,6 +7,8 @@ namespace Combat
     {
         public event Action TargetDestroyed;
         public bool Targetable { get; }
+
+        void ShowTargetedImage(bool show);
         public Transform TargetTransform { get; }
     }
 }
