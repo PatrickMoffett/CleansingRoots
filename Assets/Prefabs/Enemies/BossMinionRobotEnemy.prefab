@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetable: 1
   _targetTransform: {fileID: 8315687198863322144}
+  TargetedImage: {fileID: 0}
 --- !u!114 &8315687198863322146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5dd097aa9743e1943aaf9cdcf61335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drops:
+  - {fileID: 5881387731778018913, guid: af0156cb2204ee248aefaccd62ee58e5, type: 3}
+  - {fileID: 5881387731778018913, guid: 10f0c81d6f802ca4db53c355f66204c4, type: 3}
 --- !u!114 &8103475616239267575
 MonoBehaviour:
   m_ObjectHideFlags: 0
