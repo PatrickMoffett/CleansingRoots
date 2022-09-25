@@ -1,4 +1,5 @@
 ﻿using System;
+using Combat;
 using UnityEngine;
 
 
@@ -11,10 +12,12 @@ public class Health : MonoBehaviour,IDamageable
     [SerializeField]
     private int maxHealth = 10;
     private int _currentHealth;
+    private DamageFlash _damageFlash;
 
     private void Start()
     {
-        _currentHealth = maxHealth;            
+        _currentHealth = maxHealth;
+        _damageFlash = GetComponent<DamageFlash>();
     }
 
     public void TakeDamage(int damage)
@@ -26,6 +29,11 @@ public class Health : MonoBehaviour,IDamageable
         {
             Debug.Log("Health is Zero");
             OnHealthIsZero?.Invoke();
+        }
+
+        if (_damageFlash != null)
+        {
+            _damageFlash.FlashRed();
         }
     }
 
