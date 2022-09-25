@@ -41,6 +41,7 @@ namespace Combat.Boss
                     }
                 }
                 batteryDoor.SwitchOn();
+                bossSpawner.SpawnEnemies();
             }
             else
             {
@@ -50,7 +51,6 @@ namespace Combat.Boss
 
         private void StartFight()
         {
-            bossSpawner.SpawnEnemies();
             entranceDoor.SwitchOff();
         }
 
@@ -71,7 +71,6 @@ namespace Combat.Boss
                 {
                     doorSwitch.SwitchOff();
                 }
-                bossSpawner.SpawnEnemies();
             }
         }
 
