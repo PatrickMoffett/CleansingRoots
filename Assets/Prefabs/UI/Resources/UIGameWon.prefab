@@ -528,7 +528,7 @@ PrefabInstance:
     - target: {fileID: 4516917132151565340, guid: 0aeb1c3abe441594ea9fc49ee923d398,
         type: 3}
       propertyPath: m_Name
-      value: UIPanelText
+      value: GameWonText
       objectReference: {fileID: 0}
     - target: {fileID: 7926084076331405914, guid: 0aeb1c3abe441594ea9fc49ee923d398,
         type: 3}
