@@ -23,16 +23,15 @@ namespace Enemies
 
         private void Die()
         {
-            Assert.IsTrue(drops.Count != 0);
+            Destroy(gameObject);
             
-            if (Random.value <= dropChance)
+            if (drops.Count > 0 && Random.value <= dropChance)
             {
-                //get random int index, +1 because max is exclusive
-                int index = Random.Range(0, drops.Count + 1);
+                int index = Random.Range(0, drops.Count);
                 Instantiate(drops[index], transform.position, Quaternion.identity);
             }
 
-            Destroy(gameObject);
+            
         }
     }
 }
