@@ -63,8 +63,11 @@ namespace Player
 
         private void PausePressed(InputAction.CallbackContext obj)
         {
-            Time.timeScale = 0f;
-            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(PauseMenuState));
+            ApplicationStateManager asm = ServiceLocator.Instance.Get<ApplicationStateManager>();
+            if (asm.GetCurrentState() == typeof(GameState))
+            {
+                ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(PauseMenuState));
+            }
         }
 
         private void ToggleLockOnPressed(InputAction.CallbackContext obj)

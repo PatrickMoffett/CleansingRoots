@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Constants;
+using UnityEngine;
 
 public class GameOverState : BaseApplicationState
 {
@@ -58,6 +59,7 @@ public class GameOverState : BaseApplicationState
     public void SetupState()
     {
         _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
+        Time.timeScale = 0f;
     }
 
     public void TeardownState()
@@ -66,5 +68,7 @@ public class GameOverState : BaseApplicationState
         {
             ServiceLocator.Instance.Get<UIManager>().RemoveUIByGuid(_uiWidget.GUID);
         }
+
+        Time.timeScale = 1f;
     }
 }

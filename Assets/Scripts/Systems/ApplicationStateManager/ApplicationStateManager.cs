@@ -108,4 +108,9 @@ public class ApplicationStateManager : IService
             }
         }
     }
+
+    public Type GetCurrentState()
+    {
+        return _states.Peek().GetType();
+    }
 }

@@ -60,6 +60,7 @@ public class PauseMenuState : BaseApplicationState
     {
         _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
         _uiWidget.UIObject.GetComponent<UIPauseMenu>()?.Setup();
+        Time.timeScale = 0f;
     }
 
     public void TeardownState()
@@ -68,5 +69,6 @@ public class PauseMenuState : BaseApplicationState
         {
             ServiceLocator.Instance.Get<UIManager>().RemoveUIByGuid(_uiWidget.GUID);
         }
+        Time.timeScale = 1f;
     }
 }
