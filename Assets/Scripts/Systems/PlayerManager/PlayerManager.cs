@@ -5,8 +5,8 @@ namespace Systems.PlayerManager
 {
     public class PlayerManager : IService
     {
-        public Action playerRegistered;
-        public Action playerUnregistered;
+        public event Action playerRegistered;
+        public event Action playerUnregistered;
 
         private GameObject _player;
         
@@ -20,8 +20,8 @@ namespace Systems.PlayerManager
         {
             if (player == _player)
             {
-                _player = null;
                 playerUnregistered?.Invoke();
+                _player = null;
             }
         }
 

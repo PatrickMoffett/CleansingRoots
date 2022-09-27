@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Systems.PlayerManager;
@@ -18,7 +19,22 @@ public class UIHealthbar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    private void OnEnable()
+    {
         ServiceLocator.Instance.Get<PlayerManager>().playerRegistered += Setup;
+        if (_health != null)
+        {
+            _health.OnCurrentHealthChanged += UpdateHealth;
+        }
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Instance.Get<PlayerManager>().playerRegistered -= Setup;
+        _health.OnCurrentHealthChanged -= UpdateHealth;
     }
 
     void Setup()
@@ -34,13 +50,5 @@ public class UIHealthbar : MonoBehaviour
     void UpdateHealth(int newHealth)
     {
         _image.fillAmount = _health.GetHealthPercentage();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _currentHealth = _health.GetCurrentHealth();
-        _maxHealth = _health.GetMaxHealth();
-        _image.fillAmount = _currentHealth / _maxHealth;
     }
 }

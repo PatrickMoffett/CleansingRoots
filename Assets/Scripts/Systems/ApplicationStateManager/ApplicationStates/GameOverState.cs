@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameOverState : BaseApplicationState
 {
     public readonly string UI_PREFAB = UIPrefabs.GameOverUI;
+    public readonly int SCENE_NAME = (int)SceneIndexes.INITIAL_SCENE;
     private UIWidget _uiWidget;
 
     public GameOverState()
@@ -59,7 +60,7 @@ public class GameOverState : BaseApplicationState
     public void SetupState()
     {
         _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
-        Time.timeScale = 0f;
+        ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(SCENE_NAME);
     }
 
     public void TeardownState()
@@ -68,7 +69,5 @@ public class GameOverState : BaseApplicationState
         {
             ServiceLocator.Instance.Get<UIManager>().RemoveUIByGuid(_uiWidget.GUID);
         }
-
-        Time.timeScale = 1f;
     }
 }

@@ -13,6 +13,7 @@ public class UIPauseMenu : MonoBehaviour
     
     public void ResumeClicked()
     {
+        //remove pause menu state
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
     }
 
@@ -26,7 +27,9 @@ public class UIPauseMenu : MonoBehaviour
     }
     public void ExitToMenuClicked()
     {
+        //remove pause menu state
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
+        //remove game state
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
     }
 

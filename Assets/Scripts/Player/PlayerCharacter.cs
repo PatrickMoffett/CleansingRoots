@@ -1,4 +1,5 @@
 ﻿using System;
+using Globals;
 using Systems.AudioManager;
 using Systems.PlayerManager;
 using UnityEngine;
@@ -66,25 +67,34 @@ namespace Player
         {
             _animationEventManager.swordAttackEndedAnimationEvent += SwordAttackEnded;
             _animationEventManager.swordAttackDealDamageAnimationEvent += SwordAttackDealDamage;
-        }
-
-        private void OnDisable()
-        {
-            _animationEventManager.swordAttackEndedAnimationEvent -= SwordAttackEnded;
-            _animationEventManager.swordAttackDealDamageAnimationEvent -= SwordAttackDealDamage;
-        }
-
-        private void Start()
-        {
-            // register this game object as the player
-            ServiceLocator.Instance.Get<PlayerManager>().RegisterPlayer(gameObject);
             
             //get health component
             _health = GetComponent<Health>();
             
             //bind event to health reaching zero
             _health.OnHealthIsZero += PlayerDied;
+        }
+
+        private void OnDisable()
+        {
+            _animationEventManager.swordAttackEndedAnimationEvent -= SwordAttackEnded;
+            _animationEventManager.swordAttackDealDamageAnimationEvent -= SwordAttackDealDamage;
             
+            //bind event to health reaching zero
+            _health.OnHealthIsZero -= PlayerDied;
+        }
+
+        private void Start()
+        {
+            if (GlobalVariables.checkpointName != "")
+            {
+                GameObject checkpoint = GameObject.Find(GlobalVariables.checkpointName);
+                transform.position = checkpoint.transform.position;
+                transform.rotation = checkpoint.transform.rotation;
+            }
+            // register this game object as the player
+            ServiceLocator.Instance.Get<PlayerManager>().RegisterPlayer(gameObject);
+
             //initialize layermake
             shotLayers = ~LayerMask.GetMask("Player");
             
@@ -104,7 +114,7 @@ namespace Player
 
         private void PlayerDied()
         {
-            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameOverState));
+            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameOverState),true);
         }
 
         public void Move(Vector3 direction)

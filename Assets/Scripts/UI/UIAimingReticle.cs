@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Player;
 using Systems.PlayerManager;
 using UnityEngine;
@@ -10,24 +11,46 @@ namespace UI
     {
         public List<Image> Reticle;
 
+        private PlayerCameraComponent pcc;
+
         void Start()
         {
-            ServiceLocator.Instance.Get<PlayerManager>().playerRegistered += Setup;
             ShowReticle(false);
+        }
+
+        private void Teardown()
+        {
+            GameObject player = ServiceLocator.Instance.Get<PlayerManager>().GetPlayer();
+            pcc = player.GetComponent<PlayerCameraComponent>();
+            pcc.aimingCameraActive -= ShowReticle;
         }
 
         void Setup()
         {
-            //setup health
             GameObject player = ServiceLocator.Instance.Get<PlayerManager>().GetPlayer();
-            PlayerCameraComponent pcc = player.GetComponent<PlayerCameraComponent>();
+            pcc = player.GetComponent<PlayerCameraComponent>();
             pcc.aimingCameraActive += ShowReticle;
+        }
+        private void OnEnable()
+        {
+            ServiceLocator.Instance.Get<PlayerManager>().playerRegistered += Setup;
+            ServiceLocator.Instance.Get<PlayerManager>().playerUnregistered += Teardown;
+            if (pcc == null) return;
+            pcc.aimingCameraActive += ShowReticle;
+        }
+
+        private void OnDisable()
+        {
+            pcc.aimingCameraActive -= ShowReticle;
+            ServiceLocator.Instance.Get<PlayerManager>().playerRegistered -= Setup;
+            ServiceLocator.Instance.Get<PlayerManager>().playerUnregistered -= Teardown;
         }
 
         private void ShowReticle(bool show)
         {
             foreach (var image in Reticle)
             {
+                //if (image == null) continue;
                 image.enabled = show;
             }
         }
