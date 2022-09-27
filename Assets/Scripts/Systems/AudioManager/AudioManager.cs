@@ -89,7 +89,7 @@ namespace Systems.AudioManager
 
         public void PlaySFXAtLocation(AudioClip clipToPlay, Vector3 location)
         {
-        
+            AudioSource.PlayClipAtPoint(clipToPlay,location);
         }
 
         public void PlaySFX(AudioClip clipToPlay)
