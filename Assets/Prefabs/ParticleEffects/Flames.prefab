@@ -4842,7 +4842,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 3218153979403890407}
-  flameThrowerSFX: {fileID: 8300000, guid: aa54db0c9a6e0764cbddf3b37e1f73f9, type: 3}
 --- !u!82 &5599774447685747627
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4867,7 +4866,7 @@ AudioSource:
   MinDistance: 10
   MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
