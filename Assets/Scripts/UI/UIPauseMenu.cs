@@ -13,7 +13,6 @@ public class UIPauseMenu : MonoBehaviour
     
     public void ResumeClicked()
     {
-        Time.timeScale = 1f;
         ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
     }
 
