@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   category: 0
   modifier: 2
-  clipToPlayOnPickup: {fileID: 8300000, guid: 0977e77bc12b24449b617c4325de7138, type: 3}
+  clipToPlayOnPickup: {fileID: 8300000, guid: 7358b92d12a388843934017dbeb0d1d3, type: 3}
 --- !u!1001 &6718657637595472451
 PrefabInstance:
   m_ObjectHideFlags: 0
