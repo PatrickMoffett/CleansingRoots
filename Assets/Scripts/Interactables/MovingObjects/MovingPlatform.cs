@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,9 @@ namespace Interactables.MovingObjects
         public List<GameObject> wayPoints;
 
         public float speed = 10f;
-    
+
+        public float pauseTime = 1f;
+        public bool shouldPause = true;
         public bool waypointsFormCircle = false;
 
         private Rigidbody _rigidbody;
@@ -17,6 +20,7 @@ namespace Interactables.MovingObjects
         public bool startAtFirstWaypoint = true;
         private int _currentWaypointIndex = 0;
         private bool _movingForwards = true;
+        private bool _paused = false;
 
         // Start is called before the first frame update
         void Start()
@@ -66,6 +70,7 @@ namespace Interactables.MovingObjects
 
         private void Update()
         {
+            if (_paused) return;
             MovePlatform();
         }
 
@@ -75,10 +80,26 @@ namespace Interactables.MovingObjects
             if (direction.magnitude <= speed * Time.deltaTime)
             {
                 _rigidbody.position = wayPoints[_currentWaypointIndex].transform.position;
-                SetNextWaypoint();
+                if (shouldPause)
+                {
+                    StartCoroutine(WaitAndSetNextWaypoint());
+                }
+                else
+                {
+                    SetNextWaypoint();
+                }
+
                 return;
             }
             _rigidbody.position += direction.normalized * (speed * Time.deltaTime);
+        }
+
+        IEnumerator WaitAndSetNextWaypoint()
+        {
+            _paused = true;
+            yield return new WaitForSeconds(pauseTime);
+            SetNextWaypoint();
+            _paused = false;
         }
     }
 }
