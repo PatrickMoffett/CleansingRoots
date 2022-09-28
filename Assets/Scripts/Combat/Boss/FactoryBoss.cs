@@ -76,7 +76,7 @@ namespace Combat.Boss
 
         void EndFight()
         {
-            
+            ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameWonState),true);
         }
     }
 }

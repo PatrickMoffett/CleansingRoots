@@ -57,6 +57,9 @@ public class ApplicationStateManager : IService
         }else if (stateType.Equals(typeof(TutorialState)))
         {
             PushState(new TutorialState(),options);
+        }else if (stateType.Equals(typeof(GameWonState)))
+        {
+            PushState(new GameWonState(),options);
         }
         else
         {
