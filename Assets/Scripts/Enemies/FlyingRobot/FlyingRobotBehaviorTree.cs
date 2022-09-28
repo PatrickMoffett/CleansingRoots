@@ -21,7 +21,8 @@ namespace Enemies.FlyingRobot
         public float navigationUpdateRate = 1f;
         public GameObject playerGameObject;
         public List<BaseNavigationNode> patrolWaypoints;
-
+        public float turnSpeed = 360f;
+        
         private readonly string _selfKey = "Self";
         private readonly string _playerKey = "Player";
         private readonly string _moveSpeedKey = "MoveSpeed";
@@ -33,6 +34,7 @@ namespace Enemies.FlyingRobot
         private readonly string _targetWaypointKey = "TargetWaypoint";
         private readonly string _navPathKey = "NavPathList";
         private readonly string _attackComponentKey = "AttackComponent";
+        private readonly string _turnSpeedKey = "TurnSpeedKey";
 
         protected override BaseNode SetupTree()
         {
@@ -57,6 +59,7 @@ namespace Enemies.FlyingRobot
             SetData(_aggroRangeKey, aggroRange);
             SetData(_attackDistanceKey, attackDistance);
             SetData(_patrolMinimumDistanceKey,patrolDistanceTolerance);
+            SetData(_turnSpeedKey,turnSpeed);
             return new Selector(new List<BaseNode>
             {
                 new GameObjectWithinDistance(_aggroRangeKey,_selfKey,_playerKey,AbortType.LOWER_PRIORITY,
@@ -67,7 +70,7 @@ namespace Enemies.FlyingRobot
                                                     new GameObjectWithinDistance(_attackDistanceKey,_selfKey,_playerKey,AbortType.BOTH,
                                                         new RepeatUntilFail(
                                                             new Sequence(new List<BaseNode> {
-                                                                        new FaceTargetWaypoint(_selfKey,_targetWaypointKey),
+                                                                        new FaceTargetWaypoint(_selfKey,_targetWaypointKey,_turnSpeedKey),
                                                                         new PerformAttack(_attackComponentKey),
                                                                         new IdleTask(1f)
                                                                 })

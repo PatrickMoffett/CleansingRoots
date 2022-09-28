@@ -19,6 +19,7 @@ namespace Enemies.FlyingRobot
         public float attackDistance = 30f;
         public float patrolDistanceTolerance = .2f;
         public float navigationUpdateRate = 1f;
+        public float turnSpeed = 3f;
         private GameObject _playerGameObject;
 
         private readonly string _selfKey = "Self";
@@ -31,6 +32,7 @@ namespace Enemies.FlyingRobot
         private readonly string _targetWaypointKey = "TargetWaypoint";
         private readonly string _navPathKey = "NavPathList";
         private readonly string _attackComponentKey = "AttackComponent";
+        private readonly string _turnSpeedKey = "TurnSpeedKey";
 
         private static GameObject _player;
 
@@ -50,6 +52,7 @@ namespace Enemies.FlyingRobot
             SetData(_aggroRangeKey, aggroRange);
             SetData(_attackDistanceKey, attackDistance);
             SetData(_patrolMinimumDistanceKey,patrolDistanceTolerance);
+            SetData(_turnSpeedKey,turnSpeed);
             return new Selector(new List<BaseNode>
             {
 
@@ -60,7 +63,7 @@ namespace Enemies.FlyingRobot
                                                     new GameObjectWithinDistance(_attackDistanceKey,_selfKey,_playerKey,AbortType.BOTH,
                                                         new RepeatUntilFail(
                                                             new Sequence(new List<BaseNode> {
-                                                                        new FaceTargetWaypoint(_selfKey,_targetWaypointKey),
+                                                                        new FaceTargetWaypoint(_selfKey,_targetWaypointKey,_turnSpeedKey),
                                                                         new PerformAttack(_attackComponentKey),
                                                                         new IdleTask(1f)
                                                                 })
