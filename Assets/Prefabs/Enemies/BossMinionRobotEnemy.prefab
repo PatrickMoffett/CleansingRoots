@@ -339,6 +339,7 @@ MonoBehaviour:
   attackDistance: 20
   patrolDistanceTolerance: 0.2
   navigationUpdateRate: 0.2
+  turnSpeed: 360
 --- !u!1001 &8315687198829219900
 PrefabInstance:
   m_ObjectHideFlags: 0
