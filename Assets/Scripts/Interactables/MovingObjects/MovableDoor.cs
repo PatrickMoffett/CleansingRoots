@@ -67,7 +67,7 @@ public class MovableDoor : RespondsToSwitch
         private void SetCurrentPercentOpen(float percentOpen)
         {
                 transform.position = closePosition + Vector3.Lerp(Vector3.zero, openTranslation, percentOpen);
-                transform.rotation = Quaternion.Euler(Vector3.Lerp(Vector3.zero, openRotation, percentOpen));
+                transform.rotation = Quaternion.Euler(closeRotation) * Quaternion.Euler(Vector3.Lerp(Vector3.zero, openRotation, percentOpen));
                 _currentPercentOpen = percentOpen;
         }
         private IEnumerator OpenDoor()
