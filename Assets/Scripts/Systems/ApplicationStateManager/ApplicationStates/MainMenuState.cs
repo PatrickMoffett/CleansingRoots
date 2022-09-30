@@ -59,8 +59,6 @@ public class MainMenuState : BaseApplicationState
             _uiWidget.UIObject.SetActive(true);
         }
         
-        //clear checkpoint data
-        GlobalVariables.checkpointName = "";
         ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(SCENE_NAME);
     }
 
