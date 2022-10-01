@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea37b1dfc2764a8419df7b0bb20f7c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conveyorBeltSegmentPrefab: {fileID: 8571283328035105134, guid: 651bd8a416d52f14bb8388d6b9125590,
+  conveyorBeltSegmentPrefab: {fileID: 1184089688049314409, guid: 436af9804e70b3a488887128950cedd0,
     type: 3}
   numberOfSegments: 13
   maxSpeed: 10
