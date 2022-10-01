@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Building Exterior 1
+  m_Name: Building Exterior 5
   m_Shader: {fileID: -6465566751694194690, guid: 26cff1dd6bccaf94986166afaedab14d,
     type: 3}
   m_ValidKeywords: []
@@ -149,7 +149,7 @@ Material:
     m_Colors:
     - Toon_Ramp_Tint: {r: 0.49056596, g: 0.49056596, b: 0.49056596, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.09252689, g: 0.38679248, b: 0, a: 1}
+    - _Color: {r: 0.3882353, g: 0, b: 0.12680286, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighlightColor: {r: 0.7735849, g: 0.5669329, b: 0.20069422, a: 0}
     - _LitColor: {r: 0.8679245, g: 0.60245675, b: 0.26610893, a: 0}

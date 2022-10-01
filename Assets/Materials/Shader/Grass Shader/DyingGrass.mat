@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5877784709361582959
+--- !u!114 &-2875773257386417203
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,9 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Building Exterior 1
-  m_Shader: {fileID: -6465566751694194690, guid: 26cff1dd6bccaf94986166afaedab14d,
-    type: 3}
+  m_Name: DyingGrass
+  m_Shader: {fileID: 4800000, guid: e1fc869a06d5216438f02cc3f8e0c9b6, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -34,16 +33,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Mask_R_Emission:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: facd85f055afa8542a244b9e8b1d98c8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -86,6 +77,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WindDistortionMap:
+        m_Texture: {fileID: 2800000, guid: 1d1d74d6108c6ca47919e55e1208a64b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 1, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -100,16 +95,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Brightness_Rim: 2
-    - Rim_Power: 5
-    - Toon_Ramp_Offset: 0.5
-    - Toon_Ramp_Smoothness: 0
     - _AlphaClip: 0
+    - _AlphaCutoff: 0.99
+    - _Base: 1
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Color_Steps: 3
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -119,41 +111,31 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HighlightIntensity: 0.01
+    - _Height: 4
+    - _LightPower: 0.45
+    - _MaxHeight: 4
     - _Metallic: 0
+    - _MinHeight: 3
     - _OcclusionStrength: 1
-    - _OutlineAcuteDepthStartDot: 1
-    - _OutlineAcuteDepthThresholdMult: 1
-    - _OutlineDepthStrength: 1
-    - _OutlineDepthThreshold: 1
-    - _OutlineDepthTightening: 1
-    - _OutlineFarDepthStart: 1
-    - _OutlineFarDepthThresholdMult: 1
-    - _OutlineFarNormalStartDepth: 1
-    - _OutlineFarNormalThresholdMult: 1
-    - _OutlineNormalStrength: 1
-    - _OutlineNormalThreshold: 1
-    - _OutlineNormalTightening: 1
-    - _OutlineThickness: 0.001
     - _Parallax: 0.005
-    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _ShadowPower: 0.29
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TPower: 0.08
+    - _WindStrength: 1.05
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Toon_Ramp_Tint: {r: 0.49056596, g: 0.49056596, b: 0.49056596, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.09252689, g: 0.38679248, b: 0, a: 1}
+    - _BaseColor: {r: 0.17748336, g: 0.85882354, b: 0.1568627, a: 1}
+    - _Color: {r: 0.17748332, g: 0.85882354, b: 0.15686268, a: 1}
+    - _Darker: {r: 0, g: 0.5849056, b: 0.0011086463, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 0.7735849, g: 0.5669329, b: 0.20069422, a: 0}
-    - _LitColor: {r: 0.8679245, g: 0.60245675, b: 0.26610893, a: 0}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadedColor: {r: 0.5377358, g: 0.26611257, b: 0.10399607, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tint: {r: 1, g: 0.97407734, b: 0, a: 0}
+    - _WindFrequency: {r: 3, g: 3, b: 1, a: 0}
   m_BuildTextureStacks: []
