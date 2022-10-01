@@ -44,7 +44,7 @@ public class UIHealthbar : MonoBehaviour
         _health = player.GetComponent<Health>();
         Assert.IsNotNull(_health);
         _health.OnCurrentHealthChanged += UpdateHealth;
-        UpdateHealth(_health.GetCurrentHealth());
+        _image.fillAmount = 1f;
     }
 
     void UpdateHealth(int newHealth)

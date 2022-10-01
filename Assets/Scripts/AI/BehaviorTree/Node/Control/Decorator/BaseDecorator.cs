@@ -1,7 +1,4 @@
-﻿using System.Data;
-using UnityEditor.Experimental.GraphView;
-
-namespace AI.BehaviorTree.Control.Decorator
+﻿namespace AI.BehaviorTree.Control.Decorator
 {
     public enum AbortType
     {

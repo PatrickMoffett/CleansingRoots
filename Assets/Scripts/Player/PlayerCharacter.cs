@@ -381,6 +381,7 @@ namespace Player
             }
             Destroy(pickup);
         }
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (drawDebug)
@@ -390,7 +391,7 @@ namespace Player
                 Gizmos.DrawCube(swordAttackOffset, swordAttackBoxSize);
             }
         }
-
+#endif
         public int GetMaxAmmo() 
         {
             return maxAmmo;

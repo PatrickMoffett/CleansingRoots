@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.TextCore.Text;
 using UnityEngine;
 
 namespace Interactables.MovingObjects
@@ -107,7 +106,8 @@ namespace Interactables.MovingObjects
                 }
             }
         }
-
+        
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (drawPreview && !EditorApplication.isPlaying)
@@ -148,7 +148,7 @@ namespace Interactables.MovingObjects
                 enabled = false;
             }
         }
-
+#endif
         public override void SwitchOn()
         {
             switchState = true;

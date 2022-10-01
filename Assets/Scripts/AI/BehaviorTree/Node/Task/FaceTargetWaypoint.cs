@@ -1,4 +1,5 @@
 ﻿using AI.WaypointNavigation;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace AI.BehaviorTree.Node.Task
@@ -8,7 +9,7 @@ namespace AI.BehaviorTree.Node.Task
         private readonly string _selfGameObjectKey;
         private readonly string _targetWaypointKey;
         private readonly string _turnSpeedKey;
-        private const float Tolerance = .01f;
+        private const float Tolerance = .02f;
 
         public FaceTargetWaypoint(string selfGameObjectKey,string targetWaypointKey, string turnSpeedKey)
         {
@@ -29,13 +30,15 @@ namespace AI.BehaviorTree.Node.Task
             GameObject self = (GameObject)owningTree.GetData(_selfGameObjectKey);
             float turnSpeed = (float)owningTree.GetData(_turnSpeedKey);
             
-            Vector3 direction = targetNode.gameObject.transform.position - self.transform.position;
-            float dot = Vector3.Dot(self.transform.right, direction);
-            if (dot > -Tolerance && dot < Tolerance)
+            Vector3 direction = (targetNode.gameObject.transform.position - self.transform.position).normalized;
+            
+            //if the angle to the target is less than the amount we can turn this frame, turn directly at the target
+            if(Mathf.Acos(Vector3.Dot(self.transform.forward,direction)) < turnSpeed*Time.deltaTime*Mathf.Deg2Rad)
             {
                 self.transform.forward = direction;
                 return NodeState.SUCCESS;
             }
+            float dot = Vector3.Dot(self.transform.right, direction);
 
             if (dot > 0)
             {
