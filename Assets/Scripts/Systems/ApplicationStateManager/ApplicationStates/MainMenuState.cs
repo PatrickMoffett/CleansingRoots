@@ -7,7 +7,7 @@ using UnityEngine;
 public class MainMenuState : BaseApplicationState
 {
     public readonly string UI_PREFAB = UIPrefabs.MainMenuUI;
-    private AudioClip _mainMenuMusic = Resources.Load<AudioClip>("MainMenuMusic");
+    private AudioClip _mainMenuMusic = Resources.Load<AudioClip>("MainMenuMusicReducedVolume");
     public readonly int SCENE_NAME = (int)SceneIndexes.INITIAL_SCENE;
     private UIWidget _uiWidget;
 
