@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 2359782c413e0ec41bb34b323f43c22c
+guid: d60bfd8de1fd94141a05c8a2dc2f2b1d
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Lid
-    second: {fileID: 2100000, guid: 21094349254dc604e9f81f7029d0cae0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalCasing
-    second: {fileID: 2100000, guid: 8507644a5391cf8438701859e0eb7945, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
