@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Systems.AudioManager;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
@@ -12,6 +13,7 @@ namespace Enemies
         [SerializeField] private List<GameObject> drops;
         [SerializeField] private float dropChance = .5f;
         [SerializeField] private GameObject deathEffect;
+        [SerializeField] private AudioClip audioClip;
         
         private Health _health;
 
@@ -30,10 +32,12 @@ namespace Enemies
             {
                 int index = Random.Range(0, drops.Count);
                 Instantiate(drops[index], transform.position, Quaternion.identity);
+                
             }
             Assert.IsNotNull(deathEffect);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             
+            ServiceLocator.Instance.Get<AudioManager>().PlaySFX(audioClip);
         }
     }
 }
