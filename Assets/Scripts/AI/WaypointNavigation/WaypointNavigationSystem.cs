@@ -63,14 +63,14 @@ namespace AI.WaypointNavigation
 
         public List<BaseNavigationNode> GetPath(Vector3 startPosition)
         {
-            Collider[] colliders = Physics.OverlapSphere(startPosition, 40f, LayerMask.GetMask("Waypoint"));
+            Collider[] colliders = Physics.OverlapSphere(startPosition, 50f, LayerMask.GetMask("Waypoint"));
             RaycastHit rhInfo;
             BaseNavigationNode closestNode = null;
             int closestNodeDistance = Int32.MaxValue;
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (Physics.Raycast(startPosition, colliders[i].transform.position - startPosition, out rhInfo, 40f,
+                if (Physics.Raycast(startPosition, colliders[i].transform.position - startPosition, out rhInfo, 50f,
                         nodeConnectionLayerMask))
                 {
                     if (rhInfo.collider.gameObject.CompareTag("WaypointNode") || rhInfo.collider.gameObject.CompareTag("Player"))

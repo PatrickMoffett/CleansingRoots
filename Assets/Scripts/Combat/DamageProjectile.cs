@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cinemachine;
 using Systems.AudioManager;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -21,6 +22,12 @@ namespace Combat
         }
         private void OnCollisionEnter(Collision collision)
         {
+            if (gameObject.CompareTag("EnemyProjectile") && collision.gameObject.CompareTag("Boss"))
+            {
+                PlayHitSound();
+                Destroy(gameObject);
+                return;
+            }
             IDamageable damageableComponent = collision.gameObject.GetComponent<IDamageable>();
             if (damageableComponent != null)
             {

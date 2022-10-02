@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Interactables.Misc;
 using Interactables.Switches;
@@ -8,9 +9,10 @@ namespace Combat.Boss
 {
     public class FactoryBoss: MonoBehaviour, IDamageable
     {
-        [SerializeField] private BossSpawner bossSpawner;
+        [SerializeField] private List<BossSpawner> bossSpawners;
         [SerializeField] private int health = 3;
         [SerializeField] private MovableDoor entranceDoor;
+        [SerializeField] private List<MovableDoor> enemyDoors;
         [SerializeField] private MovableDoor batteryDoor;
         [SerializeField] private PlayerDetector playerDetector;
         [SerializeField] private List<SwitchEventForwarder> doorSwitches;
@@ -41,7 +43,15 @@ namespace Combat.Boss
                     }
                 }
                 batteryDoor.SwitchOn();
-                bossSpawner.SpawnEnemies();
+                
+                foreach(var enemyDoor in enemyDoors){
+                    enemyDoor.SwitchOn();
+                }
+
+                foreach (var bossSpawner in bossSpawners)
+                {
+                    bossSpawner.SpawnEnemies();
+                }
             }
             else
             {
@@ -70,6 +80,10 @@ namespace Combat.Boss
                 foreach (var doorSwitch in doorSwitches)
                 {
                     doorSwitch.SwitchOff();
+                }
+                foreach (var enemyDoor in enemyDoors)
+                {
+                    enemyDoor.SwitchOff();
                 }
             }
         }

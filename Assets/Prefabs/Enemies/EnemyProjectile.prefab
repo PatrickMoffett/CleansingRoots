@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3682397830591970559}
   m_Layer: 13
   m_Name: EnemyProjectile
-  m_TagString: Player
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   damage: 1
-  trail: {fileID: 0}
+  trail: {fileID: 4484560907936770868}
   hitSounds: []
 --- !u!1 &4484560907936770868
 GameObject:
