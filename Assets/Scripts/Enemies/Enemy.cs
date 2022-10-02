@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -11,6 +11,7 @@ namespace Enemies
 
         [SerializeField] private List<GameObject> drops;
         [SerializeField] private float dropChance = .5f;
+        [SerializeField] private GameObject deathEffect;
         
         private Health _health;
 
@@ -30,7 +31,8 @@ namespace Enemies
                 int index = Random.Range(0, drops.Count);
                 Instantiate(drops[index], transform.position, Quaternion.identity);
             }
-
+            Assert.IsNotNull(deathEffect);
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
             
         }
     }
