@@ -10,6 +10,8 @@ namespace Enemies.AttackComponents
         public float projectileSpeed = 30f;
         public GameObject attackProjectilePrefab;
         public Transform projectileSpawnTransform;
+        private AudioSource _audioSource;
+        public AudioClip shootSound;
         static private Transform trailBucket;
 
 
@@ -27,6 +29,8 @@ namespace Enemies.AttackComponents
             if (trailBucket == null) {
                 trailBucket = GameObject.Find("TemporaryBucket").transform;
             }
+
+            _audioSource = GetComponent<AudioSource>();
         }
 
         public override bool CanAttack()
@@ -42,6 +46,9 @@ namespace Enemies.AttackComponents
             projectile.transform.SetParent(trailBucket);
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
             _attackCoroutine = StartCoroutine(AttackCooldown());
+            _audioSource.clip = shootSound;
+            _audioSource.Play();
+            
             return true;
         }
 

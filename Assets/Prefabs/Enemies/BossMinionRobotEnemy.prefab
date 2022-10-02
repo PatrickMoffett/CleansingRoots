@@ -305,6 +305,9 @@ MonoBehaviour:
   - {fileID: 5881387731778018913, guid: af0156cb2204ee248aefaccd62ee58e5, type: 3}
   - {fileID: 5881387731778018913, guid: 10f0c81d6f802ca4db53c355f66204c4, type: 3}
   dropChance: 0.5
+  deathEffect: {fileID: 8373637343284953531, guid: bfcc9930186460b489e9a6866f5e55a8,
+    type: 3}
+  audioClip: {fileID: 8300000, guid: 0311a0b3e68a36a4c964f78b152fff39, type: 3}
 --- !u!114 &8103475616239267575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +325,7 @@ MonoBehaviour:
   attackProjectilePrefab: {fileID: 3211707212544362433, guid: 556164b0c0912aa40a845dc6e0fa565c,
     type: 3}
   projectileSpawnTransform: {fileID: 6321299807937288657}
+  shootSound: {fileID: 8300000, guid: 873f235c25d20464eb0958e5ba562508, type: 3}
 --- !u!114 &3776323807974853553
 MonoBehaviour:
   m_ObjectHideFlags: 0
