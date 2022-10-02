@@ -49,9 +49,13 @@ public class FireHazard : RespondsToSwitch
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && _isSwitchedOn)
         {
-            Debug.Log("Player Hit Fire");
+            IDamageable damageable =  other.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(1);
+            }
         }
     }
 }
