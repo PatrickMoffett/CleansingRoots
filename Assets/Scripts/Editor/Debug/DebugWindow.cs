@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using Combat.Boss;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -22,17 +23,18 @@ public class DebugWindow : EditorWindow
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Scripts/Editor/Debug/DebugWindow.uxml");
         VisualElement labelFromUXML = visualTree.Instantiate();
         root.Add(labelFromUXML);
-        
+
         rootVisualElement.Query<Button>("boss").First().RegisterCallback<ClickEvent>(GotoBoss);
         rootVisualElement.Query<Button>("stairs").First().RegisterCallback<ClickEvent>(GotoStairs);
-        
+        rootVisualElement.Query<Button>("killBoss").First().RegisterCallback<ClickEvent>(EndBossFight);
+
     }
 
     private void GotoBoss(ClickEvent evt)
     {
         if (EditorApplication.isPlaying)
         {
-            findPlayer().transform.position = new Vector3(-5.3f,25.45f,695.5f);
+            findPlayer().transform.position = new Vector3(-5.3f, 25.45f, 695.5f);
 
         }
     }
@@ -41,9 +43,13 @@ public class DebugWindow : EditorWindow
     {
         if (EditorApplication.isPlaying)
         {
-            findPlayer().transform.position = new Vector3(304,2,99);
+            findPlayer().transform.position = new Vector3(304, 2, 99);
         }
-        
+    }
+
+    private void EndBossFight(ClickEvent evt)
+    {
+        FindObjectOfType<FactoryBoss>().EndFight();
     }
 
     private GameObject findPlayer()
