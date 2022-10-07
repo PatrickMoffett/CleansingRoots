@@ -90,6 +90,15 @@ namespace Combat.Boss
 
         public void EndFight()
         {
+            StartCoroutine(StartEndGameExplosion());
+        }
+
+        private IEnumerator StartEndGameExplosion()
+        {
+            // At end call this
+            // Stop player from being able to be killed
+            yield return new WaitForSeconds(5);
+            
             ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameWonState),true);
         }
     }
