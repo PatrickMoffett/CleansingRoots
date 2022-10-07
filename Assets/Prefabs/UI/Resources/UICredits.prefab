@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5588746305765144142}
   - component: {fileID: 505548979783002374}
   m_Layer: 5
-  m_Name: CreditsTitle
+  m_Name: CreditsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,17 +27,17 @@ RectTransform:
   m_GameObject: {fileID: 3192111143755551788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2641841201342335811}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -23.792, y: 25.9516}
+  m_SizeDelta: {x: -59.481, y: -64.879}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5588746305765144142
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,46 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Credits
+  m_text: 'Patrick Moffett: Project lead, core gameplay, character animations, toon
+    shader, level design, boss fight, checkpoints, fire hazards, player movement
+    and combat, enemy AI, camera code, door trigger system, moving platforms, robot
+    model, conveyor belt, environment models (crane, dumpster, street light, window,
+    street sign, rubble), tutorial UI, audio integration, additional sounds (flamethrower,
+    footsteps, enemy hit sound), pressure switches, battery model and material
+
+    Rodrigo
+    Bonzerr Lopez: Final boss music, barrel model with wood textures, cement mixer,
+    boss fight sound, tree model, robot hover sound, shovel model, hardhat, hammer
+
+    Cooper
+    Willis: Fall damage, hip fire when target locked, slingshot trail effect, shot
+    arc
+
+    Michael Monty: Player healthbar, UI ammo indicator, game over buttons,
+    menu text improvements
+
+    Mike DiGiovanni: UI scaling, stair collider fix,
+    menu skybox improvement, end game explosion effects, boss debug functionality
+
+    Ashleigh
+    M.: Factory music
+
+    Chris DeLeon: Sounds (ammo pickup, slingshot firing and
+    hit), slingshot pebble model, machine whirring loop, material variations for
+    buildings
+
+    Fahad Muntaz: Health pickup item with related sound
+
+    Colton
+    Henderson: Health pickup heals player, pause/unpause
+
+    Rohit Narwal Kumar:
+    Grass shader
+
+    Jared Rigby: Water dripping sound effect
+
+    Playtesting:
+    : Mike DiGiovanni, Michael Monty, and Klaim'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -93,15 +132,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 35.55
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -305,13 +344,13 @@ RectTransform:
   m_Children:
   - {fileID: 8003958677469389653}
   m_Father: {fileID: 2641841201342335811}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -30}
-  m_SizeDelta: {x: 300, y: 100}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 234.6844, y: 60.1079}
+  m_Pivot: {x: 1, y: 0}
 --- !u!222 &7032371824921927082
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -486,8 +525,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 118005316168850671}
   - {fileID: 4334075853077733962}
+  - {fileID: 118005316168850671}
   m_Father: {fileID: 3495624898644409642}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

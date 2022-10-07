@@ -269,10 +269,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4166099115040697582, guid: 0aeb1c3abe441594ea9fc49ee923d398,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4516917132151565340, guid: 0aeb1c3abe441594ea9fc49ee923d398,
         type: 3}
       propertyPath: m_Name
       value: UIPanelText
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516917132151565340, guid: 0aeb1c3abe441594ea9fc49ee923d398,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4840679658699517588, guid: 0aeb1c3abe441594ea9fc49ee923d398,
         type: 3}
