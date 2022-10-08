@@ -11,8 +11,9 @@ namespace Combat
         [SerializeField] private LayerMask collisionLayers = -1;
         [SerializeField] private int damage = 1;
         [SerializeField] private GameObject trail;
-        [SerializeField] private List<AudioClip> hitSounds;
+        [SerializeField] private List<AudioClip> hitSounds = new List<AudioClip>();
         static private Transform trailBucket;
+        private bool _hasCollided = false;
 
         void Start() {
             if (trailBucket == null) {
@@ -22,6 +23,16 @@ namespace Combat
         }
         private void OnCollisionEnter(Collision collision)
         {
+            if (!_hasCollided)
+            {
+                _hasCollided = true;
+            }
+            else
+            {
+                return;
+            }
+            Destroy(gameObject);
+            
             if (gameObject.CompareTag("EnemyProjectile") && collision.gameObject.CompareTag("Boss"))
             {
                 PlayHitSound();
@@ -35,7 +46,6 @@ namespace Combat
             }
 
             PlayHitSound();
-            Destroy(gameObject);
         }
 
         private void PlayHitSound()
