@@ -16,6 +16,7 @@ namespace Combat.Boss
         [SerializeField] private MovableDoor batteryDoor;
         [SerializeField] private PlayerDetector playerDetector;
         [SerializeField] private List<SwitchEventForwarder> doorSwitches;
+        [SerializeField] private List<RespondsToSwitch> wires;
 
         private void Start()
         {
@@ -84,6 +85,11 @@ namespace Combat.Boss
                 foreach (var enemyDoor in enemyDoors)
                 {
                     enemyDoor.SwitchOff();
+                }
+
+                foreach (var wire in wires)
+                {
+                    wire.SwitchOff();
                 }
             }
         }
