@@ -315,6 +315,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1764d65b-3dfa-4e48-900a-9ecf1f3090f2"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""995fb80f-2423-4256-a2f2-4afe82e0fd72"",
                     ""path"": ""<Gamepad>/rightStickPress"",
                     ""interactions"": """",
