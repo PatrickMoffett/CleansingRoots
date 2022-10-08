@@ -29,7 +29,7 @@ public class Health : MonoBehaviour,IDamageable
             _currentHealth -= damage;
             Mathf.Clamp(_currentHealth, 0, maxHealth);
             OnCurrentHealthChanged?.Invoke(_currentHealth);
-            if (_currentHealth == 0f)
+            if (_currentHealth <= 0f)
             {
                 Debug.Log("Health is Zero");
                 OnHealthIsZero?.Invoke();
