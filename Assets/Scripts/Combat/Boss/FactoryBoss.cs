@@ -17,6 +17,7 @@ namespace Combat.Boss
         [SerializeField] private PlayerDetector playerDetector;
         [SerializeField] private List<SwitchEventForwarder> doorSwitches;
         [SerializeField] private List<RespondsToSwitch> wires;
+        [SerializeField] private GameObject endGameExplosion;
 
         private void Start()
         {
@@ -103,6 +104,9 @@ namespace Combat.Boss
         {
             // At end call this
             // Stop player from being able to be killed
+            var player = GameObject.FindWithTag("Player");
+            endGameExplosion.SetActive(true);
+                
             yield return new WaitForSeconds(5);
             
             ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(GameWonState),true);
