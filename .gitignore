@@ -47,6 +47,7 @@ sysinfo.txt
 
 #Blend History
 *.blend1
+*.blend1.meta
 
 # FMOD
 /Assets/FMODStudioCache.asset
