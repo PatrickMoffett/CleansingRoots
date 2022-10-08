@@ -14,6 +14,8 @@ public class Health : MonoBehaviour,IDamageable
     private int _currentHealth;
     private DamageFlash _damageFlash;
 
+    [SerializeField] public Boolean canTakeDamage = true;
+        
     private void Start()
     {
         _currentHealth = maxHealth;
@@ -22,18 +24,21 @@ public class Health : MonoBehaviour,IDamageable
 
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
-        Mathf.Clamp(_currentHealth, 0, maxHealth);
-        OnCurrentHealthChanged?.Invoke(_currentHealth);
-        if (_currentHealth == 0f)
+        if (canTakeDamage)
         {
-            Debug.Log("Health is Zero");
-            OnHealthIsZero?.Invoke();
-        }
+            _currentHealth -= damage;
+            Mathf.Clamp(_currentHealth, 0, maxHealth);
+            OnCurrentHealthChanged?.Invoke(_currentHealth);
+            if (_currentHealth == 0f)
+            {
+                Debug.Log("Health is Zero");
+                OnHealthIsZero?.Invoke();
+            }
 
-        if (_damageFlash != null)
-        {
-            _damageFlash.FlashRed();
+            if (_damageFlash != null)
+            {
+                _damageFlash.FlashRed();
+            }
         }
     }
 

@@ -2,4 +2,6 @@
     <ui:Button text="Goto Boss" display-tooltip-when-elided="true" name="boss" />
     <ui:Button text="Goto Stairs" display-tooltip-when-elided="true" name="stairs" />
     <ui:Button text="Kill Boss" display-tooltip-when-elided="true" name="killBoss" />
+    <ui:Button text="Toggle Player Damage" display-tooltip-when-elided="true" name="togglePlayerDamage" />
+    <ui:Button text="Gibe Max Ammo" display-tooltip-when-elided="true" name="giveMaxAmmo" />
 </ui:UXML>

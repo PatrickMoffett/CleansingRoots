@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 
 using Combat.Boss;
+using Player;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -27,6 +28,8 @@ public class DebugWindow : EditorWindow
         rootVisualElement.Query<Button>("boss").First().RegisterCallback<ClickEvent>(GotoBoss);
         rootVisualElement.Query<Button>("stairs").First().RegisterCallback<ClickEvent>(GotoStairs);
         rootVisualElement.Query<Button>("killBoss").First().RegisterCallback<ClickEvent>(EndBossFight);
+        rootVisualElement.Query<Button>("giveMaxAmmo").First().RegisterCallback<ClickEvent>(GiveMaxAmmo);
+        rootVisualElement.Query<Button>("togglePlayerDamage").First().RegisterCallback<ClickEvent>(TogglePlayerDamage);
 
     }
 
@@ -34,8 +37,24 @@ public class DebugWindow : EditorWindow
     {
         if (EditorApplication.isPlaying)
         {
-            findPlayer().transform.position = new Vector3(-5.3f, 25.45f, 695.5f);
+            findPlayer().transform.position = new Vector3(-18, 27.5f, 746.5f);
 
+        }
+    }
+    private void TogglePlayerDamage(ClickEvent evt)
+    {
+        if (EditorApplication.isPlaying)
+        {
+            var health = findPlayer().GetComponent<Health>();
+            health.canTakeDamage = !health.canTakeDamage;
+        }
+    }
+    private void GiveMaxAmmo(ClickEvent evt)
+    {
+        if (EditorApplication.isPlaying)
+        {
+            var character = findPlayer().GetComponent<PlayerCharacter>();
+            character.SetEffectivelyUnlimitedAmmo();
         }
     }
 

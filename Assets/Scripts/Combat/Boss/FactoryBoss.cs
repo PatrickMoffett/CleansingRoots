@@ -102,9 +102,9 @@ namespace Combat.Boss
 
         private IEnumerator StartEndGameExplosion()
         {
-            // At end call this
             // Stop player from being able to be killed
-            var player = GameObject.FindWithTag("Player");
+            var player = GameObject.FindWithTag("Player").GetComponent<Health>().canTakeDamage = false;
+            
             endGameExplosion.SetActive(true);
                 
             yield return new WaitForSeconds(5);

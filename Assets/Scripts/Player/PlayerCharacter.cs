@@ -397,6 +397,11 @@ namespace Player
             return maxAmmo;
         }
 
+        public void SetEffectivelyUnlimitedAmmo()
+        {
+            maxAmmo = currentAmmo = 9999;
+        }
+        
         public int GetCurrentAmmo() 
         {
             return currentAmmo;
