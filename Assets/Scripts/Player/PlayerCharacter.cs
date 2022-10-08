@@ -91,6 +91,12 @@ namespace Player
                 GameObject checkpoint = GameObject.Find(GlobalVariables.checkpointName);
                 transform.position = checkpoint.transform.position;
                 transform.rotation = checkpoint.transform.rotation;
+                
+                //Quick bad fix to play correct music after respawning
+                if (GlobalVariables.checkpointName == "Checkpoint2" || GlobalVariables.checkpointName == "Checkpoint3")
+                {
+                    ServiceLocator.Instance.Get<MusicManager>().StartSong(Resources.Load<AudioClip>("factory-music-loop-2m18s"),3f);
+                }
             }
             // register this game object as the player
             ServiceLocator.Instance.Get<PlayerManager>().RegisterPlayer(gameObject);
