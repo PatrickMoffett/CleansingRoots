@@ -67,7 +67,7 @@ public class MainMenuState : BaseApplicationState
         ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(SCENE_NAME);
         _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
         _uiWidget.UIObject.GetComponent<UIMainMenu>()?.Setup();
-        ServiceLocator.Instance.Get<MusicManager>().StartSong(_mainMenuMusic);
+        ServiceLocator.Instance.Get<MusicManager>().StartSong(_mainMenuMusic,1f);
         
     }
 

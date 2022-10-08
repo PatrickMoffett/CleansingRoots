@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using Constants;
+using Systems.AudioManager;
+using UnityEngine;
 
 public class GameState : BaseApplicationState
 {
     public readonly string UI_PREFAB = UIPrefabs.GameUI;
     public readonly int SCENE_NAME = (int)SceneIndexes.ROBOT_FACTORY_SCENE;
+    private AudioClip _mainMenuMusic = Resources.Load<AudioClip>("MainMenuMusicReducedVolume");
     private UIWidget _uiWidget;
 
     public GameState()
@@ -60,6 +63,7 @@ public class GameState : BaseApplicationState
     {
         _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
         ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(SCENE_NAME);
+        ServiceLocator.Instance.Get<MusicManager>().StartSong(_mainMenuMusic,1f);
     }
 
     public void TeardownState()
