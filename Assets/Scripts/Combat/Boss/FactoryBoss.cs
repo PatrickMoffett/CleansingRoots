@@ -18,9 +18,17 @@ namespace Combat.Boss
         [SerializeField] private List<SwitchEventForwarder> doorSwitches;
         [SerializeField] private List<RespondsToSwitch> wires;
         [SerializeField] private GameObject endGameExplosion;
+        [SerializeField] private Texture damagedTex;
+        [SerializeField] private Texture heavyDamageTex;
+        [SerializeField] private GameObject destroyedMesh;
+        [SerializeField] private GameObject deathPE;
+
+        private Material mat;
+        private static readonly int MainTex = Shader.PropertyToID("MainTex");
 
         private void Start()
         {
+            mat = GetComponent<MeshRenderer>().materials[1];
             playerDetector.OnPlayerDetected += StartFight;
             foreach (var doorSwitch in doorSwitches)
             {
@@ -78,6 +86,13 @@ namespace Combat.Boss
             }
             else
             {
+                if (health == 1)
+                {
+                    mat.SetTexture(MainTex,heavyDamageTex);
+                }else if (health == 2)
+                {
+                    mat.SetTexture(MainTex,damagedTex);
+                }
                 batteryDoor.SwitchOff();
                 foreach (var doorSwitch in doorSwitches)
                 {
@@ -97,15 +112,18 @@ namespace Combat.Boss
 
         public void EndFight()
         {
-            StartCoroutine(StartEndGameExplosion());
+            Instantiate(destroyedMesh, transform.position, transform.parent.rotation).transform.localScale = transform.parent.localScale;
+            Instantiate(deathPE, transform.position, Quaternion.identity);
+            Destroy(gameObject.transform.parent.gameObject);
+            ServiceLocator.Instance.Get<MonoBehaviorService>().StartCoroutine(StartEndGameExplosion(endGameExplosion));
         }
 
-        private IEnumerator StartEndGameExplosion()
+        private IEnumerator StartEndGameExplosion(GameObject explosionVFX)
         {
             // Stop player from being able to be killed
             var player = GameObject.FindWithTag("Player").GetComponent<Health>().canTakeDamage = false;
             
-            endGameExplosion.SetActive(true);
+            explosionVFX.SetActive(true);
                 
             yield return new WaitForSeconds(5);
             
