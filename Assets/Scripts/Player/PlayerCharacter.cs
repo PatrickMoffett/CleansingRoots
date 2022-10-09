@@ -196,11 +196,13 @@ namespace Player
         public void StartAiming()
         {
             //Don't aim if SlingShot isn't equipped or if character is not on ground
-            if (_currentPlayerWeapon != PlayerWeapon.SlingShot || !_movementComponent.IsGrounded())
+            if (_currentPlayerWeapon != PlayerWeapon.SlingShot || !_movementComponent.IsGrounded() || _cameraComponent.GetCurrentCameraMode() == PlayerCameraMode.Aiming)
             {
                 return;
             }
-            
+
+            Vector3 cameraForward = Camera.main.transform.forward;
+            transform.forward = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
             //TODO: Set Animation to Aiming
             if (_cameraComponent.GetCurrentCameraMode() == PlayerCameraMode.TargetLocked)
             {
