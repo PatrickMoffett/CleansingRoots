@@ -24,7 +24,7 @@ namespace Combat
 
         public void ShowTargetedImage(bool show)
         {
-            TargetedImage.enabled = true;
+            TargetedImage.enabled = show;
         }
 
         private void Update()
