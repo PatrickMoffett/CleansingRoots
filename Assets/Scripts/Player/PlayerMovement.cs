@@ -135,7 +135,7 @@ namespace Player
                 transform.forward = _targetDirection;
             }
         }
-        public void Jump()
+        public bool Jump()
         {
             if (_isGrounded)
             {
@@ -148,10 +148,12 @@ namespace Player
                 _characterController.Move(_velocity * Time.deltaTime);
                 
                 ServiceLocator.Instance.Get<AudioManager>().PlaySFX(jumpSFX);
+                return true;
             }
             else
             {
                 Debug.Log("Jump Failed");
+                return false;
             }
         }
 

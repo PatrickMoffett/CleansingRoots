@@ -164,7 +164,10 @@ namespace Player
             //if not attacking, try to jump
             if (!_isAttacking)
             {
-                _movementComponent.Jump();
+                if (_movementComponent.Jump())
+                {
+                    StopAiming();
+                }
             }
         }
         
