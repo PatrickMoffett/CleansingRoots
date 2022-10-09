@@ -105,7 +105,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""f4c706db-4ef1-468a-8250-84e87396912d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -133,6 +133,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StopAiming"",
+                    ""type"": ""Button"",
+                    ""id"": ""40b8d3af-8c42-474a-8719-a4176906e4cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -392,6 +401,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""376b31be-baf1-4a54-8c68-b474e5a71f96"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""8a1ad24c-5bea-417d-affa-d1a260a0ab0a"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
@@ -448,7 +468,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""92eef5ff-1658-4412-b9ce-39a70ed97815"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -497,6 +517,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DebugTeleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""555ed3c9-713e-422b-b74e-fb046352d9e9"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""StopAiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3567adb9-fa8f-49b0-a854-e5571aad8266"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""StopAiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1096,6 +1138,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_AimAxis = m_Player.FindAction("AimAxis", throwIfNotFound: true);
         m_Player_DebugTeleport = m_Player.FindAction("DebugTeleport", throwIfNotFound: true);
         m_Player_DebugUnlimitedAmmo = m_Player.FindAction("DebugUnlimitedAmmo", throwIfNotFound: true);
+        m_Player_StopAiming = m_Player.FindAction("StopAiming", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1179,6 +1222,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AimAxis;
     private readonly InputAction m_Player_DebugTeleport;
     private readonly InputAction m_Player_DebugUnlimitedAmmo;
+    private readonly InputAction m_Player_StopAiming;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1195,6 +1239,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @AimAxis => m_Wrapper.m_Player_AimAxis;
         public InputAction @DebugTeleport => m_Wrapper.m_Player_DebugTeleport;
         public InputAction @DebugUnlimitedAmmo => m_Wrapper.m_Player_DebugUnlimitedAmmo;
+        public InputAction @StopAiming => m_Wrapper.m_Player_StopAiming;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1240,6 +1285,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @DebugUnlimitedAmmo.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugUnlimitedAmmo;
                 @DebugUnlimitedAmmo.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugUnlimitedAmmo;
                 @DebugUnlimitedAmmo.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDebugUnlimitedAmmo;
+                @StopAiming.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopAiming;
+                @StopAiming.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopAiming;
+                @StopAiming.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopAiming;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1280,6 +1328,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @DebugUnlimitedAmmo.started += instance.OnDebugUnlimitedAmmo;
                 @DebugUnlimitedAmmo.performed += instance.OnDebugUnlimitedAmmo;
                 @DebugUnlimitedAmmo.canceled += instance.OnDebugUnlimitedAmmo;
+                @StopAiming.started += instance.OnStopAiming;
+                @StopAiming.performed += instance.OnStopAiming;
+                @StopAiming.canceled += instance.OnStopAiming;
             }
         }
     }
@@ -1448,6 +1499,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnAimAxis(InputAction.CallbackContext context);
         void OnDebugTeleport(InputAction.CallbackContext context);
         void OnDebugUnlimitedAmmo(InputAction.CallbackContext context);
+        void OnStopAiming(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

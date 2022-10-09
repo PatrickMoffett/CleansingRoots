@@ -3,6 +3,7 @@ using Cinemachine;
 using Combat;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 namespace Player
 {
@@ -30,20 +31,14 @@ namespace Player
             _playerControls.Player.PauseMenu.performed += PausePressed;
             _playerControls.Player.SwapWeapon.performed += SwapWeapon;
             _playerControls.Player.AimDownSight.performed += Aim;
-            _playerControls.Player.AimDownSight.canceled += StopAiming;
-            _playerControls.Player.AimAxis.performed += AimAxis;
-            
+            _playerControls.Player.StopAiming.performed += StopAiming;
+
 #if UNITY_EDITOR
             //Bind Debug Controls
             _playerControls.Player.DebugTeleport.performed += DebugTeleportPressed;
             _playerControls.Player.DebugUnlimitedAmmo.performed += DebugUnlimitedAmmo;
 #endif
 
-        }
-
-        private void AimAxis(InputAction.CallbackContext obj)
-        {
-           _playerCharacter.Aim(obj.ReadValue<Vector2>());
         }
 
         private void StopAiming(InputAction.CallbackContext obj)
@@ -105,6 +100,9 @@ namespace Player
             Vector3 inputDirection = new Vector3(input.x, 0, input.y);
             
             _playerCharacter.Move(inputDirection);
+
+            input = _playerControls.Player.AimAxis.ReadValue<Vector2>();
+            _playerCharacter.Aim(input);
         }
 #if UNITY_EDITOR
         ///////////////////////////////////
