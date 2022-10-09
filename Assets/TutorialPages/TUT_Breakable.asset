@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipTitle: Breakables
   tipText: There are breakable barrels around that can contain health and ammo
-  tipImage: {fileID: 21300000, guid: 05168f17fc56e3c46aeb8efc4599e06e, type: 3}
+  tipImage: {fileID: 21300000, guid: cb760c7d871063a41a133466839ffcec, type: 3}
