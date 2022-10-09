@@ -1,5 +1,6 @@
 ﻿using System;
 using Combat;
+using Systems.AudioManager;
 using UnityEngine;
 
 
@@ -15,6 +16,9 @@ public class Health : MonoBehaviour,IDamageable
     private DamageFlash _damageFlash;
 
     [SerializeField] public Boolean canTakeDamage = true;
+    
+    [Header("Sound Properties")]
+    [SerializeField] private AudioClip damagedSFX;
         
     private void Start()
     {
@@ -38,6 +42,11 @@ public class Health : MonoBehaviour,IDamageable
             if (_damageFlash != null)
             {
                 _damageFlash.FlashRed();
+            }
+
+            if (damagedSFX != null)
+            {
+                ServiceLocator.Instance.Get<AudioManager>().PlaySFX(damagedSFX);
             }
         }
     }
