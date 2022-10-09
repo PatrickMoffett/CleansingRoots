@@ -260,6 +260,10 @@ namespace Player
 
         public void SwapWeapon()
         {
+            if (_cameraComponent.GetCurrentCameraMode() == PlayerCameraMode.Aiming)
+            {
+                return;
+            }
             if (_currentPlayerWeapon == PlayerWeapon.Sword)
             {
                 EquipWeapon(PlayerWeapon.SlingShot);
