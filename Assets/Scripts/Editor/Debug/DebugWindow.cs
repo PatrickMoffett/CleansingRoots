@@ -53,8 +53,9 @@ public class DebugWindow : EditorWindow
     {
         if (EditorApplication.isPlaying)
         {
-            var character = findPlayer().GetComponent<PlayerCharacter>();
-            character.SetEffectivelyUnlimitedAmmo();
+            var _playerCharacter = findPlayer().GetComponent<PlayerCharacter>();
+
+            _playerCharacter.unlimitedAmmoDebug = !_playerCharacter.unlimitedAmmoDebug;
         }
     }
 
