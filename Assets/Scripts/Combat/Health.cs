@@ -66,6 +66,7 @@ public class Health : MonoBehaviour,IDamageable
     public void AddHealth(int amountToAdd)
     {
         _currentHealth += amountToAdd;
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
         Mathf.Clamp(_currentHealth, 0, maxHealth);
         OnCurrentHealthChanged?.Invoke(_currentHealth);
         if (_currentHealth <= 0f)
