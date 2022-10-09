@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: TUT_Switches
   m_EditorClassIdentifier: 
   tipTitle: Sling Shot
-  tipText: Hit Q or Y Button to swap between your sword and slingshot. You can hold
-    LT to aim the sling shot and RT to fire, or fire directly while locked on.
+  tipText: Red switches can be activated with your sword or slingshot
   tipImage: {fileID: 21300000, guid: 05168f17fc56e3c46aeb8efc4599e06e, type: 3}
