@@ -1,4 +1,5 @@
 using System;
+using Systems.AudioManager;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,6 +24,9 @@ namespace Player
         private Vector3 _targetDirection = Vector3.forward;
         private Vector3 _velocity = Vector3.zero;
         private CharacterController _characterController;
+        
+        [Header("Sound Properties")]
+        [SerializeField] private AudioClip jumpSFX;
 
         private float _lastStandingHeight;
 
@@ -142,6 +146,8 @@ namespace Player
                     _velocity.y += slopeForce;
                 }
                 _characterController.Move(_velocity * Time.deltaTime);
+                
+                ServiceLocator.Instance.Get<AudioManager>().PlaySFX(jumpSFX);
             }
             else
             {
