@@ -339,18 +339,32 @@ namespace Player
             }            
 #endif
             //don't attack without ammo or not aiming
-            if (currentAmmo <= 0 || (_cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.Aiming && _cameraComponent.GetCurrentCameraMode() != PlayerCameraMode.TargetLocked)) { return; }
+            if (currentAmmo <= 0 || (_cameraComponent.GetCurrentCameraMode() == PlayerCameraMode.Orbit )) { return; }
 
             // origin direction hitinfo distance
+            /*
             if (Physics.Raycast(projectileSpawnTransform.position, projectileSpawnTransform.rotation.eulerAngles, out var rhInfo, 5000.0f, shotLayers)) {
                 var targetedObject = rhInfo.collider.gameObject;
                 var targetedPoint = rhInfo.point;
                 Debug.Log(targetedObject.name + " " + targetedPoint);
             }
+            */
+            
+            
             //Spawn projectile
             GameObject projectile =  Instantiate(slingShotProjectilePrefab, projectileSpawnTransform.position,projectileSpawnTransform.rotation);
-            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
-            
+            if (_cameraComponent.GetCurrentCameraMode() == PlayerCameraMode.Aiming)
+            {
+                projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileSpeed;
+            }
+            else
+            {
+                //if locked on shoot directly at the target
+                Vector3 targetPosition = _targetingComponent.GetCurrentTarget().TargetTransform.position;
+                projectile.GetComponent<Rigidbody>().velocity =
+                    (targetPosition - projectile.transform.position).normalized * projectileSpeed;
+            }
+
             //reduce ammo
             currentAmmo--;
             playerAmmoChanged?.Invoke(currentAmmo);
