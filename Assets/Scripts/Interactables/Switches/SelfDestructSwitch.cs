@@ -1,3 +1,4 @@
+using Systems.AudioManager;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Interactables.Switches
         public RespondsToSwitch objectToSwitch;
         public GameObject BrokenVersion;
         public GameObject VFX;
+        public AudioClip SFX;
         
         
     
@@ -27,6 +29,7 @@ namespace Interactables.Switches
         {
             Instantiate(VFX, transform.position, Quaternion.identity);
             Instantiate(BrokenVersion, transform.position, Quaternion.identity);
+            ServiceLocator.Instance.Get<AudioManager>().PlaySFX(SFX);
             objectToSwitch.ToggleSwitch();
             Destroy(gameObject);
         }
