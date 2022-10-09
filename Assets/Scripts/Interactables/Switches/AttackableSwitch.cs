@@ -1,3 +1,4 @@
+using Systems.AudioManager;
 using UnityEngine;
 
 namespace Interactables.Switches
@@ -6,9 +7,11 @@ namespace Interactables.Switches
     {
         public RespondsToSwitch objectToSwitch;
 
+        public AudioClip hitSFX;
         public void TakeDamage(int damage)
         {
             objectToSwitch.ToggleSwitch();
+            ServiceLocator.Instance.Get<AudioManager>().PlaySFX(hitSFX);
         }
     }
 }
