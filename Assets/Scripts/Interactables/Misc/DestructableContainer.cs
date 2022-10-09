@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Systems.AudioManager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,6 +14,7 @@ namespace Interactables.Misc
         [SerializeField] private GameObject BrokenVersion;
         [SerializeField] private GameObject VFX;
         [SerializeField] private Vector3 VFXOffset = Vector3.zero;
+        [SerializeField] private AudioClip breakSFX;
         public void TakeDamage(int damage)
         {
             Destroy(gameObject);
@@ -32,6 +34,11 @@ namespace Interactables.Misc
             if (BrokenVersion != null)
             {
                 Instantiate(BrokenVersion, transform.position, transform.rotation);
+            }
+
+            if (breakSFX != null)
+            {
+                ServiceLocator.Instance.Get<AudioManager>().PlaySFX(breakSFX);
             }
         }
     }
