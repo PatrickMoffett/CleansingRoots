@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Constants;
 using UI.Tutorial;
+using UnityEngine;
 
 namespace Systems.ApplicationStateManager.ApplicationStates
 {
@@ -8,6 +9,7 @@ namespace Systems.ApplicationStateManager.ApplicationStates
     {
     public readonly string UI_PREFAB = UIPrefabs.TutorialUI;
     private UIWidget _uiWidget;
+    private UITutorial _tutorial;
 
     public TutorialState()
     {
@@ -24,7 +26,22 @@ namespace Systems.ApplicationStateManager.ApplicationStates
 
         if(toState == State.ACTIVE && CurrentState == State.INACTIVE)
         {
-            SetupState();
+            if (options != null)
+            {
+                if (options.ContainsKey("Page"))
+                {
+                    int page = (int) options["Page"];
+                    SetupState(page);
+                }
+                else
+                {
+                    SetupState();
+                }
+            }
+            else
+            {
+                SetupState();
+            }
         }
         else if(toState == State.INACTIVE && CurrentState == State.ACTIVE)
         {
@@ -58,9 +75,12 @@ namespace Systems.ApplicationStateManager.ApplicationStates
         }
     }
 
-    private void SetupState()
+    private void SetupState(int page = 0)
     {
         _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
+        _tutorial = _uiWidget.UIObject.GetComponent<UITutorial>();
+        _tutorial.SetTip(page);
+        Time.timeScale = 0f;
     }
 
     private void TeardownState()

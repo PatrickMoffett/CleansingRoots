@@ -69,6 +69,5 @@ public class PauseMenuState : BaseApplicationState
         {
             ServiceLocator.Instance.Get<UIManager>().RemoveUIByGuid(_uiWidget.GUID);
         }
-        Time.timeScale = 1f;
     }
 }

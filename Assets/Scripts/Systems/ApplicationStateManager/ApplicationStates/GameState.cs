@@ -49,6 +49,7 @@ public class GameState : BaseApplicationState
         {
             _uiWidget.UIObject.SetActive(true);
         }
+        Time.timeScale = 1f;
     }
 
     private void SetToBackgroundStateFromActive()

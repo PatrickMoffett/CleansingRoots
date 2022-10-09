@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Globals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ namespace UI.Tutorial
         [SerializeField] private TMP_Text tipCount;
         [SerializeField] private TMP_Text tipText;
         [SerializeField] private Image tipImage;
+        [SerializeField] private Toggle toggle;
         
         public List<TutorialPageSO> tutorialPages = new List<TutorialPageSO>();
         
@@ -26,6 +28,7 @@ namespace UI.Tutorial
                 ShowTip(currentTipIndex);
             }
             Show();
+            toggle.isOn = GlobalVariables.hideTutorialPopups;
         }
 
         private void ShowTip(int index)
@@ -44,6 +47,15 @@ namespace UI.Tutorial
                 currentTipIndex = 0;
             }
             ShowTip(currentTipIndex);
+        }
+
+        public void SetTip(int tipToSet)
+        {
+            if (tipToSet >= 0 && tipToSet < tutorialPages.Count)
+            {
+                currentTipIndex = tipToSet;
+                ShowTip(tipToSet);
+            }
         }
         public void PrevTip()
         {
@@ -73,6 +85,12 @@ namespace UI.Tutorial
         public void Close()
         {
             ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(null,true);
+        }
+
+        public void ShowTutorialPopups()
+        {
+            GlobalVariables.hideTutorialPopups = toggle.isOn;
+            Debug.Log(GlobalVariables.hideTutorialPopups);
         }
     }
 }
