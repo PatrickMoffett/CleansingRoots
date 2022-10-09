@@ -1214,9 +1214,12 @@ MonoBehaviour:
   tipImage: {fileID: 4070879508963678635}
   toggle: {fileID: 8038697863131232026}
   tutorialPages:
-  - {fileID: 11400000, guid: cdb938f568baefd419bd60532937f024, type: 2}
+  - {fileID: 11400000, guid: ded7234eeec21b740a60b7158dfccc49, type: 2}
   - {fileID: 11400000, guid: 6fefb84489a861a4cba65e855944f131, type: 2}
+  - {fileID: 11400000, guid: 17536477836bffb4c8fbc20e88f8d857, type: 2}
   - {fileID: 11400000, guid: 6f83f7150da04c647966874a996459af, type: 2}
+  - {fileID: 11400000, guid: 914273bc53a7d7e46ab57607ef1fef46, type: 2}
+  - {fileID: 11400000, guid: 020e76883559ce84984d714c265ac541, type: 2}
 --- !u!1 &6040253263174880982
 GameObject:
   m_ObjectHideFlags: 0

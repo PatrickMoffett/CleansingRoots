@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Globals;
 using Systems.ApplicationStateManager.ApplicationStates;
 using UnityEngine;
 
@@ -12,9 +13,13 @@ namespace General
         {
             if (other.CompareTag("Player"))
             {
-                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                dictionary["Page"] = tutorialNumber;
-                ServiceLocator.Instance.Get<ApplicationStateManager>().NavigateToState(typeof(TutorialState),false,dictionary);
+                if (!GlobalVariables.hideTutorialPopups)
+                {
+                    Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                    dictionary["Page"] = tutorialNumber;
+                    ServiceLocator.Instance.Get<ApplicationStateManager>()
+                        .NavigateToState(typeof(TutorialState), false, dictionary);
+                }
                 Destroy(gameObject);
             }
         }

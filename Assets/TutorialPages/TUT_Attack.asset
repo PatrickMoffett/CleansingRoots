@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TUT_Attack
   m_EditorClassIdentifier: 
   tipTitle: Attack
-  tipText: Left click to attack with your sword
+  tipText: Left click, B Button or RT to attack with your sword
   tipImage: {fileID: 21300000, guid: 87c35d9335ab8ac4e8d66df7c2095218, type: 3}
