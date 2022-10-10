@@ -66,46 +66,49 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Patrick Moffett: Project lead, core gameplay, character animations, toon
+  m_text: '-Patrick Moffett: Project lead, core gameplay, character animations, toon
     shader, level design, boss fight, checkpoints, fire hazards, player movement
-    and combat, enemy AI, camera code, door trigger system, moving platforms, robot
-    model, conveyor belt, environment models (crane, dumpster, street light, window,
-    street sign, rubble), tutorial UI, audio integration, additional sounds (flamethrower,
-    footsteps, enemy hit sound), pressure switches, battery model and material
+    and combat, enemy AI, camera code, door trigger system, dynamic wire color, moving
+    platforms, robot model, conveyor belt, environment models (crane, dumpster, street
+    light, window, street sign, rubble), tutorial UI, audio integration, assorted
+    sounds (crane, battery, jump, flamethrower, footsteps, enemy hit sound), pressure
+    switches, battery model and material with damage variation, song crossfade, destroyable
+    barrels
 
-    Rodrigo
-    Bonzerr Lopez: Final boss music, barrel model with wood textures, cement mixer,
-    boss fight sound, tree model, robot hover sound, shovel model, hardhat, hammer
+    -Rodrigo Bonzerr Lopez: Final boss music, barrel model with wood
+    textures, cement mixer, boss fight sound, tree model, robot hover sound, shovel
+    model, hardhat, hammer
 
-    Cooper
-    Willis: Fall damage, hip fire when target locked, slingshot trail effect, shot
-    arc
+    -Cooper Willis: Fall damage, hip fire when target
+    locked, slingshot trail effect, shot arc
 
-    Michael Monty: Player healthbar, UI ammo indicator, game over buttons,
-    menu text improvements
+    -Michael Monty: Player healthbar,
+    UI ammo indicator, game over buttons, menu text improvements, updates to loading
+    screen and general UI
 
-    Mike DiGiovanni: UI scaling, stair collider fix,
-    menu skybox improvement, end game explosion effects, boss debug functionality
+    -Mike DiGiovanni: UI scaling, stair collider fix,
+    menu skybox improvement, end game explosion effects, debug cheats functionality,
+    gamepad pause support, better targeting behavior
 
-    Ashleigh
-    M.: Factory music
+    -Ashleigh M.: Factory music
 
-    Chris DeLeon: Sounds (ammo pickup, slingshot firing and
-    hit), slingshot pebble model, machine whirring loop, material variations for
-    buildings
+    -Chris
+    DeLeon: Sounds (ammo pickup, slingshot firing and hit), slingshot pebble model,
+    machine whirring loop, material variations for buildings
 
-    Fahad Muntaz: Health pickup item with related sound
+    -Fahad Muntaz:
+    Health pickup item with related sound
 
-    Colton
-    Henderson: Health pickup heals player, pause/unpause
+    -Colton Henderson: Health pickup heals
+    player, pause/unpause
 
-    Rohit Narwal Kumar:
-    Grass shader
+    -Rohit Narwal Kumar: Grass shader
 
-    Jared Rigby: Water dripping sound effect
+    -Jared Rigby:
+    Water dripping sound effect
 
-    Playtesting:
-    : Mike DiGiovanni, Michael Monty, and Klaim'
+    -Playtesting: : Mike DiGiovanni, Michael Monty,
+    and Klaim'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -132,7 +135,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.55
+  m_fontSize: 32.15
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
