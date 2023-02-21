@@ -10,7 +10,6 @@ jobs:
     name: Build for ${{ matrix.targetPlatform }}
     concurrency:
       group: unity-build
-      cancel-in-progress: true
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
