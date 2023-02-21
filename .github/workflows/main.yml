@@ -8,8 +8,6 @@ on:
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    concurrency:
-      group: unity-build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
