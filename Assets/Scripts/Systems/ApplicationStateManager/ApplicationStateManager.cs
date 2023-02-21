@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Systems.ApplicationStateManager.ApplicationStates;
 using UnityEngine;
 
@@ -26,6 +27,18 @@ public class ApplicationStateManager : IService
         {
             PopState();
         }
+        
+        try
+        {
+            BaseApplicationState newState = (BaseApplicationState)Activator.CreateInstance(stateType);
+            PushState(newState, options);
+        }
+        catch (InvalidCastException e)
+        {
+            Debug.LogErrorFormat("ApplicationStateManager: Cannot Push State. Type is not an Application State: {0}", stateType.ToString());
+        }
+
+        /*
         // Setup and push new state based on type
         if(stateType == null)
         {
@@ -65,6 +78,7 @@ public class ApplicationStateManager : IService
         {
             Debug.LogWarningFormat("Unsupported State Type: {0}", stateType.ToString());
         }
+        */
     }
 
     /// <summary>
